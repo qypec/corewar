@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/15 18:23:50 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/15 18:24:41 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,6 @@ int print_usage(int code, int usage)
 	return (0);
 }
 
-//int 	parse_vm_flags(char **ag)
-//{
-//	int i;
-//	i = 0;
-//	while (ag[++])
-//}
-
-int 	check_extension(char *file)
-{
-	int	i;
-
-	i = -1;
-	while (file[++i] != '.')
-		;
-	if (file[i] == '.' && ft_strequ(file + i, ".cor"))
-		return (1);
-	else
-		return(0);
-}
-
 int 	check_args(int ac, char **ag)
 {
 	int i;
@@ -71,8 +51,7 @@ int 	check_args(int ac, char **ag)
 			;
 		if (ag[i][j] != '.')
 			print_usage(-1, 1);
-		else if (ag[i][j] == '.' && ft_strequ(ag[i] + j, ".cor")
-			&& check_extension(ag[i]))
+		else if (ag[i][j] == '.' && ft_strequ(ag[i] + j, ".cor"))
 			ft_printf("%s %d\n", "player",++player);
 		else
 			print_usage(-1, 1);
