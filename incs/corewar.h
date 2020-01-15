@@ -1,22 +1,22 @@
 #ifndef COREWAR_H
 # define COREWAR_H
 
-#include		"op.h"
-#include		<uchar.h>
+#include		<stdio.h>
 #include		<unistd.h>
+#include		"op.h"
+#include		"libft.h"
 
 typedef struct			s_player
 {
 	int					id;
 	char				*name;
 	char				*comment;
-	char32_t			*code;
+	char				*code;
 	int 				code_size;
 	short				is_alive;
 	ssize_t				lives_all;
 	ssize_t				lives_last;
 	ssize_t				lives_current;
-	struct s_player		*next;
 }						t_player;
 
 typedef struct			s_process
@@ -39,7 +39,7 @@ typedef struct			s_game
 	t_process 			*processes;
 	t_player			*last_alive;
 	t_player			players[MAX_PLAYERS];
-	char32_t			arena[MEM_SIZE];
+	char				arena[MEM_SIZE];
 	size_t				cycles_all;
 	ssize_t 			cycle_current;
 	size_t				lives_in_round;
@@ -48,3 +48,10 @@ typedef struct			s_game
 }						t_game;
 
 #endif
+
+
+/*
+** -------------------------- Parse args -------------------------------
+*/
+
+int 	check_args(int ac, char **ag);

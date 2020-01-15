@@ -1,0 +1,91 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/21 17:02:56 by ergottli          #+#    #+#             */
+/*   Updated: 2019/06/11 12:42:54 by ergottli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+char	*save_list(char **str, int i)
+{
+	char	*temp;
+
+	temp = ft_strdup(*str + i + 1);
+	free(*str);
+	return (temp);
+}
+
+char	*line_builder(t_list *ltmp, char *line)
+{
+	int		i;
+	char	*elem;
+
+	i = 0;
+	elem = ltmp->content;
+	while (elem[i])
+	{
+		if ((char)elem[i] == '\n')
+			break ;
+		i++;
+	}
+	line = ft_strnew((size_t)(i));
+	line = ft_strncpy(line, ltmp->content, (size_t)i);
+	if (i < (int)ft_strlen(ltmp->content))
+		ltmp->content = save_list((char**)&ltmp->content, i);
+	else
+		ft_strclr(ltmp->content);
+	return (line);
+}
+
+t_list	*get_list(t_list **list, int fd)
+{
+	t_list	*temp;
+
+	temp = *list;
+	while (temp)
+	{
+		if ((int)temp->content_size == fd)
+			return (temp);
+		temp = temp->next;
+	}
+	temp = ft_lstnew("\0", 1);
+	temp->content_size = (size_t)fd;
+	ft_lstadd(list, temp);
+	temp = *list;
+	return (temp);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	int				ret;
+	char			temp[BUFF_SIZE + 1];
+	static	t_list	*list;
+	t_list			*ltmp;
+
+	if (fd < 0 || line == NULL)
+		return (-1);
+	ltmp = get_list(&list, fd);
+	if (!ft_strchr(ltmp->content, '\n'))
+	{
+		while ((ret = (int)read(fd, &temp, BUFF_SIZE)) > 0)
+		{
+			temp[ret] = '\0';
+			ltmp->content = ft_strrejoin((char*)ltmp->content, temp);
+			if (ft_strchr(ltmp->content, '\n'))
+				break ;
+		}
+		if (ret == -1)
+			return (-1);
+	}
+	if (!ft_strlen((char*)ltmp->content))
+		return (0);
+	else
+		*line = line_builder(*&ltmp, *line);
+	return (1);
+}
