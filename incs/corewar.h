@@ -55,3 +55,4 @@ typedef struct			s_game
 */
 
 int 	check_args(int ac, char **ag);
+int		print_usage(int code, int usage);

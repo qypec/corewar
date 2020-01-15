@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/15 17:21:01 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/15 18:39:03 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ int 	init_corewar()
 
 int 	main(int argc, char **argv)
 {
+	t_game vm;
+
 	if (argc <= 1)
-		return (print_usage(0));
+		return (print_usage(0, 1));
 	else
+	{
+		init_corewar();
 		check_args(argc, argv);
+	}
 	return (0);
 }
