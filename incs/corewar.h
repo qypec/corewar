@@ -47,6 +47,8 @@ typedef struct			s_game
 	int					rounds_all;
 }						t_game;
 
+	t_game				vm;
+
 #endif
 
 
@@ -54,5 +56,5 @@ typedef struct			s_game
 ** -------------------------- Parse args -------------------------------
 */
 
-int 	check_args(int ac, char **ag);
+int check_args(int ac, char **ag);
 int		print_usage(int code, int usage);
