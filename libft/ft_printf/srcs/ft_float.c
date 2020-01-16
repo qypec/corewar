@@ -17,7 +17,7 @@ void	print_bits(unsigned char octet)
 	int		i;
 	char	temp;
 
-	i = 64;
+	i = 8; //TODO: 64
 	while (--i >= 0)
 	{
 		temp = ((octet & (1 << i)) ? '1' : '0');

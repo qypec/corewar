@@ -32,11 +32,6 @@ int 	init_players_struct()
 	return (1);
 }
 
-//int 	init_proc_struct()
-//{
-//
-//}
-
 int 	init_corewar()
 {
 	vm.rounds_all = 0;
@@ -55,10 +50,12 @@ int 	main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	else
-	{
-		if (!init_corewar())
+		if (!init_corewar() || 	!check_args(argc, argv))
 			return (0);
-		check_args(argc, argv);
+	if (!create_players(argv))
+	{
+		ft_printf("rabaet");
+		return (0);
 	}
 	return (0);
 }

@@ -35,12 +35,30 @@ void	set_id(int player_k)
 
 int		load_player(char *player_filename, int player_k)
 {
+	int fd;
+
+	fd = 0;
 	if (vm.players[player_k].id == 0)
 		set_id(player_k);
+	if ((fd = open(player_filename, O_RDONLY)) < 1)
+		return (0);
+	if (!check_magic(fd, player_k))
+		return (0);
+	return (1);
+	if (!check_name(fd, player_k)) //check NULL
+		return (0);
+	if (!check_comment(fd, player_k)) //check NULL
+		return (0);
+	if (!check_exec_size(fd, player_k))
+		return (0);
+	if (!check_code(fd, player_k))
+		return (0);
+	//TODO function to check player file
+	close(fd);
 	return (1);
 }
 
-int		create_players(int argc, char **argv)
+int create_players(char **argv)
 {
 	int i;
 	int k;
@@ -50,8 +68,11 @@ int		create_players(int argc, char **argv)
 	while (argv[++i])
 	{
 		if (ft_strstr(argv[i], ".cor"))
+		{
 			if (!load_player(argv[i], k))
 				return (0);
+			++k;
+		}
 	}
 	return (1);
 }

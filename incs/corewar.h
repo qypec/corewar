@@ -59,5 +59,15 @@ typedef struct			s_game
 
 int check_args(int ac, char **ag);
 int	print_usage(int code, int usage);
-int	create_players(int argc, char **argv);
+int create_players(char **argv);
 int	is_set(int number, int max);
+
+/*
+ *
+ */
+
+int check_magic(int fd, int player_k);
+int check_name(int fd, int player_k);
+int check_comment(int fd, int player_k);
+int check_exec_size(int fd, int player_k);
+int check_code(int fd, int player_k);
