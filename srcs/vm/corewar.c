@@ -45,6 +45,7 @@ int 	init_corewar()
 	vm.cycles_all = 0;
 	vm.cycle_current = 0;
 	vm.cycles_to_die = CYCLE_TO_DIE;
+	vm.players_sum = 0;
 	init_players_struct();
 }
 

@@ -39,6 +39,7 @@ typedef struct			s_game
 	t_process 			*processes;
 	t_player			*last_alive;
 	t_player			players[MAX_PLAYERS];
+	int 				players_sum;
 	char				arena[MEM_SIZE];
 	size_t				cycles_all;
 	ssize_t 			cycle_current;

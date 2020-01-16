@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/15 19:18:25 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:09:08 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int print_usage(int code, int usage)
 	return (0);
 }
 
-int check_flags(int ac, char **ag, int player_id)
+int check_flags(int ac, char **ag)
 {
 	if (!ft_isnum(ag[ac + 1]))
 		return (0);
@@ -43,7 +43,7 @@ int check_flags(int ac, char **ag, int player_id)
 		if (ft_atoi(ag[ac + 1]) > MAX_PLAYERS || ag[ac + 1] <= 0)
 			return (0);
 		else
-			vm.players[player_id].id = ft_atoi(ag[ac + 1]);
+			vm.players[vm.players_sum].id = ft_atoi(ag[ac + 1]);
 	}
 	else if (ag[ac][1] == 'd')
 		if (ft_atoi(ag[ac + 1]) > CYCLE_TO_DIE || ag[ac + 1] <= 0)
@@ -51,33 +51,39 @@ int check_flags(int ac, char **ag, int player_id)
 	return (1);
 }
 
+int		check_extension(int i, char **file)
+{
+	int j;
+
+	j = 0;
+	while (file[i][++j] != '.')
+		;
+	if (file[i][j] != '.')
+		return (print_usage(-1, 1));
+	if (file[i][j] == '.' && ft_strequ(file[i] + j, ".cor"))
+		ft_printf("%s %d %s\n", "player", ++vm.players_sum, "checked...");
+	else
+		return (print_usage(-1, 1));
+	return(1);
+}
+
 int 	check_args(int ac, char **ag)
 {
 	int i;
-	int j;
-	int player;
 
 	i = 0;
-	player = 0;
 	while (++i < ac)
 	{
-		j = 0;
 		if (ag[i][0] == '-')
 		{
-			if (!check_flags(i, ag, player))
+			if (!check_flags(i, ag))
 				return (print_usage(-2, 1));;
 			i += 2;
 		}
-		while (ag[i][++j] != '.')
-			;
-		if (ag[i][j] != '.')
-			return (print_usage(-1, 1));
-		if (ag[i][j] == '.' && ft_strequ(ag[i] + j, ".cor"))
-			ft_printf("%s %d %s\n", "player", ++player, "checked...");
-		else
-			return (print_usage(-1, 1));
-		if (player > MAX_PLAYERS)
+		if (!check_extension(i, ag))
+			return (0);
+		if (vm.players_sum > MAX_PLAYERS)
 			return (print_usage(-4, 1));
 	}
-	return (0);
+	return (1);
 }
