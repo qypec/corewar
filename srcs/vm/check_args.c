@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/16 17:09:08 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/16 17:18:41 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int print_usage(int code, int usage)
 	if (code == -1)
 		ft_printf("%s\n", ANSI_B_RED"Only files with the extension .cor are accepted!"ANSI_RESET);
 	if (code == -2)
-		ft_printf("%s\n", ANSI_B_RED"The-n (1 - MAX_PLAYERS) flag overrides the player's sequence number,"
+		ft_printf("%s\n", ANSI_B_RED"The-n (1 - MAX_PLAYERS) flag overrides the player's sequence number, "
 						  "set before the player's file."ANSI_RESET);
 	if (code == -3)
 		ft_printf("%s\n", ANSI_B_RED"The-d CYCLE flag prints the state of the arena on the specified cycle.\n"
@@ -78,7 +78,10 @@ int 	check_args(int ac, char **ag)
 		{
 			if (!check_flags(i, ag))
 				return (print_usage(-2, 1));;
-			i += 2;
+			if ((i + 2) < ac)
+				i += 2;
+			else
+				return (print_usage(-2, 1));
 		}
 		if (!check_extension(i, ag))
 			return (0);
