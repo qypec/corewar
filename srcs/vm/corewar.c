@@ -54,11 +54,8 @@ int 	main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	else
-	{
-		if (!init_corewar())
+		if (!init_corewar() || !check_args(argc, argv) || !read_players(argc, argv))
 			return (0);
-		check_args(argc, argv);
-	}
 	ft_printf("%d %s %d\n", vm.players[0].id, "- player was", 0);
 	ft_printf("%d %s %d\n", vm.players[1].id, "- player was", 1);
 	ft_printf("%d %s %d\n", vm.players[2].id, "- player was", 2);

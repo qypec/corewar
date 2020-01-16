@@ -4,7 +4,7 @@
 #include		<stdio.h>
 #include		<unistd.h>
 #include		"op.h"
-#include		"libft.h"
+#include		"../libft/libft.h"
 
 typedef struct			s_player
 {
@@ -58,4 +58,5 @@ typedef struct			s_game
 */
 
 int check_args(int ac, char **ag);
-int		print_usage(int code, int usage);
+int	print_usage(int code, int usage);
+int	create_players(int argc, char **argv);
