@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/15 19:24:39 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/16 18:46:49 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int 	init_corewar()
 	vm.cycles_to_die = CYCLE_TO_DIE;
 	vm.players_sum = 0;
 	init_players_struct();
+	return (1);
 }
 
 int 	main(int argc, char **argv)
@@ -54,11 +55,10 @@ int 	main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	else
-		if (!init_corewar() || !check_args(argc, argv) || !read_players(argc, argv))
+	{
+		if (!init_corewar())
 			return (0);
-	ft_printf("%d %s %d\n", vm.players[0].id, "- player was", 0);
-	ft_printf("%d %s %d\n", vm.players[1].id, "- player was", 1);
-	ft_printf("%d %s %d\n", vm.players[2].id, "- player was", 2);
-	ft_printf("%d %s %d\n", vm.players[3].id, "- player was", 3);
+		check_args(argc, argv);
+	}
 	return (0);
 }

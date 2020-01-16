@@ -19,8 +19,8 @@ int		is_set(int number, int max)
 	i = -1;
 	while (++i < max)
 		if (vm.players[i].id == number)
-			return (0);
-	return (1);
+			return (1);
+	return (0);
 }
 
 void	set_id(int player_k)
