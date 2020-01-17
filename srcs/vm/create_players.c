@@ -44,15 +44,19 @@ int		load_player(char *player_filename, int player_k)
 		return (0);
 	if (!check_magic(fd, player_k))
 		return (0);
+	printf("1\n");
 	if (!check_name(fd, player_k)) //check NULL
 		return (0);
+	printf("2\n");
 	if (!check_exec_size(fd, player_k))
 		return (0);
+	printf("3\n");
 	if (!check_comment(fd, player_k)) //check NULL
 		return (0);
+	printf("4\n");
 	if (!check_code(fd, player_k))
 		return (0);
-	//TODO function to check player file
+	printf("5\n");
 	close(fd);
 	return (1);
 }

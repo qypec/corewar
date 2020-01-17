@@ -31,15 +31,13 @@ int	check_magic(int fd, int player_k)
 
 int check_exec_size(int fd, int player_k)
 {
-	char		buf[2];
+	uint16_t 		buf;
 
-	if (read(fd, &buf[0], 1) < 1)
+	if (read(fd, &buf, 2) < 2)
 		return (0);
-	if (read(fd, &buf[1], 1) < 1)
+	if (buf > CHAMP_MAX_SIZE)
 		return (0);
-	if (*(uint16_t*)buf > CHAMP_MAX_SIZE)
-		return (0);
-	vm.players[player_k].code_size = *(uint16_t*)buf;
+	vm.players[player_k].code_size = buf;
 	return (1);
 }
 
@@ -49,10 +47,50 @@ int check_code(int fd, int player_k)
 	char buf[CHAMP_MAX_SIZE + 1];
 
 	ret = -1;
+	printf("4.1\n");
 	if ((ret = read(fd, &buf, CHAMP_MAX_SIZE + 1)) < 1)
 		return (0);
+	printf("4.2\n");
+	printf("code_size - %d  ret - %d\n", vm.players[player_k].code_size, ret);
 	if (ret != vm.players[player_k].code_size)
 		return (0);
+	printf("4.3\n");
 	ft_memcpy(vm.players[player_k].code, buf, vm.players[player_k].code_size);
+	return (1);
+}
+
+int check_name(int fd, int player_k)
+{
+	int			ret;
+	uint16_t	*buf;
+
+	ret = -1;
+	if ((ret = read(fd, &(vm.players[player_k].name), PROG_NAME_LENGTH)) < PROG_NAME_LENGTH)
+		return (0);
+	vm.players[player_k].name[ret] = '\0';
+	if (ft_strlen(vm.players[player_k].name) < 1)
+		return (0);
+	if (read(fd, &buf, 2) < 2)
+		return (0);
+	if (buf != 0)
+		return (0);
+	printf("name - %s\n", vm.players[player_k].name);
+	return (1);
+}
+
+int check_comment(int fd, int player_k)
+{
+	int			ret;
+	uint16_t	*buf;
+
+	ret = -1;
+	if ((ret = read(fd, &(vm.players[player_k].comment), COMMENT_LENGTH)) < COMMENT_LENGTH)
+		return (0);
+	vm.players[player_k].comment[ret] = '\0';
+	if (read(fd, &buf, 2) < 2)
+		return (0);
+	if (buf != 0)
+		return (0);
+	printf("comment - %s\n", vm.players[player_k].comment);
 	return (1);
 }

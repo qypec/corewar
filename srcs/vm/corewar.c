@@ -20,9 +20,8 @@ int 	init_players_struct()
 	while (++i < MAX_PLAYERS)
 	{
 		vm.players[i].id = 0;
-		vm.players[i].name = NULL;
-		vm.players[i].comment = NULL;
-		vm.players[i].code = NULL;
+		vm.players[i].name[PROG_NAME_LENGTH] = '\0';
+		vm.players[i].comment[COMMENT_LENGTH] = '\0';
 		vm.players[i].code_size = 0;
 		vm.players[i].is_alive = 0;
 		vm.players[i].lives_all = 0;
@@ -55,9 +54,11 @@ int 	main(int argc, char **argv)
 			return (0);
 	if (!create_players(argv))
 	{
-		ft_printf("rabaet");
+		ft_printf("error with player code");
 		return (0);
 	}
+	printf("ok");
+	return (0);
 	if (!init_game())
 		return (0);
 	return (0);
