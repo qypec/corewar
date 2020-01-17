@@ -17,7 +17,7 @@ int 	init_players_struct()
 	int i;
 
 	i = -1;
-	while (++i <= MAX_PLAYERS)
+	while (++i < MAX_PLAYERS)
 	{
 		vm.players[i].id = 0;
 		vm.players[i].name = NULL;
@@ -41,6 +41,7 @@ int 	init_corewar()
 	vm.cycle_current = 0;
 	vm.cycles_to_die = CYCLE_TO_DIE;
 	vm.players_sum = 0;
+	ft_bzero(vm.arena, MEM_SIZE);
 	init_players_struct();
 	return (1);
 }
@@ -57,5 +58,7 @@ int 	main(int argc, char **argv)
 		ft_printf("rabaet");
 		return (0);
 	}
+	if (!init_game())
+		return (0);
 	return (0);
 }

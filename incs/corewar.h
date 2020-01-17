@@ -71,3 +71,7 @@ int check_name(int fd, int player_k);
 int check_comment(int fd, int player_k);
 int check_exec_size(int fd, int player_k);
 int check_code(int fd, int player_k);
+
+int init_game(void);
+
+t_process *create_process(int n_player, int position);
