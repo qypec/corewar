@@ -19,7 +19,7 @@ void		init_var(t_process **new)
 	(*new)->carry = 0;
 	(*new)->delay = 0;
 	(*new)->live_incycle = 0;
-	ft_bzero(((*new)->regs + 1), REG_SIZE - 1);
+	ft_bzero(((*new)->regs), REG_SIZE);
 }
 
 t_process	*create_process(int n_player, int position)
@@ -41,7 +41,7 @@ t_process	*create_process(int n_player, int position)
 	}
 	new->player_id = vm.players[n_player].id;
 	new->pos = position;
-	new->regs[0] = vm.players[n_player].id;
 	init_var(&new);
+	new->regs[0] = vm.players[n_player].id;
 	return (new);
 }
