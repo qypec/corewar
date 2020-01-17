@@ -9,9 +9,9 @@
 typedef struct			s_player
 {
 	int					id;
-	char				*name;
-	char				*comment;
-	char				*code;
+	char				name[PROG_NAME_LENGTH + 1];
+	char				comment[COMMENT_LENGTH + 1];
+	char				code[CHAMP_MAX_SIZE];
 	int 				code_size;
 	short				is_alive;
 	ssize_t				lives_all;

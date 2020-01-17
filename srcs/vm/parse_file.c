@@ -42,3 +42,17 @@ int check_exec_size(int fd, int player_k)
 	vm.players[player_k].code_size = *(uint16_t*)buf;
 	return (1);
 }
+
+int check_code(int fd, int player_k)
+{
+	int ret;
+	char buf[CHAMP_MAX_SIZE + 1];
+
+	ret = -1;
+	if ((ret = read(fd, &buf, CHAMP_MAX_SIZE + 1)) < 1)
+		return (0);
+	if (ret != vm.players[player_k].code_size)
+		return (0);
+	ft_memcpy(vm.players[player_k].code, buf, vm.players[player_k].code_size);
+	return (1);
+}
