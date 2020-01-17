@@ -44,12 +44,11 @@ int		load_player(char *player_filename, int player_k)
 		return (0);
 	if (!check_magic(fd, player_k))
 		return (0);
-	return (1);
 	if (!check_name(fd, player_k)) //check NULL
 		return (0);
-	if (!check_comment(fd, player_k)) //check NULL
-		return (0);
 	if (!check_exec_size(fd, player_k))
+		return (0);
+	if (!check_comment(fd, player_k)) //check NULL
 		return (0);
 	if (!check_code(fd, player_k))
 		return (0);

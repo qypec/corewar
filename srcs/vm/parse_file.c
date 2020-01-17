@@ -28,3 +28,17 @@ int	check_magic(int fd, int player_k)
 		return (0);
 	return (1);
 }
+
+int check_exec_size(int fd, int player_k)
+{
+	char		buf[2];
+
+	if (read(fd, &buf[0], 1) < 1)
+		return (0);
+	if (read(fd, &buf[1], 1) < 1)
+		return (0);
+	if (*(uint16_t*)buf > CHAMP_MAX_SIZE)
+		return (0);
+	vm.players[player_k].code_size = *(uint16_t*)buf;
+	return (1);
+}
