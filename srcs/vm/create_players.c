@@ -44,19 +44,19 @@ int		load_player(char *player_filename, int player_k)
 		return (0);
 	if (!check_magic(fd, player_k))
 		return (0);
-	printf("1\n");
+	printf("1 - after magic\n");
 	if (!check_name(fd, player_k)) //check NULL
 		return (0);
-	printf("2\n");
+	printf("2 - after name\n");
 	if (!check_exec_size(fd, player_k))
 		return (0);
-	printf("3\n");
+	printf("3 - after exec size\n");
 	if (!check_comment(fd, player_k)) //check NULL
 		return (0);
-	printf("4\n");
+	printf("4 - after comment\n");
 	if (!check_code(fd, player_k))
 		return (0);
-	printf("5\n");
+	printf("5 - after code\n");
 	close(fd);
 	return (1);
 }

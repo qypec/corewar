@@ -37,6 +37,7 @@ int check_exec_size(int fd, int player_k)
 		return (0);
 	if (buf > CHAMP_MAX_SIZE)
 		return (0);
+	printf("exec_size - %d\n", buf);
 	vm.players[player_k].code_size = buf;
 	return (1);
 }
