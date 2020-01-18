@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/16 19:06:28 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/18 19:08:50 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int 	check_flags(int i, int ac, char **ag)
 		else
 		{
 			if (!is_set(value, MAX_PLAYERS))
-				vm.players[vm.players_sum].id = value;
+					vm.players_temp[vm.players_sum].id = value;
 			else
 				return (print_usage(-5, 1));
 		}

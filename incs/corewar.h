@@ -38,7 +38,8 @@ typedef struct			s_game
 {
 	t_process 			*processes;
 	t_player			*last_alive;
-	t_player			players[MAX_PLAYERS];
+	t_player			players_temp[MAX_PLAYERS];
+	t_player			players[MAX_PLAYERS + 1];
 	int 				players_sum;
 	char				arena[MEM_SIZE];
 	size_t				cycles_all;
@@ -61,6 +62,7 @@ int check_args(int ac, char **ag);
 int	print_usage(int code, int usage);
 int create_players(char **argv);
 int	is_set(int number, int max);
+void	set_id(int player_k);
 
 /*
  *

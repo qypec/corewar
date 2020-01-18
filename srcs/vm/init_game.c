@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 17:39:55 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 17:23:17 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/18 18:07:40 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int 	init_game(void)
 	while (++i < vm.players_sum)
 	{
 		j = 0;
-		while (vm.players[j].id != i)
+		while (vm.players_temp[j].id != i)
 			++j;
-		ft_memcpy(vm.arena + ((i - 1) * step), vm.players[j].code, vm.players[j].code_size);
+		ft_memcpy(vm.arena + ((i - 1) * step), vm.players_temp[j].code, vm.players_temp[j].code_size);
 		if (!create_process(j, (i - 1) * step))
 			return (0);
 	}

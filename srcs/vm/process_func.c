@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:24:37 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 17:23:17 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/18 18:07:40 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_process	*create_process(int n_player, int position)
 		new->next = vm.processes;
 		vm.processes = new;
 	}
-	new->player_id = vm.players[n_player].id;
+	new->player_id = vm.players_temp[n_player].id;
 	new->pos = position;
 	init_var(&new);
-	new->regs[0] = vm.players[n_player].id;
+	new->regs[0] = vm.players_temp[n_player].id;
 	return (new);
 }
