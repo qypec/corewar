@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/16 18:46:49 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int 	main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	else
-		if (!init_corewar() || 	!check_args(argc, argv))
-			return (0);
+	if (!init_corewar() || 	!check_args(argc, argv))
+		return (0);
 	if (!create_players(argv))
 	{
 		ft_printf("error with player code");

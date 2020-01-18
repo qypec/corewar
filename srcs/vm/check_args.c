@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/16 19:06:28 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int 	check_flags(int i, int ac, char **ag)
 	value = ft_atoi(ag[i + 1]);
 	if (ag[i][1] == 'n')
 	{
-		if (value > MAX_PLAYERS || value <= 0)
+		if (value > MAX_PLAYERS || value < 1)
 			return (print_usage(-2, 1));
 		else
 		{
