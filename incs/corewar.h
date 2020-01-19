@@ -27,6 +27,8 @@ typedef struct			s_process
     int					pc;
     int					op;
     int					args[3];
+    int					has_args_code;
+    int 				change_carry;
 	int					carry;
 	int					delay;
 	int					live_incycle;
@@ -46,7 +48,9 @@ typedef struct			s_game
 	ssize_t 			cycle_current;
 	size_t				lives_in_round;
 	int					cycles_to_die;
+	int					cycles_to_die_last;
 	int					rounds_all;
+	int 				checks;
 }						t_game;
 
 	t_game				vm;

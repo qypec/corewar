@@ -5,7 +5,10 @@ int 	get_op_code(t_process *proc)
 {
 	proc->op = (int)vm.arena[proc->pos];
 	if (proc->op < 1 || proc->op > 16)
-		return (0);
+	{
+		proc->op = 0;
+		proc->delay = 0;
+	}
 	proc->delay = (proc->op == 1 || proc->op == 4
 			|| proc->op == 5 || proc->op == 13)
 			? 10 : proc->delay;
@@ -42,9 +45,15 @@ void	intro(void)
 	}
 }
 
-void	ft_exec_op()
+void	ft_exec_op(t_process *proc)
 {
+	t_process *temp;
 
+	temp = proc;
+	// HERE SOHULD BE VALIDATION!
+	if (temp->op > 0 && temp->op < 17)
+		ft_select_op(temp);
+	proc->op = 0; // at the very bottom
 }
 
 int 	check_proc(void)
@@ -57,7 +66,7 @@ int 	check_proc(void)
 		if (!iter->op)
 			get_op_code(iter);
 		if (!iter->delay)
-			ft_exec_op(); // Здесь проверяется, пришло ли время для исолнения операции.
+			ft_exec_op(iter); // Здесь проверяется, пришло ли время для исолнения операции.
 		else
 			--iter->delay;
 		iter = iter->next;
@@ -67,7 +76,29 @@ int 	check_proc(void)
 
 int 	battle_check()
 {
+	t_process *temp;
+	t_process *new;
 
+	temp = vm.processes;
+	while (temp)
+	{
+		if (!temp->live_incycle)
+		{
+			if (temp->next)
+			{
+				new = temp->next;
+				ft_bzero((void*)temp, sizeof(t_process) * 1);
+				temp = new;
+			}
+		}
+		temp = temp->next;
+	}
+	if (vm.lives_in_round >= NBR_LIVE
+	|| ((vm.checks == MAX_CHECKS) && vm.cycles_to_die == vm.cycles_to_die_last))
+		vm.cycles_to_die -= CYCLE_DELTA;
+	++vm.checks;
+	vm.cycle_current = 0;
+	vm.cycles_to_die_last = vm.cycles_to_die;
 }
 
 int 	battle(void)
@@ -82,6 +113,7 @@ int 	battle(void)
 		if (vm.cycles_to_die < 1)
 			battle_check();
 		vm.cycles_to_die -= 1;
+		++vm.cycle_current;
 	}
 	return (0);
 }
