@@ -6,7 +6,13 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# DEFINE
+# define T_REG_ARG		1
+# define T_DIR_ARG		10
+# define T_IND_ARG		11
+
+# define SET_BIT(byte, mask) byte |= mask
+
+# define GET_BIT(byte, mask) byte & mask
 
 typedef struct			s_player
 {
@@ -29,7 +35,8 @@ typedef struct			s_process
     int					pc;
     int					op;
 	unsigned char		op_args;
-    int					args[3];
+    int					args_value[3];
+    unsigned int		args[4];
     int					has_args_code;
     int 				change_carry;
 	int					carry;
@@ -55,7 +62,7 @@ typedef struct			s_game
 	int					cycles_to_die_updated;
 	int					rounds_all;
 	int 				checks;
-	void 				*ops[17];
+	void 				(*ops[17]) (t_process *proc);
 }						t_game;
 
 	t_game				vm;
@@ -94,6 +101,7 @@ t_process				*create_process(int n_player, int position);
 */
 
 int						battle_check(void);
+void set_args_code(t_process *proc);
 
 /*
 ** -------------------------- Operations -------------------------------

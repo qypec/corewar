@@ -41,19 +41,49 @@ void	intro(void)
 	}
 }
 
-void	ft_select_op(t_process *proc)
-{
+/*
+ * 01 	11 	01 	10
+ * 0x1	0xb	0x1	0xa
+ */
 
+void set_args_code(t_process *proc)
+{
+	unsigned int 	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		proc->args[i] = ((unsigned int)vm.arena[proc->pos + 1] >> (6u - i * 2)) & (3u);
+		printf("proc->args[%d] = %d\n", i, proc->args[i]);
+	}
 }
 
-void	ft_exec_op(t_process *proc)
+int	check_op_args(t_process *proc)
+{
+	int 	ok;
+
+	ok = 0;
+	if (proc->args[3])
+		return (0);
+	if (proc->op == 2 || proc->op == 13) // ld, lld
+			ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG) && proc->args[1] == T_REG_ARG && !proc->args[2]) ? 1 : 0;
+	if (proc->op == 3) // st
+				ok = ((proc->args[0] == T_REG) && (proc->args[1] == T_REG_ARG || proc->args[1] == T_IND_ARG) && !proc->args[2]) ? 1 : 0;
+
+	return (ok);
+}
+
+int ft_exec_op(t_process *proc)
 {
 	t_process *temp;
 
 	temp = proc;
+	set_args_code(proc);
+	if (!check_op_args(proc))
+		return (0);
 	// HERE SOHULD BE VALIDATION!
 	if (temp->op > 0 && temp->op < 17)
-		ft_select_op(temp);
+		vm.ops[proc->op](proc);
 }
 
 int 	check_proc(void)
