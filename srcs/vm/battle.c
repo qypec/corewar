@@ -41,6 +41,11 @@ void	intro(void)
 	}
 }
 
+void	ft_select_op(t_process *proc)
+{
+
+}
+
 void	ft_exec_op(t_process *proc)
 {
 	t_process *temp;
@@ -74,13 +79,14 @@ int 	battle(void)
 
 	i = 0;
 	intro();
-	while (++vm.cycles_all)
+	while (vm.processes) // TODO: add dump function
 	{
 		check_proc();
 		if (vm.cycles_to_die < 1)
 			battle_check();
 		vm.cycles_to_die -= 1;
 		++vm.cycle_current;
-	}
+		++vm.cycles_all;
+	} // TODO: print last alive player
 	return (0);
 }

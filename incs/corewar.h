@@ -54,6 +54,7 @@ typedef struct			s_game
 	int					cycles_to_die_updated;
 	int					rounds_all;
 	int 				checks;
+	void 				*ops[17];
 }						t_game;
 
 	t_game				vm;
