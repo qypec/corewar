@@ -95,6 +95,7 @@ int						init_game(void);
 void					print_process(void);
 void					print_arena(void);
 t_process				*create_process(int n_player, int position);
+void					del_process(t_process *proc);
 
 /*
 ** -------------------------- Battle -------------------------------
