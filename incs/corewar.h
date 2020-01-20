@@ -28,6 +28,7 @@ typedef struct			s_process
 	int					pos;
     int					pc;
     int					op;
+	unsigned char		op_args;
     int					args[3];
     int					has_args_code;
     int 				change_carry;
@@ -93,5 +94,26 @@ t_process				*create_process(int n_player, int position);
 */
 
 int						battle_check(void);
+
+/*
+** -------------------------- Operations -------------------------------
+*/
+
+void					live_op(t_process *proc);
+void					ld_op(t_process *proc);
+void					st_op(t_process *proc);
+void					add_op(t_process *proc);
+void					sub_op(t_process *proc);
+void					and_op(t_process *proc);
+void					or_op(t_process *proc);
+void					xor_op(t_process *proc);
+void					zjmp_op(t_process *proc);
+void					ldi_op(t_process *proc);
+void					sti_op(t_process *proc);
+void					fork_op(t_process *proc);
+void					lld_op(t_process *proc);
+void					lldi_op(t_process *proc);
+void					lfork_op(t_process *proc);
+void					aff_op(t_process *proc);
 
 #endif
