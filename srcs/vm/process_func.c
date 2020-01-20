@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:24:37 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 18:07:40 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/20 14:15:45 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void		init_var(t_process **new)
 	(*new)->carry = 0;
 	(*new)->delay = 0;
 	(*new)->live_incycle = 0;
-	ft_bzero((*new)->regs, REG_SIZE * REG_NUMBER);
-	ft_bzero((*new)->args, sizeof(int) * 3);
+	ft_bzero(((*new)->regs), REG_SIZE);
 }
 
 t_process	*create_process(int n_player, int position)
@@ -33,7 +32,6 @@ t_process	*create_process(int n_player, int position)
 	{
 		new->proc_id = 1;
 		new->next = NULL;
-		vm.processes = new;
 	}
 	else
 	{
@@ -41,9 +39,9 @@ t_process	*create_process(int n_player, int position)
 		new->next = vm.processes;
 		vm.processes = new;
 	}
-	new->player_id = vm.players[n_player].id;
+	new->player_id = vm.players_temp[n_player].id;
 	new->pos = position;
 	init_var(&new);
-	new->regs[0] = vm.players[n_player].id;
+	new->regs[0] = vm.players_temp[n_player].id;
 	return (new);
 }

@@ -6,6 +6,8 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
+# DEFINE
+
 typedef struct			s_player
 {
 	int					id;
@@ -49,37 +51,46 @@ typedef struct			s_game
 	size_t				lives_in_round;
 	int					cycles_to_die;
 	int					cycles_to_die_last;
+	int					cycles_to_die_updated;
 	int					rounds_all;
 	int 				checks;
 }						t_game;
 
 	t_game				vm;
 
-#endif
-
-
 /*
 ** -------------------------- Parse args -------------------------------
 */
 
-int check_args(int ac, char **ag);
-int	print_usage(int code, int usage);
-int create_players(char **argv);
-int	is_set(int number, int max);
-void	set_id(int player_k);
+int						check_args(int ac, char **ag);
+int						print_usage(int code, int usage);
+int						create_players(char **argv);
+int						is_set(int number, int max);
+void					set_id(int player_k);
 
 /*
- *
- */
+** -------------------------- Parse players -------------------------------
+*/
 
-int check_magic(int fd, int player_k);
-int check_name(int fd, int player_k);
-int check_comment(int fd, int player_k);
-int check_exec_size(int fd, int player_k);
-int check_code(int fd, int player_k);
+int						check_magic(int fd, int player_k);
+int						check_name(int fd, int player_k);
+int						check_comment(int fd, int player_k);
+int						check_exec_size(int fd, int player_k);
+int						check_code(int fd, int player_k);
 
-int init_game(void);
-void	print_process(void);
-void		print_arena(void);
+/*
+** -------------------------- Initialization -------------------------------
+*/
 
-t_process *create_process(int n_player, int position);
+int						init_game(void);
+void					print_process(void);
+void					print_arena(void);
+t_process				*create_process(int n_player, int position);
+
+/*
+** -------------------------- Battle -------------------------------
+*/
+
+int						battle_check(void);
+
+#endif
