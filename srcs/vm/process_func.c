@@ -47,3 +47,27 @@ t_process	*create_process(int n_player, int position)
 	new->regs[0] = vm.players[n_player].id;
 	return (new);
 }
+
+void		del_process(t_process *proc)
+{
+	t_process	*iter;
+	t_process	*next;
+
+	next = NULL;
+	if (proc == vm.processes)
+	{
+		ft_memdel((void *)&proc);
+		vm.processes = NULL;
+		return ;
+	}
+	iter = vm.processes;
+	while (iter && iter->next != proc)
+		iter = iter->next;
+	if (proc)
+	{
+		next = proc->next;
+		ft_memdel((void *)&proc);
+	}
+	if (iter)
+		iter->next = next;
+}

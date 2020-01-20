@@ -54,6 +54,7 @@ typedef struct			s_game
 	t_player			players[MAX_PLAYERS + 1];
 	int 				players_sum;
 	unsigned char		arena[MEM_SIZE];
+	unsigned char		arena_id[MEM_SIZE];
 	size_t				cycles_all;
 	ssize_t 			cycle_current;
 	size_t				lives_in_round;
@@ -95,6 +96,7 @@ int						init_game(void);
 void					print_process(void);
 void					print_arena(void);
 t_process				*create_process(int n_player, int position);
+void					del_process(t_process *proc);
 
 /*
 ** -------------------------- Battle -------------------------------
