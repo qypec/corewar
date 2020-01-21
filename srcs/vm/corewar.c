@@ -66,8 +66,8 @@ int 	main(int argc, char **argv)
 	printf("ok");
 	if (!init_game())
 		return (0);
-//	print_arena();
-//	print_process();
-//	process_args_code(vm.processes);
+	if (DEBUG)
+		print_process();
+	battle();
 	return (0);
 }

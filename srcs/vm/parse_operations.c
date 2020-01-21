@@ -5,22 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:56:47 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/21 22:57:10 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:56:47 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/21 22:56:47 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:56:45 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/21 22:56:45 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/21 22:56:44 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/21 22:56:44 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 20:15:18 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 22:54:57 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <corewar_ops.h>
 #include "../../incs/corewar.h"
 
-unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types)
+unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_process *proc, int j)
 {
 	int 	i;
 
 	i = -1;
 	while (++i < 3)
 		if (arg_code == arg_types[i])
-			return (arg_code);
+		{
+			proc->args[j] = arg_code;
+			return (1);
+		}
 	return (0);
 }
 
@@ -31,25 +78,21 @@ int 					calc_args_size(int i, t_process *proc)
 	size = 0;
 	size = (proc->args[i] == T_REG) ? 1 : size;
 	size = (proc->args[i] == T_IND) ? 2 : size;
-	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op].dir_size + 1) : size;
+	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op - 1].dir_size + 1) : size;
 	return (size);
 }
 
 void 		process_args_code(t_process *proc)
 {
 	int 			i;
-	unsigned int	arg_code;
 
 	i = -1;
 	while (++i < 4)
 	{
-		if ((arg_code = check_args_type((((*(vm.arena + proc->pos + 1u)) &
-							   (192u >> (unsigned) (i * 2)))) >> (6u - (unsigned) (i * 2)),
-							 op_tab[proc->op - 1].args_types + i * 3)))
-		{
-			proc->args[i] = arg_code;
+		if (check_args_type((*(vm.arena + proc->pos + 1u)
+		& (192u >> (unsigned) (i * 2))) >> (6u - (unsigned) (i * 2)),
+				op_tab[proc->op - 1].args_types + i * 3, proc, i))
 			proc->pc += calc_args_size(i, proc);
-		}
 		else
 		{
 			proc->op = 0;
@@ -79,9 +122,9 @@ int 					parse_args_values(t_process *proc)
 	while (++i < 3)
 	{
 		size = calc_args_size(i, proc);
-		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : 0;
-		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : 0;
-		proc->args_value[i] = (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset, 0) : 0;
+		proc->args_value[i] += (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : 0;
+		proc->args_value[i] += (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : 0;
+		proc->args_value[i] += (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset, 0) : 0;
 		offset += (int)size;
 	}
 	return (1);

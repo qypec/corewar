@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 19:09:16 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/21 17:14:20 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:18:46 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	ld_op(t_process *proc)
 	int number;
 
 	number = -1;
-	if (proc->args[0] == T_DIR_ARG)
+	if (proc->args[0] == T_DIR)
 	{
 		number = proc->args_value[0]; // for debug
 		proc->regs[proc->args_value[1] - 1] = number;
 		if (!proc->args_value[0])
 			proc->carry = 1;
 	}
-	else if (proc->args[0] == T_IND_ARG)
+	else if (proc->args[0] == T_IND)
 	{
 		number = get_int32_from_mem(proc->pc +
 				(int)proc->args_value[0], 0) % IDX_MOD;

@@ -72,6 +72,7 @@ void					del_process(t_process *proc);
 ** -------------------------- Battle -------------------------------
 */
 
+int						battle(void);
 int						battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
