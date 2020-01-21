@@ -125,8 +125,8 @@ typedef struct			s_game
 	int					cycles_to_die;
 	int					cycles_to_die_last;
 	int					cycles_to_die_updated;
-	int					rounds_all;
 	int 				checks;
+	int 				dump_cycle;
 }						t_game;
 
 t_game					vm;
