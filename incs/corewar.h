@@ -14,6 +14,8 @@
 
 # define GET_BIT(byte, mask) byte & mask
 
+# define DEBUG 1
+
 typedef struct			s_player
 {
 	int					id;

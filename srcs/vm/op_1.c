@@ -14,19 +14,41 @@
 
 void	live_op(t_process *proc)
 {
-	int *number;
+	int				number;
+	unsigned char	buf[4];
+	unsigned char	*cur_position;
 
-	++proc->live_incycle;
-	number = (int*)(vm.arena + proc->pos + 1);
-	number &=
-	if (*number > 0 && *number <= MAX_PLAYERS && vm.players[*number].id)
+	cur_position = vm.arena + proc->pc + 1;
+	buf[3] = *(cur_position);
+	buf[2] = *(cur_position + 1);
+	buf[1] = *(cur_position + 2);
+	buf[0] = *(cur_position + 3);
+	buf[0] &= 127u;
+	number = *((int*)buf);
+	if (number > 0 && number <= MAX_PLAYERS && vm.players[number].id)
 	{
-		++vm.players[*number].is_alive;
-		++vm.players[*number].lives_all;
-		++vm.players[*number].lives_last;
-		++vm.players[*number].lives_current;
+		++vm.players[number].is_alive;
+		++vm.players[number].lives_all;
+		++vm.players[number].lives_last;
+		++vm.players[number].lives_current;
 		++vm.lives_in_round;
-		vm.last_alive = *number;
+		vm.last_alive = &vm.players[number];
+		++proc->live_incycle;
 	}
+	if (DEBUG)
+	{
+		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
+	}
+}
 
+void	zjmp_op(t_process *proc)
+{
+	unsigned char	buf[2];
+
+	if (proc->carry == 1)
+	{
+		buf[1] = *(vm.arena + proc->pc + 1);
+		buf[1] = *(vm.arena + proc->pc + 2);
+		proc->pc = proc->pc + (*((int16_t*)buf)) % IDX_MOD;
+	}
 }
