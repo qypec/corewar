@@ -66,6 +66,70 @@ typedef struct			s_game
 	void 				(*ops[17]) (t_process *proc);
 }						t_game;
 
+	t_game				vm;
+
+/*
+** -------------------------- Parse args -------------------------------
+*/
+
+int						check_args(int ac, char **ag);
+int						print_usage(int code, int usage);
+int						create_players(char **argv);
+int						is_set(int number, int max);
+void					set_id(int player_k);
+
+/*
+** -------------------------- Parse players -------------------------------
+*/
+
+int						check_magic(int fd, int player_k);
+int						check_name(int fd, int player_k);
+int						check_comment(int fd, int player_k);
+int						check_exec_size(int fd, int player_k);
+int						check_code(int fd, int player_k);
+
+/*
+** -------------------------- Initialization -------------------------------
+*/
+
+int						init_game(void);
+void					print_process(void);
+void					print_arena(void);
+t_process				*create_process(int n_player, int position);
+void					del_process(t_process *proc);
+
+/*
+** -------------------------- Battle -------------------------------
+*/
+
+int						battle_check(void);
+void					set_args_code(t_process *proc);
+int						check_op_args(t_process *proc);
+int 					parse_args_values(t_process *proc);
+int 					check_regs(t_process *proc);
+int 					move_process(t_process *proc);
+
+/*
+** -------------------------- Operations -------------------------------
+*/
+
+void					live_op(t_process *proc);
+void					ld_op(t_process *proc);
+void					st_op(t_process *proc);
+void					add_op(t_process *proc);
+void					sub_op(t_process *proc);
+void					and_op(t_process *proc);
+void					or_op(t_process *proc);
+void					xor_op(t_process *proc);
+void					zjmp_op(t_process *proc);
+void					ldi_op(t_process *proc);
+void					sti_op(t_process *proc);
+void					fork_op(t_process *proc);
+void					lld_op(t_process *proc);
+void					lldi_op(t_process *proc);
+void					lfork_op(t_process *proc);
+void					aff_op(t_process *proc);
+
 typedef struct			s_op
 {
 	char				*op_code;
@@ -80,7 +144,7 @@ typedef struct			s_op
 }						t_op;
 
 t_op					op_tab[17] =
-{
+		{
 				{"live",
 						1,
 						{T_DIR},
@@ -89,7 +153,7 @@ t_op					op_tab[17] =
 						"alive",
 						0,
 						0,
-						},
+						live_op},
 
 				{"ld",
 						2,
@@ -98,7 +162,8 @@ t_op					op_tab[17] =
 						5,
 						"load",
 						1,
-						0},
+						0,
+						ld_op},
 
 				{"st",
 						2,
@@ -107,7 +172,8 @@ t_op					op_tab[17] =
 						5,
 						"store",
 						1,
-						0},
+						0,
+						NULL},
 
 				{"add",
 						3,
@@ -116,7 +182,8 @@ t_op					op_tab[17] =
 						10,
 						"addition",
 						1,
-						0},
+						0,
+						NULL},
 
 				{"sub",
 						3,
@@ -161,7 +228,8 @@ t_op					op_tab[17] =
 						20,
 						"jump if zero",
 						0,
-						1},
+						1,
+						zjmp_op},
 
 				{"ldi",
 						3,
@@ -235,70 +303,7 @@ t_op					op_tab[17] =
 						0,
 						0,
 						0}
-};
+		};
 
-	t_game				vm;
-
-/*
-** -------------------------- Parse args -------------------------------
-*/
-
-int						check_args(int ac, char **ag);
-int						print_usage(int code, int usage);
-int						create_players(char **argv);
-int						is_set(int number, int max);
-void					set_id(int player_k);
-
-/*
-** -------------------------- Parse players -------------------------------
-*/
-
-int						check_magic(int fd, int player_k);
-int						check_name(int fd, int player_k);
-int						check_comment(int fd, int player_k);
-int						check_exec_size(int fd, int player_k);
-int						check_code(int fd, int player_k);
-
-/*
-** -------------------------- Initialization -------------------------------
-*/
-
-int						init_game(void);
-void					print_process(void);
-void					print_arena(void);
-t_process				*create_process(int n_player, int position);
-void					del_process(t_process *proc);
-
-/*
-** -------------------------- Battle -------------------------------
-*/
-
-int						battle_check(void);
-void					set_args_code(t_process *proc);
-int						check_op_args(t_process *proc);
-int 					parse_args_values(t_process *proc);
-int 					check_regs(t_process *proc);
-int 					move_process(t_process *proc);
-
-/*
-** -------------------------- Operations -------------------------------
-*/
-
-void					live_op(t_process *proc);
-void					ld_op(t_process *proc);
-void					st_op(t_process *proc);
-void					add_op(t_process *proc);
-void					sub_op(t_process *proc);
-void					and_op(t_process *proc);
-void					or_op(t_process *proc);
-void					xor_op(t_process *proc);
-void					zjmp_op(t_process *proc);
-void					ldi_op(t_process *proc);
-void					sti_op(t_process *proc);
-void					fork_op(t_process *proc);
-void					lld_op(t_process *proc);
-void					lldi_op(t_process *proc);
-void					lfork_op(t_process *proc);
-void					aff_op(t_process *proc);
 
 #endif
