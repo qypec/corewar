@@ -27,9 +27,9 @@ void ft_exec_op(t_process *proc)
 {
 	set_args_code(proc); // запись значений кодов аргументов
 	if (proc->op > 0 && proc->op < 17
-	&& check_op_args(proc) // проверка валидности кода операции и соответствия кодов аргументов текущей операции
+	&& check_op_args(proc) )// проверка валидности кода операции и соответствия кодов аргументов текущей операции
 	&& parse_args_values(proc)) // парсинг значений аргументов и валидация регистров при их наличии
-		vm.ops[proc->op](proc); // исполнение операции (из массива указателей на функции операций)
+		op_tab[proc->op].operations(proc); // исполнение операции (из массива указателей на функции операций)
 	if (proc->args[0] == T_REG_ARG || proc->args[1] == T_REG_ARG || proc->args[2] == T_REG_ARG)
 		check_regs(proc);
 	proc->pos += proc->pc; // смещение позиции процесса в соотвествии со значением PC
@@ -66,6 +66,7 @@ int 	battle(void)
 		vm.cycles_to_die -= 1;
 		++vm.cycle_current;
 		++vm.cycles_all;
-	} // TODO: print last alive player
+	}
+	// TODO: print last alive player
 	return (0);
 }

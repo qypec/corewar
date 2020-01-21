@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 16:14:38 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 17:25:41 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void set_args_code(t_process *proc)
 		}
 	}
 }
+
+/*
+ * 			{T_REG, T_REG, T_REG}
+ */
 
 int	check_op_args(t_process *proc)
 {
@@ -61,11 +65,6 @@ int	check_op_args(t_process *proc)
  * 			|	1b		|	4b		|	|	|	2b		|	|
  */
 
-void					dir_size_init()
-{
-	dir_si
-}
-
 int 					parse_args_values(t_process *proc)
 {
 	int	i;
@@ -83,8 +82,9 @@ int 					parse_args_values(t_process *proc)
 		size = (proc->args[i] == T_DIR_ARG) ? ft_dir_size : size;
 		offset += size;
 	}
+	return (0);
 }
 
-int 					check_regs(t_process *proc);
-
-int 					move_process(t_process *proc);
+//int 					check_regs(t_process *proc);
+//
+//int 					move_process(t_process *proc);

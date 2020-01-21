@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/20 17:55:03 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 18:46:43 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int 	main(int argc, char **argv)
 	printf("ok");
 	if (!init_game())
 		return (0);
-	print_arena();
-	print_process();
-	set_args_code(vm.processes);
+//	print_arena();
+//	print_process();
+//	set_args_code(vm.processes);
 	return (0);
 }

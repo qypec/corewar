@@ -3,16 +3,13 @@
 
 #include		<stdio.h>
 #include		<unistd.h>
+#include		<inttypes.h>
 #include		"op.h"
 #include		"../libft/libft.h"
 
 # define T_REG_ARG		1
 # define T_DIR_ARG		10
 # define T_IND_ARG		11
-
-# define SET_BIT(byte, mask) byte |= mask
-
-# define GET_BIT(byte, mask) byte & mask
 
 # define DEBUG 1
 
@@ -113,182 +110,6 @@ void					aff_op(t_process *proc);
 int						get_int32_from_mem(int position, int drop_bit);
 int						get_int16_from_mem(int position);
 
-typedef struct			s_op
-{
-	char				*op_code;
-	int					argc;
-	int					args_types[3];
-	int					op_id;
-	int					op_delay;
-	char				*op_name;
-	int					carry;
-	int					dir_size;
-	void 				(*ops[17]) (t_process *proc);
-}						t_op;
-
-t_op					op_tab[17] =
-		{
-				{"live",
-						1,
-						{T_DIR},
-						1,
-						10,
-						"alive",
-						0,
-						0,
-						live_op},
-
-				{"ld",
-						2,
-						{T_DIR | T_IND, T_REG},
-						2,
-						5,
-						"load",
-						1,
-						0,
-						ld_op},
-
-				{"st",
-						2,
-						{T_REG,T_IND | T_REG},
-						3,
-						5,
-						"store",
-						1,
-						0,
-						NULL},
-
-				{"add",
-						3,
-						{T_REG,	T_REG, T_REG},
-						4,
-						10,
-						"addition",
-						1,
-						0,
-						NULL},
-
-				{"sub",
-						3,
-						{T_REG,	T_REG, T_REG},
-						5,
-						10,
-						"soustraction",
-						1,
-						0},
-
-				{"and",
-						3,
-						{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
-						6,
-						6,
-						"and",
-						1,
-						0},
-
-				{"or",
-						3,
-						{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
-						7,
-						6,
-						"or",
-						1,
-						0},
-
-				{"xor",
-						3,
-						{T_REG | T_IND | T_DIR,T_REG | T_IND | T_DIR,	T_REG},
-						8,
-						6,
-						"xor",
-						1,
-						0},
-
-				{"zjmp",
-						1,
-						{T_DIR},
-						9,
-						20,
-						"jump if zero",
-						0,
-						1,
-						zjmp_op},
-
-				{"ldi",
-						3,
-						{T_REG | T_DIR | T_IND,T_DIR | T_REG,	T_REG},
-						10,
-						25,
-						"load index",
-						1,
-						1},
-
-				{"sti",
-						3,
-						{T_REG,
-								T_REG | T_DIR | T_IND,T_DIR | T_REG},
-						11,
-						25,
-						"store index",
-						1,
-						1},
-
-				{"fork",
-						1,
-						{T_DIR},
-						12,
-						800,
-						"fork",
-						0,
-						1},
-
-				{"lld",
-						2,
-						{T_DIR | T_IND, T_REG},
-						13,
-						10,
-						"long load",
-						1,
-						0},
-
-				{"lldi",
-						3,
-						{T_REG | T_DIR | T_IND,T_DIR | T_REG, T_REG},
-						14,
-						50,
-						"long load index",
-						1,
-						1},
-
-				{"lfork",
-						1,
-						{T_DIR},
-						15,
-						1000,
-						"long fork",
-						0,
-						1},
-
-				{"aff",
-						1,
-						{T_REG},
-						16,
-						2,
-						"aff",
-						1,
-						0},
-
-				{0,
-						0,
-						{0},
-						0,
-						0,
-						0,
-						0,
-						0}
-		};
-
-
 typedef struct			s_game
 {
 	t_process 			*processes;
@@ -306,9 +127,8 @@ typedef struct			s_game
 	int					cycles_to_die_updated;
 	int					rounds_all;
 	int 				checks;
-	void 				(*ops[17]) (t_process *proc);
 }						t_game;
 
-t_game				vm;
+t_game					vm;
 
 #endif

@@ -1,6 +1,6 @@
 #include "../../incs/corewar.h"
 
-int 	update_cycle_to_die(void)
+void update_cycle_to_die(void)
 {
 	if (vm.lives_in_round >= NBR_LIVE)
 		vm.cycles_to_die = vm.cycles_to_die_last - CYCLE_DELTA;
