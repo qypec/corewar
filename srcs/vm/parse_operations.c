@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 19:50:56 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 20:00:57 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,20 @@ int 					parse_args_values(t_process *proc)
 	int offset;
 	unsigned int size;
 
-	i = 0;
-	offset = (op_tab[proc->op].has_args_code) ? 2 : 0; // смещение при наличии на 1 байт значения аргументов
+	i = -1;
+	offset = (op_tab[proc->op].has_args_code) ? 2 : 1; // смещение при наличии на 1 байт значения аргументов
 	size = 0;
 	while (++i < 3)
 	{
-		size = (proc->args[i] == T_REG || proc->args[i] == T_IND) ? proc->args[i] : size;
+		size = (proc->args[i] == T_REG) ? 1 : size;
+		size = (proc->args[i] == T_IND) ? 2 : size;
 		size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op].dir_size + 1) : size;
-		proc->args_value[i] = (proc->args[i] == T_REG) ? vm.arena[proc->pos + offset] : 0;
-		proc->args_value[i] = (proc->args[i] == T_IND) ?  : 0;
-		proc->args_value[i] = (proc->args[i] == T_DIR) ?  : 0;
-		offset += size;
+		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : 0;
+		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : 0;
+		proc->args_value[i] = (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset, 0) : 0;
+		offset += (int)size;
 	}
-	return (0);
+	return (1);
 }
 
 //int 					check_regs(t_process *proc);
