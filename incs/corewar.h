@@ -105,7 +105,11 @@ void					del_process(t_process *proc);
 */
 
 int						battle_check(void);
-void set_args_code(t_process *proc);
+void					set_args_code(t_process *proc);
+int						check_op_args(t_process *proc);
+int 					parse_args_values(t_process *proc);
+int 					check_regs(t_process *proc);
+int 					move_process(t_process *proc);
 
 /*
 ** -------------------------- Operations -------------------------------
