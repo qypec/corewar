@@ -128,4 +128,7 @@ void					lldi_op(t_process *proc);
 void					lfork_op(t_process *proc);
 void					aff_op(t_process *proc);
 
+int						get_int32_from_mem(int position, int drop_bit);
+int						get_int16_from_mem(int position);
+
 #endif

@@ -15,16 +15,8 @@
 void	live_op(t_process *proc)
 {
 	int				number;
-	unsigned char	buf[4];
-	unsigned char	*cur_position;
 
-	cur_position = vm.arena + proc->pc + 1;
-	buf[3] = *(cur_position);
-	buf[2] = *(cur_position + 1);
-	buf[1] = *(cur_position + 2);
-	buf[0] = *(cur_position + 3);
-	buf[0] &= 127u;
-	number = *((int*)buf);
+	number = get_int32_from_mem(proc->pc + 1, 1);
 	if (number > 0 && number <= MAX_PLAYERS && vm.players[number].id)
 	{
 		++vm.players[number].is_alive;
@@ -36,19 +28,41 @@ void	live_op(t_process *proc)
 		++proc->live_incycle;
 	}
 	if (DEBUG)
-	{
 		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
-	}
 }
 
 void	zjmp_op(t_process *proc)
 {
-	unsigned char	buf[2];
-
 	if (proc->carry == 1)
 	{
-		buf[1] = *(vm.arena + proc->pc + 1);
-		buf[1] = *(vm.arena + proc->pc + 2);
-		proc->pc = proc->pc + (*((int16_t*)buf)) % IDX_MOD;
+		proc->pc = proc->pc + get_int16_from_mem(proc->pc + 1) % IDX_MOD;
+		if (DEBUG)
+			ft_printf("proc id - %d: zjmp op - %d\n", proc->proc_id, get_int16_from_mem(proc->pc + 1));
 	}
+	else if (DEBUG)
+		ft_printf("proc id - %d: zjmp op carry - %d\n", proc->proc_id, proc->carry);
+}
+
+void	ld_op(t_process *proc)
+{
+	int number;
+
+	number = -1;
+	if (proc->args[0] == T_DIR_ARG)
+	{
+		number = proc->args_value[0]; // for debug
+		proc->regs[proc->args_value[1] - 1] = number;
+		if (!proc->args_value[0])
+			proc->carry = 1;
+	}
+	else if (proc->args[0] == T_IND_ARG)
+	{
+		number = get_int32_from_mem(proc->pc +
+				(int)proc->args_value[0], 0) % IDX_MOD;
+		proc->regs[proc->args_value[1] - 1] = number;
+		if (!number)
+			proc->carry = 1;
+	}
+	if (DEBUG)
+		ft_printf("proc id - %d: ld op: num - %d reg - %d\n", proc->proc_id, number, proc->args_value[1]);
 }
