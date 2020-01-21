@@ -6,10 +6,11 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 17:25:41 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 19:50:56 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <corewar_ops.h>
 #include "../../incs/corewar.h"
 
 void set_args_code(t_process *proc)
@@ -69,17 +70,18 @@ int 					parse_args_values(t_process *proc)
 {
 	int	i;
 	int offset;
-	int size;
+	unsigned int size;
 
 	i = 0;
-	offset = (proc->op != 1 || proc->op != 9
-			|| proc->op != 12 || proc->op != 15) ? 1 : 0; // смещение при наличии
+	offset = (op_tab[proc->op].has_args_code) ? 2 : 0; // смещение при наличии на 1 байт значения аргументов
 	size = 0;
 	while (++i < 3)
 	{
-		size = (proc->args[i] == T_REG_ARG) ? 1 : size;
-		size = (proc->args[i] == T_IND_ARG) ? 2 : size;
-		size = (proc->args[i] == T_DIR_ARG) ? ft_dir_size : size;
+		size = (proc->args[i] == T_REG || proc->args[i] == T_IND) ? proc->args[i] : size;
+		size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op].dir_size + 1) : size;
+		proc->args_value[i] = (proc->args[i] == T_REG) ? vm.arena[proc->pos + offset] : 0;
+		proc->args_value[i] = (proc->args[i] == T_IND) ?  : 0;
+		proc->args_value[i] = (proc->args[i] == T_DIR) ?  : 0;
 		offset += size;
 	}
 	return (0);
