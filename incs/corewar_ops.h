@@ -19,7 +19,7 @@ typedef struct			s_op
 {
 	char				*op_code;
 	int					argc;
-	int					args_types[3];
+	int					args_types[9];
 	int					op_id;
 	int					op_delay;
 	char				*op_name;
@@ -42,7 +42,7 @@ static t_op					op_tab[16] =
 
 				{"ld",
 						2,
-						{T_DIR | T_IND, T_REG},
+						{T_DIR, T_IND, 0, T_REG},
 						2,
 						5,
 						"load",
@@ -52,7 +52,7 @@ static t_op					op_tab[16] =
 
 				{"st",
 						2,
-						{T_REG,T_IND | T_REG},
+						{T_REG, 0, 0, T_IND, T_REG},
 						3,
 						5,
 						"store",
@@ -62,7 +62,7 @@ static t_op					op_tab[16] =
 
 				{"add",
 						3,
-						{T_REG,	T_REG, T_REG},
+						{T_REG, 0, 0, T_REG, 0, 0, T_REG, 0, 0},
 						4,
 						10,
 						"addition",
@@ -72,7 +72,7 @@ static t_op					op_tab[16] =
 
 				{"sub",
 						3,
-						{T_REG,	T_REG, T_REG},
+						{T_REG, 0, 0, T_REG, 0, 0, T_REG, 0, 0},
 						5,
 						10,
 						"soustraction",
@@ -81,7 +81,7 @@ static t_op					op_tab[16] =
 
 				{"and",
 						3,
-						{T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG},
+						{T_REG, T_DIR, T_IND, T_REG, T_IND, T_DIR, T_REG},
 						6,
 						6,
 						"and",
@@ -90,7 +90,7 @@ static t_op					op_tab[16] =
 
 				{"or",
 						3,
-						{T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG},
+						{T_REG, T_IND, T_DIR, T_REG, T_IND, T_DIR, T_REG},
 						7,
 						6,
 						"or",
@@ -99,7 +99,7 @@ static t_op					op_tab[16] =
 
 				{"xor",
 						3,
-						{T_REG | T_IND | T_DIR,T_REG | T_IND | T_DIR,	T_REG},
+						{T_REG, T_IND, T_DIR,T_REG, T_IND, T_DIR, T_REG},
 						8,
 						6,
 						"xor",
@@ -118,7 +118,7 @@ static t_op					op_tab[16] =
 
 				{"ldi",
 						3,
-						{T_REG | T_DIR | T_IND,T_DIR | T_REG,	T_REG},
+						{T_REG, T_DIR, T_IND, T_DIR, T_REG,	0, T_REG},
 						10,
 						25,
 						"load index",
@@ -127,8 +127,7 @@ static t_op					op_tab[16] =
 
 				{"sti",
 						3,
-						{T_REG,
-								T_REG | T_DIR | T_IND,T_DIR | T_REG},
+						{T_REG, 0, 0, T_REG, T_DIR, T_IND,T_DIR, T_REG},
 						11,
 						25,
 						"store index",
@@ -146,7 +145,7 @@ static t_op					op_tab[16] =
 
 				{"lld",
 						2,
-						{T_DIR | T_IND, T_REG},
+						{T_DIR, T_IND, 0, T_REG},
 						13,
 						10,
 						"long load",
@@ -155,7 +154,7 @@ static t_op					op_tab[16] =
 
 				{"lldi",
 						3,
-						{T_REG | T_DIR | T_IND,T_DIR | T_REG, T_REG},
+						{T_REG, T_DIR, T_IND, T_DIR, T_REG, 0, T_REG},
 						14,
 						50,
 						"long load index",

@@ -1,4 +1,4 @@
-#include "../../incs/corewar.h"
+#include "../../incs/corewar_ops.h"
 
 
 int 	get_op_code(t_process *proc)
@@ -25,7 +25,8 @@ void	intro(void)
 
 void ft_exec_op(t_process *proc)
 {
-	set_args_code(proc); // запись значений кодов аргументов
+	if (op_tab[proc->op - 1])
+	process_args_code(proc); // запись значений кодов аргументов
 	if (proc->op > 0 && proc->op < 17
 	&& check_op_args(proc) )// проверка валидности кода операции и соответствия кодов аргументов текущей операции
 	&& parse_args_values(proc)) // парсинг значений аргументов и валидация регистров при их наличии

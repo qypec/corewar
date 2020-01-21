@@ -67,6 +67,6 @@ int 	main(int argc, char **argv)
 		return (0);
 //	print_arena();
 //	print_process();
-//	set_args_code(vm.processes);
+//	process_args_code(vm.processes);
 	return (0);
 }

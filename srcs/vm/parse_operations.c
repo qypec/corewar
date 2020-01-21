@@ -12,26 +12,16 @@
 
 #include "../../incs/corewar.h"
 
-void set_args_code(t_process *proc)
+void 		process_args_code(t_process *proc)
 {
-	unsigned int 	i;
 
-	i = -1;
-	while (++i < 4)
-	{
-		proc->args[i] = ((unsigned int)vm.arena[proc->pos + 1] >> (6u - i * 2)) & (3u);
-		if (DEBUG)
-		{
-			ft_printf("proc id - %d -- proc->args[%d] = %d\n", proc->proc_id, i, proc->args[i]);
-		}
-	}
 }
 
 /*
  * 			{T_REG, T_REG, T_REG}
  */
 
-int	check_op_args(t_process *proc)
+int			check_op_args(t_process *proc)
 {
 	int 	ok;
 
