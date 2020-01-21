@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 20:00:57 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 20:15:18 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,18 @@ int 					parse_args_values(t_process *proc)
 	return (1);
 }
 
-//int 					check_regs(t_process *proc);
-//
-//int 					move_process(t_process *proc);
+int 	check_regs(t_process *proc)
+{
+	int i;
+	int ok;
+
+	i = -1;
+	ok = 1;
+	while (++i < 3)
+	{
+		if (proc->args[i] == T_REG)
+			if (proc->args_value[i] < 1 || proc->args_value[i] > 16)
+				ok = 0;
+	}
+	return (ok);
+}
