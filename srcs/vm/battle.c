@@ -23,7 +23,7 @@ void	intro(void)
 	}
 }
 
-int ft_exec_op(t_process *proc)
+void ft_exec_op(t_process *proc)
 {
 	set_args_code(proc); // запись значений кодов аргументов
 	if (proc->op > 0 && proc->op < 17
@@ -32,7 +32,7 @@ int ft_exec_op(t_process *proc)
 		vm.ops[proc->op](proc); // исполнение операции (из массива указателей на функции операций)
 	if (proc->args[0] == T_REG_ARG || proc->args[1] == T_REG_ARG || proc->args[2] == T_REG_ARG)
 		check_regs(proc);
-	move_process(proc); // смещение позиции процесса в соотвествии со значением PC
+	proc->pos += proc->pc; // смещение позиции процесса в соотвествии со значением PC
 }
 
 int 	check_proc(void)

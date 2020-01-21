@@ -14,6 +14,8 @@
 
 # define GET_BIT(byte, mask) byte & mask
 
+# define DEBUG 1
+
 typedef struct			s_player
 {
 	int					id;
@@ -45,8 +47,6 @@ typedef struct			s_process
     int					regs[REG_NUMBER];
 	struct s_process	*next;
 }						t_process;
-
-
 
 /*
 ** -------------------------- Parse args -------------------------------
@@ -109,6 +109,9 @@ void					lld_op(t_process *proc);
 void					lldi_op(t_process *proc);
 void					lfork_op(t_process *proc);
 void					aff_op(t_process *proc);
+
+int						get_int32_from_mem(int position, int drop_bit);
+int						get_int16_from_mem(int position);
 
 typedef struct			s_op
 {
@@ -285,6 +288,7 @@ t_op					op_tab[17] =
 						0}
 		};
 
+
 typedef struct			s_game
 {
 	t_process 			*processes;
@@ -302,7 +306,7 @@ typedef struct			s_game
 	int					cycles_to_die_updated;
 	int					rounds_all;
 	int 				checks;
-	t_op				operations;
+	void 				(*ops[17]) (t_process *proc);
 }						t_game;
 
 t_game				vm;

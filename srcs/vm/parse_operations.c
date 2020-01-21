@@ -20,7 +20,10 @@ void set_args_code(t_process *proc)
 	while (++i < 4)
 	{
 		proc->args[i] = ((unsigned int)vm.arena[proc->pos + 1] >> (6u - i * 2)) & (3u);
-		printf("proc->args[%d] = %d\n", i, proc->args[i]);
+		if (DEBUG)
+		{
+			ft_printf("proc id - %d -- proc->args[%d] = %d\n", proc->proc_id, i, proc->args[i]);
+		}
 	}
 }
 
