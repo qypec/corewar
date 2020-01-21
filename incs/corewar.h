@@ -7,10 +7,6 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# define T_REG_ARG		1
-# define T_DIR_ARG		10
-# define T_IND_ARG		11
-
 # define DEBUG 1
 
 typedef struct			s_player
@@ -33,11 +29,8 @@ typedef struct			s_process
 	int					pos;
     int					pc;
     int					op;
-	unsigned char		op_args;
     int					args_value[3];
     unsigned int		args[4];
-    int					has_args_code;
-    int 				change_carry;
 	int					carry;
 	int					delay;
 	int					live_incycle;

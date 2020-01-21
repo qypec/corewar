@@ -26,13 +26,13 @@ void	intro(void)
 void ft_exec_op(t_process *proc)
 {
 	if (op_tab[proc->op - 1].has_args_code)
-		process_args_code(proc); // запись значений кодов аргументов
+		process_args_code(proc); // запись значений кодов аргументов// проверка валидности кода операции и соответствия кодов аргументов текущей операции
 	if (proc->op > 0 && proc->op < 17
-	&& check_op_args(proc) // проверка валидности кода операции и соответствия кодов аргументов текущей операции
 	&& parse_args_values(proc)
 	&& check_regs(proc)) // парсинг значений аргументов и валидация регистров при их наличии
 		op_tab[proc->op].operations(proc); // исполнение операции (из массива указателей на функции операций)
 	proc->pos += proc->pc; // смещение позиции процесса в соотвествии со значением PC
+	proc->pc = 0;
 }
 
 int 	check_proc(void)
