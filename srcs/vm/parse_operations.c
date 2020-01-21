@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 15:07:20 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/21 16:13:36 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,35 @@ int	check_op_args(t_process *proc)
 	return (ok);
 }
 
-int 					parse_args_values(t_process *proc);
+/*
+ * 	live	|	T_REG 	|	T_DIR	|	|	|	T_IND	|	|
+ * 			|	1b		|	4b		|	|	|	2b		|	|
+ */
+
+void					dir_size_init()
+{
+	dir_si
+}
+
+int 					parse_args_values(t_process *proc)
+{
+	int	i;
+	int offset;
+	int size;
+
+	i = 0;
+	offset = (proc->op != 1 || proc->op != 9
+			|| proc->op != 12 || proc->op != 15) ? 1 : 0; // смещение при наличии
+	size = 0;
+	while (++i < 3)
+	{
+		size = (proc->args[i] == T_REG_ARG) ? 1 : size;
+		size = (proc->args[i] == T_IND_ARG) ? 2 : size;
+		size = (proc->args[i] == T_DIR_ARG) ? ft_dir_size : size;
+		offset += size;
+	}
+}
+
 int 					check_regs(t_process *proc);
+
 int 					move_process(t_process *proc);
