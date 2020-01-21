@@ -25,8 +25,8 @@ void	intro(void)
 
 void ft_exec_op(t_process *proc)
 {
-	if (op_tab[proc->op - 1])
-	process_args_code(proc); // запись значений кодов аргументов
+	if (op_tab[proc->op - 1].has_args_code)
+		process_args_code(proc); // запись значений кодов аргументов
 	if (proc->op > 0 && proc->op < 17
 	&& check_op_args(proc) )// проверка валидности кода операции и соответствия кодов аргументов текущей операции
 	&& parse_args_values(proc)) // парсинг значений аргументов и валидация регистров при их наличии

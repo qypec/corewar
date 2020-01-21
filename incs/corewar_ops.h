@@ -19,7 +19,7 @@ typedef struct			s_op
 {
 	char				*op_code;
 	int					argc;
-	int					args_types[9];
+	int					args_types[12];
 	int					op_id;
 	int					op_delay;
 	char				*op_name;
@@ -110,7 +110,7 @@ static t_op					op_tab[16] =
 
 				{"xor",
 						3,
-						{T_REG, T_IND, T_DIR,T_REG, T_IND, T_DIR, T_REG},
+						{T_REG, T_IND, T_DIR, T_REG, T_IND, T_DIR, T_REG},
 						8,
 						6,
 						"xor",

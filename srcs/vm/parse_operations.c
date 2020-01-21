@@ -13,43 +13,39 @@
 #include <corewar_ops.h>
 #include "../../incs/corewar.h"
 
+int 		check_args_type(unsigned int arg_code, const int *arg_types)
+{
+	int 	i;
+
+	i = -1;
+	while (++i < 3)
+		if (arg_code == arg_types[i])
+			return (1);
+	return (0);
+}
+
 void 		process_args_code(t_process *proc)
 {
+	int i;
 
+	i = -1;
+	while (++i < 4)
+	{
+		if (!check_args_type((((*(vm.arena + proc->pos + 1u)) &
+							   (192u >> (unsigned) (i * 2)))) >> (6u - (unsigned) (i * 2)),
+							 op_tab[proc->op - 1].args_types + i * 3))
+		{
+			proc->op = 0;
+			proc->pc = 1;
+		}
+	}
 }
 
 /*
  * 			{T_REG, T_REG, T_REG}
  */
 
-int			check_op_args(t_process *proc)
-{
-	int 	ok;
 
-	ok = 0;
-	if (proc->args[3])
-		return (0);
-	if (proc->op == 2 || proc->op == 13) // ld, lld
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG) && proc->args[1] == T_REG_ARG && !proc->args[2]) ? 1 : 0;
-	if (proc->op == 3) // st,
-		ok = ((proc->args[0] == T_REG) && (proc->args[1] == T_REG_ARG || proc->args[1] == T_IND_ARG) && !proc->args[2]) ? 1 : 0;
-	if (proc->op == 4 || proc->op == 5) // add, sub
-		ok = ((proc->args[0] == T_REG) && proc->args[1] == T_REG_ARG && proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 6 || proc->op == 7 || proc->op == 8) // and, or, xor
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG || proc->args[0] == T_REG_ARG)
-			  && (proc->args[1] == T_DIR_ARG || proc->args[1] == T_IND_ARG || proc->args[1] == T_REG_ARG)
-			  && proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 10 || proc->op == 14) // ldi, lldi
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG || proc->args[0] == T_REG_ARG)
-			  && (proc->args[1] == T_DIR_ARG || proc->args[1] == T_REG_ARG) && proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 11) // sti
-		ok = (proc->args[0] == T_REG
-			  && (proc->args[1] == T_DIR_ARG || proc->args[1] == T_IND_ARG || proc->args[1] == T_REG_ARG)
-			  && (proc->args[2] == T_REG_ARG || proc->args[2] == T_DIR_ARG)) ? 1 : 0;
-	if (proc->op == 16) // aff
-		ok = (proc->args[0] == T_REG && !proc->args[1] && !proc->args[2]) ? 1 : 0;
-	return (ok);
-}
 
 /*
  * 	live	|	T_REG 	|	T_DIR	|	|	|	T_IND	|	|
