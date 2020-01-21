@@ -41,103 +41,16 @@ void	intro(void)
 	}
 }
 
-/*
- * 01 	11 	01 	10
- * 0x1	0xb	0x1	0xa
- */
-
-void set_args_code(t_process *proc)
-{
-	unsigned int 	i;
-
-	i = -1;
-	while (++i < 4)
-	{
-		proc->args[i] = ((unsigned int)vm.arena[proc->pos + 1] >> (6u - i * 2)) & (3u);
-		printf("proc->args[%d] = %d\n", i, proc->args[i]);
-	}
-}
-
-int	check_op_args(t_process *proc)
-{
-	int 	ok;
-
-	ok = 0;
-	if (proc->args[3])
-		return (0);
-	if (proc->op == 2 || proc->op == 13) // ld, lld
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG) && proc->args[1] == T_REG_ARG && !proc->args[2]) ? 1 : 0;
-	if (proc->op == 3) // st,
-		ok = ((proc->args[0] == T_REG) && (proc->args[1] == T_REG_ARG || proc->args[1] == T_IND_ARG) && !proc->args[2]) ? 1 : 0;
-	if (proc->op == 4 || proc->op == 5) // add, sub
-		ok = ((proc->args[0] == T_REG) && proc->args[1] == T_REG_ARG && proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 6 || proc->op == 7 || proc->op == 8) // and, or, xor
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG || proc->args[0] == T_REG_ARG)
-				&& (proc->args[1] == T_DIR_ARG || proc->args[1] == T_IND_ARG || proc->args[1] == T_REG_ARG)
-				&& proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 10 || proc->op == 14) // ldi, lldi
-		ok = ((proc->args[0] == T_DIR_ARG || proc->args[0] == T_IND_ARG || proc->args[0] == T_REG_ARG)
-				&& (proc->args[1] == T_DIR_ARG || proc->args[1] == T_REG_ARG) && proc->args[2] == T_REG_ARG) ? 1 : 0;
-	if (proc->op == 11) // sti
-		ok = (proc->args[0] == T_REG
-				&& (proc->args[1] == T_DIR_ARG || proc->args[1] == T_IND_ARG || proc->args[1] == T_REG_ARG)
-				&& (proc->args[2] == T_REG_ARG || proc->args[2] == T_DIR_ARG)) ? 1 : 0;
-	if (proc->op == 16) // aff
-		ok = (proc->args[0] == T_REG && !proc->args[1] && !proc->args[2]) ? 1 : 0;
-	return (ok);
-}
-
-int 	check_regs(t_process *proc)
-{
-	int i;
-	int j;
-	int ok;
-
-	i = -1;
-	j = -1;
-	while (++i <= REG_NUMBER)
-	{
-		if (proc->args[j] == T_REG_ARG)
-		{
-			ok = (proc->regs[i])
-		}
-	}
-}
-
-int 	get_regs(t_process *proc)
-{
-	int i;
-	int offset;
-
-	i = -1;
-	if (!(offset = proc->has_args_code))
-		return (1);
-	while (++i < 3)
-	{
-		if (proc->args[0] == T_REG_ARG)
-			proc->args_value[0] = vm.arena[proc->pos + offset + 1];
-
-		if (proc->args[i] == T_REG_ARG)
-		{
-			j = -1;
-			while (++j < i)
-			proc->args_value[i] = vm.arena[proc->pos + i * ]
-		}
-	}
-}
-
 int ft_exec_op(t_process *proc)
 {
-	t_process *temp;
-
-	temp = proc;
-	set_args_code(proc);
-	if (!check_op_args(proc))
-		return (0);
+	set_args_code(proc); // запись значений кодов аргументов
+	if (proc->op > 0 && proc->op < 17
+	&& check_op_args(proc) // проверка валидности кода операции и соответствия кодов аргументов текущей операции
+	&& parse_args_values(proc)) // парсинг значений аргументов и валидация регистров при их наличии
+		vm.ops[proc->op](proc); // исполнение операции (из массива указателей на функции операций)
 	if (proc->args[0] == T_REG_ARG || proc->args[1] == T_REG_ARG || proc->args[2] == T_REG_ARG)
 		check_regs(proc);
-	if (temp->op > 0 && temp->op < 17)
-		vm.ops[proc->op](proc);
+	move_process(proc); // смещение позиции процесса в соотвествии со значением PC
 }
 
 int 	check_proc(void)
@@ -148,10 +61,10 @@ int 	check_proc(void)
 	while (iter)
 	{
 		if (!iter->delay)
-			get_op_code(iter);
+			get_op_code(iter); // парсинг кода текущей операции
 		iter->delay -= (iter->delay > 0) ? 1 : 0;
 		if (!iter->delay)
-			ft_exec_op(iter); // Здесь проверяется, пришло ли время для исолнения операции.
+			ft_exec_op(iter); // парсинг и исполнение операции
 		iter = iter->next;
 	}
 	return (1);
@@ -165,9 +78,9 @@ int 	battle(void)
 	intro();
 	while (vm.processes) // TODO: add dump function
 	{
-		check_proc();
+		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.cycles_to_die < 1)
-			battle_check();
+			battle_check(); // проверка хода игры
 		vm.cycles_to_die -= 1;
 		++vm.cycle_current;
 		++vm.cycles_all;

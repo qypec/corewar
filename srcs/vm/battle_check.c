@@ -26,10 +26,8 @@ int 	kill_all_procs(void)
 	procs = vm.processes;
 	while (procs)// TODO: Удалить все процессы
 	{
-		if (procs->next)
-			next = procs->next;
-		ft_bzero((void*)procs, sizeof(t_process) * 1);
-		procs = NULL;
+		next = procs->next;
+		del_process(procs);
 		procs = next;
 	}
 }
@@ -44,15 +42,12 @@ int 	check_procs(void)
 	{
 		if (!temp->live_incycle) // TODO: Если не было выполнено операций live за раунд - удалить процесс
 		{
-			if (temp->next)
-			{
 				next = temp->next;
-				ft_bzero((void*)temp, sizeof(t_process) * 1);
-				free(temp);
+				del_process(temp);
 				temp = next;
-			}
 		}
-		temp = temp->next;
+		else
+			temp = temp->next;
 	}
 }
 
