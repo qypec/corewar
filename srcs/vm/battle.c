@@ -5,25 +5,7 @@ int 	get_op_code(t_process *proc)
 {
 	proc->op = (int)(vm.arena[proc->pos]);
 	if (proc->op < 1 || proc->op > 16)
-	{
 		proc->op = 0;
-		proc->delay = 0;
-	}
-	proc->delay = (proc->op == 1 || proc->op == 4
-			|| proc->op == 5 || proc->op == 13)
-			? 10 : proc->delay;
-	proc->delay = (proc->op == 2 || proc->op == 3) ? 5 : proc->delay;
-	proc->delay = (proc->op == 6 || proc->op == 7 || proc->op == 8) ? 6 : proc->delay;
-	proc->delay = (proc->op == 9) ? 20 : proc->delay;
-	proc->delay = (proc->op == 10 || proc->op == 11) ? 25 : proc->delay;
-	proc->delay = (proc->op == 12) ? 800 : proc->delay;
-	proc->delay = (proc->op == 14) ? 50 : proc->delay;
-	proc->delay = (proc->op == 15) ? 1000 : proc->delay;
-	proc->delay = (proc->op == 16) ? 2 : proc->delay;
-	if (proc->op == 1 || proc->op == 9 || proc->op == 12 || proc->op == 15)
-		proc->has_args_code = 0;
-	else
-		proc->has_args_code = 1;
 	return (1);
 }
 

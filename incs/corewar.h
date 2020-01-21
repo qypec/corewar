@@ -46,27 +46,7 @@ typedef struct			s_process
 	struct s_process	*next;
 }						t_process;
 
-typedef struct			s_game
-{
-	t_process 			*processes;
-	t_player			*last_alive;
-	t_player			players_temp[MAX_PLAYERS];
-	t_player			players[MAX_PLAYERS + 1];
-	int 				players_sum;
-	unsigned char		arena[MEM_SIZE];
-	unsigned char		arena_id[MEM_SIZE];
-	size_t				cycles_all;
-	ssize_t 			cycle_current;
-	size_t				lives_in_round;
-	int					cycles_to_die;
-	int					cycles_to_die_last;
-	int					cycles_to_die_updated;
-	int					rounds_all;
-	int 				checks;
-	void 				(*ops[17]) (t_process *proc);
-}						t_game;
 
-	t_game				vm;
 
 /*
 ** -------------------------- Parse args -------------------------------
@@ -305,5 +285,26 @@ t_op					op_tab[17] =
 						0}
 		};
 
+typedef struct			s_game
+{
+	t_process 			*processes;
+	t_player			*last_alive;
+	t_player			players_temp[MAX_PLAYERS];
+	t_player			players[MAX_PLAYERS + 1];
+	int 				players_sum;
+	unsigned char		arena[MEM_SIZE];
+	unsigned char		arena_id[MEM_SIZE];
+	size_t				cycles_all;
+	ssize_t 			cycle_current;
+	size_t				lives_in_round;
+	int					cycles_to_die;
+	int					cycles_to_die_last;
+	int					cycles_to_die_updated;
+	int					rounds_all;
+	int 				checks;
+	t_op				operations;
+}						t_game;
+
+t_game				vm;
 
 #endif
