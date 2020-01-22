@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 19:35:10 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:51:03 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int init_players_struct(t_player *players)
 
 int 	init_corewar()
 {
+	vm.process_count = 0;
 	vm.processes = NULL;
 	vm.last_alive = NULL;
 	vm.cycles_all = 0;
 	vm.cycle_current = 0;
 	vm.cycles_to_die = CYCLE_TO_DIE;
+	vm.cycles_to_die_last = CYCLE_TO_DIE;
 	vm.players_sum = 0;
 	vm.dump_cycle = 0;
 	vm.checks = 0;

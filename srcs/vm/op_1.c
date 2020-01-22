@@ -3,10 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   op_1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 18:09:30 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/22 19:35:48 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_1.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 19:09:16 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/21 17:18:46 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:07:26 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +26,18 @@
 void	live_op(t_process *proc)
 {
 	int				number;
+	int 			player_index;
 
-	number = get_int32_from_mem(proc->pc + 1, 1);
-	if (number > 0 && number <= MAX_PLAYERS && vm.players[number].id)
+	number = get_int32_from_mem(proc->pos + 1, 0);
+	player_index = number * -1;
+	if (player_index > 0 && player_index <= MAX_PLAYERS && vm.players[player_index].id)
 	{
-		++vm.players[number].is_alive;
-		++vm.players[number].lives_all;
-		++vm.players[number].lives_last;
-		++vm.players[number].lives_current;
+		++vm.players[player_index].is_alive;
+		++vm.players[player_index].lives_all;
+		++vm.players[player_index].lives_last;
+		++vm.players[player_index].lives_current;
 		++vm.lives_in_round;
-		vm.last_alive = &vm.players[number];
+		vm.last_alive = &vm.players[player_index];
 		++proc->live_incycle;
 	}
 	if (DEBUG)
@@ -35,9 +48,9 @@ void	zjmp_op(t_process *proc)
 {
 	if (proc->carry == 1)
 	{
-		proc->pc = proc->pc + get_int16_from_mem(proc->pc + 1) % IDX_MOD;
+		proc->pc = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
 		if (DEBUG)
-			ft_printf("proc id - %d: zjmp op - %d\n", proc->proc_id, get_int16_from_mem(proc->pc + 1));
+			ft_printf("proc id - %d: zjmp op - %d\n", proc->proc_id, proc->pc);
 	}
 	else if (DEBUG)
 		ft_printf("proc id - %d: zjmp op carry - %d\n", proc->proc_id, proc->carry);

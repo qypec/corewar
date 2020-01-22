@@ -5,52 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 22:56:47 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:57:10 by vgerold-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_operations.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 22:56:47 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:56:47 by vgerold-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_operations.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 22:56:45 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:56:45 by vgerold-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_operations.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 22:56:44 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:56:44 by vgerold-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_operations.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:54:57 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/22 19:14:08 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +45,9 @@ void 		process_args_code(t_process *proc)
 	i = -1;
 	while (++i < 4)
 	{
-		if (check_args_type((*(vm.arena + proc->pos + 1u)
+		if (!check_args_type((*(vm.arena + proc->pos + 1u)
 		& (192u >> (unsigned) (i * 2))) >> (6u - (unsigned) (i * 2)),
 				op_tab[proc->op - 1].args_types + i * 3, proc, i))
-			proc->pc += calc_args_size(i, proc);
-		else
 		{
 			proc->op = 0;
 			proc->pc = 1;
@@ -118,15 +72,18 @@ int 					parse_args_values(t_process *proc)
 	unsigned int size;
 
 	i = -1;
-	offset = (op_tab[proc->op].has_args_code) ? 2 : 1; // смещение при наличии на 1 байт значения аргументов
-	while (++i < 3)
+	offset = (op_tab[proc->op - 1].has_args_code) ? 2 : 1; // смещение при наличии на 1 байт значения аргументов
+	if (proc->op == 1)
+		proc->op = 1;
+	while (++i < op_tab[proc->op - 1].argc)
 	{
 		size = calc_args_size(i, proc);
-		proc->args_value[i] += (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : 0;
-		proc->args_value[i] += (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : 0;
-		proc->args_value[i] += (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset, 0) : 0;
+		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset, 0) : proc->args_value[i];
 		offset += (int)size;
 	}
+	proc->pc += offset;
 	return (1);
 }
 
@@ -137,11 +94,9 @@ int 	check_regs(t_process *proc)
 
 	i = -1;
 	ok = 1;
-	while (++i < 3)
-	{
+	while (++i < op_tab[proc->op - 1].argc)
 		if (proc->args[i] == T_REG)
 			if (proc->args_value[i] < 1 || proc->args_value[i] > 16)
 				ok = 0;
-	}
 	return (ok);
 }

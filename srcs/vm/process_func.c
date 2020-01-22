@@ -6,11 +6,13 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:24:37 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/21 15:32:23 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:37:16 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/corewar.h"
+
+
 
 void		init_var(t_process **new)
 {
@@ -44,7 +46,8 @@ t_process	*create_process(int n_player, int position)
 	new->player_id = vm.players[n_player].id;
 	new->pos = position;
 	init_var(&new);
-	new->regs[0] = vm.players[n_player].id;
+	new->regs[0] = vm.players[n_player].id * -1;
+	++vm.process_count;
 	return (new);
 }
 
@@ -70,4 +73,5 @@ void		del_process(t_process *proc)
 	}
 	if (iter)
 		iter->next = next;
+	--vm.process_count;
 }

@@ -35,7 +35,7 @@ void ft_exec_op(t_process *proc)
 		op_tab[proc->op - 1].operations(proc); // исполнение операции (из массива указателей на функции операций)
 	proc->pos += proc->pc; // смещение позиции процесса в соотвествии со значением PC
 	proc->pc = 0;
-	ft_bzero((void*)proc->args_value, sizeof(proc->args_value) * 3);
+	ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 }
 
 int 	check_proc(void)
@@ -57,13 +57,10 @@ int 	check_proc(void)
 
 int 	battle(void)
 {
-	int i;
-
-	i = 0;
 	intro();
 	while (vm.processes)
 	{
-		if (vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle)
+		if ((vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle) || !DEBUG)
 			print_arena();
 		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.cycles_to_die < 1)
@@ -74,7 +71,15 @@ int 	battle(void)
 		if (!vm.processes)
 			break ;
 	}
-	ft_printf("* Player %s id:[%d] win! Congratulations!\n",
-			vm.last_alive->name, vm.last_alive->id);
+	if (vm.last_alive)
+	{
+		ft_printf("* Player %s id:[%d] win! Congratulations!\n",
+				  vm.last_alive->name, vm.last_alive->id);
+		if (DEBUG)
+			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = %d\nproccesses_count = %d\n",
+					vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count);
+	}
+	else
+		ft_printf("All players died! :(\n");
 	return (0);
 }

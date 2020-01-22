@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 21:24:09 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/21 22:25:49 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/22 18:34:19 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void update_cycle_to_die(void)
 {
 	if (vm.lives_in_round >= NBR_LIVE)
 		vm.cycles_to_die = vm.cycles_to_die_last - CYCLE_DELTA;
+	else
+		vm.cycles_to_die = vm.cycle_current;
 	if (vm.cycles_to_die == vm.cycles_to_die_last)
 		vm.cycles_to_die_updated++;
 	else
@@ -26,8 +28,8 @@ void update_cycle_to_die(void)
 		vm.cycles_to_die_updated = 0;
 	}
 	++vm.checks;
+	vm.cycles_to_die_last = vm.cycle_current;
 	vm.cycle_current = 0;
-	vm.cycles_to_die_last = vm.cycles_to_die;
 }
 
 int 	kill_all_procs(void)
