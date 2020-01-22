@@ -60,14 +60,13 @@ int 	battle(void)
 	intro();
 	while (vm.processes)
 	{
-		if ((vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle) || !DEBUG)
-			print_arena();
-		check_proc(); // проверка процессов, парсинг и исполнение
-		if (vm.cycles_to_die < 1)
-			battle_check(); // проверка хода игры
-		vm.cycles_to_die -= 1;
 		++vm.cycle_current;
 		++vm.cycles_all;
+		if ((vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle) || DEBUG)
+			print_arena();
+		check_proc(); // проверка процессов, парсинг и исполнение
+		if (vm.cycle_current == vm.cycles_to_die - 1)
+			battle_check(); // проверка хода игры
 		if (!vm.processes)
 			break ;
 	}
@@ -75,9 +74,12 @@ int 	battle(void)
 	{
 		ft_printf("* Player %s id:[%d] win! Congratulations!\n",
 				  vm.last_alive->name, vm.last_alive->id);
-		if (DEBUG)
-			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = %d\nproccesses_count = %d\n",
-					vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count);
+		if (!DEBUG)
+			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = %d\nproccesses_count = %d\ncycle_to_die = %d\n",
+					vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count, vm.cycles_to_die);
+			int i = 0;
+			while (++i < vm.players_sum + 1)
+				ft_printf("vm.player[%d].lives_all = %d\n", i, vm.players[i].lives_all);
 	}
 	else
 		ft_printf("All players died! :(\n");

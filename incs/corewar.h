@@ -7,7 +7,7 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# define DEBUG 1
+# define DEBUG 0
 
 typedef struct			s_player
 {
@@ -73,7 +73,7 @@ void					del_process(t_process *proc);
 */
 
 int						battle(void);
-int						battle_check(void);
+void battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
 int 					parse_args_values(t_process *proc);
