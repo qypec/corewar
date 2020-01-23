@@ -5,24 +5,26 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/23 18:40:10 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/23 18:52:01 by yquaro           ###   ########.fr        #
+#    Created: 2020/01/23 18:44:31 by yquaro            #+#    #+#              #
+#    Updated: 2020/01/23 18:50:54 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include incs/corewar.mk
+include ../../incs/corewar.mk
 
-all:
-	@make -C libft/ all
-	@make -C srcs/vm/ all
-	@make -C .objs/ all
+HEADER_H = -I ../../incs/
 
-clean:
-	@make -C libft/ clean
-	@make -C .objs/ clean
+DIR_O = ../../.objs
+SOURCES = battle.c battle_check.c check_args.c corewar.c create_players.c \
+			debug.c init_game.c op_1.c op_2.c op_3.c op_utils.c parse_file.c \
+			parse_operations.c process_func.c
 
-fclean: clean
-	@make -C libft/ fclean
-	@make -C .objs/ fclean
+OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 
-re: fclean all
+all: print $(OBJECTS)
+
+print:
+	@echo \*\*\* Compiling vm files
+
+$(DIR_O)/%.o: %.c
+	$(COMPILING) $< -o $@

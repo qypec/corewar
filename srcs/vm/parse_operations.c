@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:04:38 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/22 19:14:08 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:48:16 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <corewar_ops.h>
-#include "../../incs/corewar.h"
+#include "corewar_ops.h"
+#include "corewar.h"
 
 unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_process *proc, int j)
 {

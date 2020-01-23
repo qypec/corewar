@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_players.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 17:47:07 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 19:18:37 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:17 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 void 		redistribution(void)
 {

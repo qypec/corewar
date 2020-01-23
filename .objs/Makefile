@@ -5,24 +5,24 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/23 18:40:10 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/23 18:52:01 by yquaro           ###   ########.fr        #
+#    Created: 2020/01/23 18:40:59 by yquaro            #+#    #+#              #
+#    Updated: 2020/01/23 18:43:41 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include incs/corewar.mk
+include ../incs/corewar.mk
+
+CFLAGS = -g -Wall -Wextra -Werror
+COMPILING = $(CC) $(CFLAGS) $(HEADER_H)
 
 all:
-	@make -C libft/ all
-	@make -C srcs/vm/ all
-	@make -C .objs/ all
+	@mv ../libft/$(LIBNAME) $(LIBNAME)
+	$(COMPILING) *.o $(LIBNAME) -o $(EXECUTABLE)
+	@mv $(EXECUTABLE) ../$(EXECUTABLE)
+	@echo \*\*\* COREWAR COMPILED!
 
 clean:
-	@make -C libft/ clean
-	@make -C .objs/ clean
+	@rm -f *.o
 
 fclean: clean
-	@make -C libft/ fclean
-	@make -C .objs/ fclean
-
-re: fclean all
+	@rm -f $(LIBNAME)

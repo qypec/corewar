@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   process_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 18:24:37 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/22 17:37:16 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:56 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
-
-
+#include "corewar.h"
 
 void		init_var(t_process **new)
 {

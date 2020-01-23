@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   battle_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 21:24:09 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 16:49:22 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:48:55 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 void update_cycle_to_die(void)
 {
@@ -50,6 +50,7 @@ int 	kill_all_procs(void)
 		del_process(procs);
 		procs = next;
 	}
+	return (1);
 }
 
 void check_procs(void)
