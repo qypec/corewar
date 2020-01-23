@@ -6,11 +6,12 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 18:49:12 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/23 19:27:22 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "visu.h"
 
 int init_players_struct(t_player *players)
 {
@@ -50,6 +51,7 @@ int 	init_corewar()
 	vm.checks = 0;
 	ft_bzero(vm.arena, MEM_SIZE);
 	init_players_struct(NULL);
+	vm.win = init_visu();
 	return (1);
 }
 
@@ -65,11 +67,12 @@ int 	main(int argc, char **argv)
 		ft_printf("error with player's file");
 		return (0);
 	}
-	printf("ok");
+	// printf("ok");
 	if (!init_game())
 		return (0);
 	if (DEBUG)
 		print_process();
 	battle();
+	delete_windows(&(vm.win));
 	return (0);
 }

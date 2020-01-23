@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 19:55:56 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/23 18:49:48 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/23 19:21:37 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int check_exec_size(int fd, int player_k)
 		return (0);
 	if (read(fd, &buf[0], 1) < 1)
 		return (0);
-	printf("exec_size - %d\n", *(int*)buf);
+	// printf("exec_size - %d\n", *(int*)buf);
 	vm.players_temp[player_k].code_size = *(int*)buf;
 	return (1);
 }
@@ -52,14 +52,14 @@ int check_code(int fd, int player_k)
 	char buf[CHAMP_MAX_SIZE + 1];
 
 	ret = -1;
-	printf("4.1\n");
+	// printf("4.1\n");
 	if ((ret = read(fd, &buf, CHAMP_MAX_SIZE + 1)) < 1)
 		return (0);
-	printf("4.2\n");
-	printf("code_size - %d  ret - %d\n", vm.players_temp[player_k].code_size, ret);
+	// printf("4.2\n");
+	// printf("code_size - %d  ret - %d\n", vm.players_temp[player_k].code_size, ret);
 	if (ret != vm.players_temp[player_k].code_size)
 		return (0);
-	printf("4.3\n");
+	// printf("4.3\n");
 	ft_memcpy(vm.players_temp[player_k].code, buf, vm.players_temp[player_k].code_size);
 	return (1);
 }
@@ -78,7 +78,7 @@ int check_name(int fd, int player_k)
 		return (0);
 	if (buf != 0)
 		return (0);
-	printf("name - %s after name mem - %d\n", vm.players_temp[player_k].name, buf);
+	// printf("name - %s after name mem - %d\n", vm.players_temp[player_k].name, buf);
 	return (1);
 }
 

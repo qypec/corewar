@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 18:49:08 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/23 19:26:20 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int		check_extension(int i, char **file)
 	if (file[i][j] != '.')
 		return (print_usage(-1, 1));
 	if (file[i][j] == '.' && ft_strequ(file[i] + j, ".cor"))
-		ft_printf("%s %d %s\n", "player", ++vm.players_sum, "checked...");
+		++vm.players_sum;
+		// ft_printf("%s %d %s\n", "player", ++vm.players_sum, "checked...");
 	else
 		return (print_usage(-1, 1));
 	return(1);

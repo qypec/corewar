@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:09:30 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 18:49:36 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/23 19:20:28 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	live_op(t_process *proc)
 		vm.last_alive = &vm.players[player_index];
 		++proc->live_incycle;
 	}
-	if (!DEBUG)
+	if (DEBUG)
 		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
 }
 

@@ -6,8 +6,9 @@
 #include		<inttypes.h>
 #include		"op.h"
 #include		"../libft/libft.h"
+#include		"visu.h"
 
-# define DEBUG 1
+# define DEBUG 0
 
 typedef struct			s_player
 {
@@ -73,7 +74,7 @@ void					del_process(t_process *proc);
 */
 
 int						battle(void);
-void battle_check(void);
+void					battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
 int 					parse_args_values(t_process *proc);
@@ -106,6 +107,7 @@ int						get_int16_from_mem(int position);
 
 typedef struct			s_game
 {
+	t_windows			*win;
 	int 				process_count;
 	t_process 			*processes;
 	t_player			*last_alive;
