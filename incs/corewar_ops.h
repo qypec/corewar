@@ -61,7 +61,7 @@ static t_op					op_tab[16] =
 						"store",
 						1,
 						0,
-						NULL,
+						st_op,
 						1},
 
 				{"add",
@@ -72,7 +72,7 @@ static t_op					op_tab[16] =
 						"addition",
 						1,
 						0,
-						NULL,
+						add_op,
 						1},
 
 				{"sub",
@@ -83,7 +83,7 @@ static t_op					op_tab[16] =
 						"soustraction",
 						1,
 						0,
-						NULL,
+						sub_op,
 						1},
 
 				{"and",
@@ -94,7 +94,7 @@ static t_op					op_tab[16] =
 						"and",
 						1,
 						0,
-						NULL,
+						and_op,
 						1},
 
 				{"or",
@@ -105,7 +105,7 @@ static t_op					op_tab[16] =
 						"or",
 						1,
 						0,
-						NULL,
+						or_op,
 						1},
 
 				{"xor",
@@ -116,7 +116,7 @@ static t_op					op_tab[16] =
 						"xor",
 						1,
 						0,
-						NULL,
+						xor_op,
 						1},
 
 				{"zjmp",

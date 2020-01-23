@@ -29,7 +29,7 @@ void	ldi_op(t_process *proc)
 	else if (proc->args[0] == T_IND)
 	{
 		res = get_int32_from_mem(proc->pos +
-								 (int)proc->args_value[0], 0) % IDX_MOD;
+								 (int) proc->args_value[0]) % IDX_MOD;
 		proc->regs[proc->args_value[2] - 1] = res;
 	}
 	if (DEBUG)
@@ -48,7 +48,7 @@ void	sti_op(t_process *proc)
 				+ proc->regs[proc->args_value[2] - 1]) % IDX_MOD;
 	else if (proc->args[0] == T_IND)
 		addr = get_int32_from_mem(proc->pos
-				+ (int)proc->args_value[2], 0) % IDX_MOD;
+								  + (int) proc->args_value[2]) % IDX_MOD;
 	vm.arena[addr] = proc->regs[proc->args_value[0] - 1];
 	vm.arena_id[addr] = proc->player_id;
 }
@@ -78,7 +78,7 @@ void	lld_op(t_process *proc)
 	else if (proc->args[0] == T_IND)
 	{
 		res = get_int32_from_mem(proc->pos
-								 + (int)proc->args_value[0], 0);
+								 + (int) proc->args_value[0]);
 		proc->regs[proc->args_value[1] - 1] = res;
 		if (!res)
 			proc->carry = 1;
@@ -105,7 +105,7 @@ void	lldi_op(t_process *proc)
 	else if (proc->args[0] == T_IND)
 	{
 		res = get_int32_from_mem(proc->pos
-				+ (int)proc->args_value[0], 0) % IDX_MOD;
+								 + (int) proc->args_value[0]) % IDX_MOD;
 		proc->regs[proc->args_value[2] - 1] = res;
 	}
 	if (DEBUG)
