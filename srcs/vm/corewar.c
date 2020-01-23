@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/22 17:51:03 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 15:50:48 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int 	init_corewar()
 	vm.dump_cycle = 0;
 	vm.checks = 0;
 	ft_bzero(vm.arena, MEM_SIZE);
-	ft_bzero(vm.arena_id, MEM_SIZE * sizeof(int));
 	init_players_struct(NULL);
 	return (1);
 }

@@ -3,6 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   op_1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/22 18:09:30 by vgerold-          #+#    #+#             */
+/*   Updated: 2020/01/23 15:51:24 by vgerold-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_1.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 19:09:16 by ergottli          #+#    #+#             */
@@ -29,7 +40,7 @@ void	live_op(t_process *proc)
 		vm.last_alive = &vm.players[player_index];
 		++proc->live_incycle;
 	}
-	if (DEBUG)
+	if (!DEBUG)
 		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
 }
 

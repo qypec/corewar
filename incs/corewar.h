@@ -7,7 +7,7 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# define DEBUG 0
+# define DEBUG 1
 
 typedef struct			s_player
 {
@@ -119,7 +119,7 @@ typedef struct			s_game
 	size_t				lives_in_round;
 	int					cycles_to_die;
 	int					cycles_to_die_last;
-	int					cycles_to_die_updated;
+	int					cycles_to_die_not_updated;
 	int 				checks;
 	int 				dump_cycle;
 }						t_game;
