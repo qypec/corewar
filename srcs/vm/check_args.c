@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int print_usage(int code, int usage)
+int		print_usage(int code, int usage)
 {
 	if (!code)
 		ft_printf("%s\n", ANSI_B_RED"You didn't pass the program arguments!"ANSI_RESET);
@@ -40,7 +40,7 @@ int print_usage(int code, int usage)
 	return (0);
 }
 
-int 	check_flags(int i, int ac, char **ag)
+int		check_flags(int i, int ac, char **ag)
 {
 	int value;
 
@@ -57,7 +57,8 @@ int 	check_flags(int i, int ac, char **ag)
 		{
 			if (is_set(value, MAX_PLAYERS))
 				return (print_usage(-5, 1));
-			vm.players_temp[vm.players_sum].id = (!is_set(value, MAX_PLAYERS)) ? value : 0;
+			vm.players_temp[vm.players_sum].id =
+					(!is_set(value, MAX_PLAYERS)) ? value : 0;
 		}
 	}
 	else if (ag[i][1] == 'd')
@@ -83,10 +84,10 @@ int		check_extension(int i, char **file)
 		ft_printf("%s %d %s\n", "player", ++vm.players_sum, "checked...");
 	else
 		return (print_usage(-1, 1));
-	return(1);
+	return (1);
 }
 
-int 	check_args(int ac, char **ag)
+int		check_args(int ac, char **ag)
 {
 	int i;
 
@@ -97,7 +98,7 @@ int 	check_args(int ac, char **ag)
 		{
 			if ((i + 1 < ac && ag[i + 1][0] == '-') ||
 			(i + 2 < ac && ag[i + 2][0] == '-'))
-				return (print_usage(-5, 1));;
+				return (print_usage(-5, 1));
 			if (!check_flags(i, ac, ag))
 				return (0);
 			if ((i + 2) < ac)
