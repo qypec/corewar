@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/18 19:08:50 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:08 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 int print_usage(int code, int usage)
 {

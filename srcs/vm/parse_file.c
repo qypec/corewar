@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 19:55:56 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 18:07:40 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:48 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 int	check_magic(int fd, int player_k)
 {

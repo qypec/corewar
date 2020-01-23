@@ -1,5 +1,5 @@
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 void	print_process(void)
 {

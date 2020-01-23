@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 17:39:55 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/23 15:50:48 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:26 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 int 	init_game(void)
 {

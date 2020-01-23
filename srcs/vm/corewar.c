@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vgerold- <vgerold-@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 15:50:48 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:12 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 int init_players_struct(t_player *players)
 {

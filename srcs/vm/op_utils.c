@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:47:21 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/21 15:47:24 by ergottli         ###   ########.fr       */
+/*   Updated: 2020/01/23 18:49:44 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/corewar.h"
+#include "corewar.h"
 
 int get_int32_from_mem(int position, int drop_bit)
 {
