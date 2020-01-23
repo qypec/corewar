@@ -12,7 +12,7 @@
 
 #include "corewar_ops.h"
 
-int 	get_op_code(t_process *proc)
+int		get_op_code(t_process *proc)
 {
 	proc->op = (int)(vm.arena[proc->pos]);
 	if (proc->op < 1 || proc->op > 16)
@@ -32,11 +32,12 @@ void	intro(void)
 	{
 		if (vm.players[i].id)
 			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
-					vm.players[i].id, vm.players[i].code_size, vm.players[i].name, vm.players[i].comment);
+					vm.players[i].id, vm.players[i].code_size,
+					vm.players[i].name, vm.players[i].comment);
 	}
 }
 
-void ft_exec_op(t_process *proc)
+void 	ft_exec_op(t_process *proc)
 {
 	if (vm.cycles_to_die_not_updated == 6 && vm.cycles_to_die == 36)
 		printf("OPOPOP\n");
@@ -86,11 +87,15 @@ int 	battle(void)
 		ft_printf("* Player %s id:[%d] win! Congratulations!\n",
 				  vm.last_alive->name, vm.last_alive->id);
 		if (DEBUG)
-			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = %d\nproccesses_count = %d\ncycle_to_die = %d\n",
-					vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count, vm.cycles_to_die);
+		{
+			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = "
+					  "%d\nproccesses_count = %d\ncycle_to_die = %d\n",
+					  vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count, vm.cycles_to_die);
 			int i = 0;
 			while (++i < vm.players_sum + 1)
-				ft_printf("vm.player[%d].lives_all = %d\n", i, vm.players[i].lives_all);
+				ft_printf("vm.player[%d].lives_all = %d\n",
+						  i, vm.players[i].lives_all);
+		}
 	}
 	else
 		ft_printf("All players died! :(\n");
