@@ -113,7 +113,7 @@ typedef struct			s_game
 	t_player			players[MAX_PLAYERS + 1];
 	int 				players_sum;
 	unsigned char		arena[MEM_SIZE];
-	unsigned char		arena_id[MEM_SIZE];
+	int					arena_id[MEM_SIZE];
 	size_t				cycles_all;
 	ssize_t 			cycle_current;
 	size_t				lives_in_round;

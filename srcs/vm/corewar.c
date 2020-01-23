@@ -49,6 +49,7 @@ int 	init_corewar()
 	vm.dump_cycle = 0;
 	vm.checks = 0;
 	ft_bzero(vm.arena, MEM_SIZE);
+	ft_bzero(vm.arena_id, MEM_SIZE * sizeof(int));
 	init_players_struct(NULL);
 	return (1);
 }
