@@ -24,18 +24,6 @@ void			sub_op(t_process *proc)
 	proc->regs[proc->args[2] - 1] = res;
 }
 
-unsigned int	get_arg_op(t_process *proc, int i)
-{
-	if (proc->args[i] == T_REG)
-		return (proc->regs[proc->args_value[i] - 1]);
-	else if (proc->args[i] == T_DIR)
-		return (proc->args_value[i]);
-	else if (proc->args[i] == T_IND)
-		return (get_int32_from_mem(proc->pos + proc->args_value[i] % IDX_MOD));
-	else
-		return (-1);
-}
-
 void			and_op(t_process *proc)
 {
 	unsigned int res;

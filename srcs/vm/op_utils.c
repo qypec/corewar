@@ -31,3 +31,15 @@ int get_int16_from_mem(int position)
 	buf[0] = *(vm.arena + position + 1);
 	return (*((int16_t*)buf));
 }
+
+unsigned int	get_arg_op(t_process *proc, int i)
+{
+	if (proc->args[i] == T_REG)
+		return (proc->regs[proc->args_value[i] - 1]);
+	else if (proc->args[i] == T_DIR)
+		return (proc->args_value[i]);
+	else if (proc->args[i] == T_IND)
+		return (get_int32_from_mem(proc->pos + proc->args_value[i] % IDX_MOD));
+	else
+		return (-1);
+}

@@ -100,6 +100,7 @@ void					lld_op(t_process *proc);
 void					lldi_op(t_process *proc);
 void					lfork_op(t_process *proc);
 void					aff_op(t_process *proc);
+unsigned int			get_arg_op(t_process *proc, int i);
 
 int get_int32_from_mem(int position);
 int						get_int16_from_mem(int position);
