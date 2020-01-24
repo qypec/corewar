@@ -30,7 +30,7 @@ void	live_op(t_process *proc)
 		vm.last_alive = &vm.players[player_index];
 		++proc->live_incycle;
 	}
-	if (!DEBUG)
+	if (DEBUG)
 		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
 }
 

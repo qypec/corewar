@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:50:11 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/23 18:50:12 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 18:14:59 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int 	battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		if ((vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle) || !DEBUG)
+		if ((vm.dump_cycle && vm.cycle_current + 1 == vm.dump_cycle))
 			print_arena();
 		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)

@@ -138,7 +138,7 @@ static t_op					op_tab[16] =
 						"load index",
 						1,
 						1,
-						NULL,
+						ldi_op,
 						1},
 
 				{"sti",
@@ -149,7 +149,7 @@ static t_op					op_tab[16] =
 						"store index",
 						1,
 						1,
-						NULL,
+						sti_op,
 						1},
 
 				{"fork",
@@ -160,7 +160,7 @@ static t_op					op_tab[16] =
 						"fork",
 						0,
 						1,
-						NULL,
+						fork_op,
 						0},
 
 				{"lld",
@@ -171,7 +171,7 @@ static t_op					op_tab[16] =
 						"long load",
 						1,
 						0,
-						NULL,
+						lld_op,
 						1},
 
 				{"lldi",
@@ -182,7 +182,7 @@ static t_op					op_tab[16] =
 						"long load index",
 						1,
 						1,
-						NULL,
+						lldi_op,
 						1},
 
 				{"lfork",
@@ -193,7 +193,7 @@ static t_op					op_tab[16] =
 						"long fork",
 						0,
 						1,
-						NULL,
+						lfork_op,
 						0},
 
 				{"aff",
@@ -204,8 +204,8 @@ static t_op					op_tab[16] =
 						"aff",
 						1,
 						0,
-						NULL,
+						aff_op,
 						1}
 		};
 
-#endif //COREWAR_COREWAR_OPS_H
+#endif

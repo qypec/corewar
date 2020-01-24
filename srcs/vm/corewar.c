@@ -60,7 +60,6 @@ int		main(int argc, char **argv)
 		ft_printf("error with player's file");
 		return (0);
 	}
-	printf("ok");
 	if (!init_game())
 		return (0);
 	if (DEBUG)

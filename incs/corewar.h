@@ -7,9 +7,9 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# define DEBUG 1
-# define OPTIONS 128u
-# define AF 128u
+# define DEBUG 0
+# define OPTIONS 12u
+# define AF 1u
 
 typedef struct			s_player
 {

@@ -6,7 +6,7 @@
 /*   By: vgerold- <vgerold-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:38:06 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 19:10:02 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/24 18:01:05 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	fork_op(t_process *proc)
 		return ;
 	ft_memcpy(new->regs, proc->regs, 16 * sizeof(int));
 	new->carry = proc->carry;
-
+	new->live_incycle = proc->live_incycle;
+	if (DEBUG)
+		ft_printf("proc id - %d: fork op: t_dir - %d\n", proc->proc_id, proc->args_value[0]);
 }
 
 void	lld_op(t_process *proc)
@@ -62,7 +64,20 @@ void	lldi_op(t_process *proc)
 		ft_printf("proc id - %d: lldi op: reg - %d\n", proc->proc_id, proc->regs[proc->args_value[2] - 1]);
 }
 
-void	lfork_op(t_process *proc);
+void	lfork_op(t_process *proc)
+{
+	t_process	*new;
+	int 		addr;
+
+	addr = proc->args_value[0];
+	if (!(new = create_process(proc->player_id, addr)))
+		return ;
+	ft_memcpy(new->regs, proc->regs, 16 * sizeof(int));
+	new->carry = proc->carry;
+	new->live_incycle = proc->live_incycle;
+	if (DEBUG)
+		ft_printf("proc id - %d: fork op: t_dir - %d\n", proc->proc_id, proc->args_value[0]);
+}
 
 void	aff_op(t_process *proc)
 {

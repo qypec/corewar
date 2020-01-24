@@ -81,7 +81,7 @@ int		check_extension(int i, char **file)
 	if (file[i][j] != '.')
 		return (print_usage(-1, 1));
 	if (file[i][j] == '.' && ft_strequ(file[i] + j, ".cor"))
-		ft_printf("%s %d %s\n", "player", ++vm.players_sum, "checked...");
+		++vm.players_sum;
 	else
 		return (print_usage(-1, 1));
 	return (1);
