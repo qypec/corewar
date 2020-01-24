@@ -14,26 +14,7 @@
 
 void	ldi_op(t_process *proc)
 {
-	int res;
 
-	if (proc->args[0] == T_REG && proc->args[1] == T_REG)
-	{
-		res = (proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1]) % IDX_MOD;
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
-	else if (proc->args[0] == T_DIR && proc->args[1] == T_DIR)
-	{
-		res = (proc->args_value[0] + proc->args_value[1]) % IDX_MOD;
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
-	else if (proc->args[0] == T_IND)
-	{
-		res = get_int32_from_mem(proc->pos +
-								 (int) proc->args_value[0]) % IDX_MOD;
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
-	if (DEBUG)
-		ft_printf("proc id - %d: ldi op: num - %d reg - %d\n", proc->proc_id, res, proc->regs[proc->args_value[2] - 1]);
 }
 
 void	sti_op(t_process *proc)
