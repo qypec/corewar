@@ -13,6 +13,7 @@
 typedef struct			s_player
 {
 	int					id;
+	int					color;
 	char				name[PROG_NAME_LENGTH + 1];
 	char				comment[COMMENT_LENGTH + 1];
 	char				code[CHAMP_MAX_SIZE];

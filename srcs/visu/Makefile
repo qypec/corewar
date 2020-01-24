@@ -6,7 +6,7 @@
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 19:01:16 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/23 19:14:35 by yquaro           ###   ########.fr        #
+#    Updated: 2020/01/24 12:24:20 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ include ../../incs/corewar.mk
 HEADER_H = -I ../../incs/
 
 DIR_O = ../../.objs
-SOURCES = init_visu.c
+SOURCES = init_visu.c draw.c color.c
 
 OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 
