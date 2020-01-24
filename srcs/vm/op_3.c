@@ -56,7 +56,7 @@ void	lld_op(t_process *proc)
 		ft_printf("proc id - %d: lld op: reg - %d\n", proc->proc_id, proc->args_value[1]);
 }
 
-void	lldi_op(t_process *proc)
+void	lldi_op(t_process *proc)//TODO надо чекнуть
 {
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos +
             (int)(get_arg_op(proc,0) + get_arg_op(proc,1)));
