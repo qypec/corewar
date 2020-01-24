@@ -49,6 +49,8 @@ void	zjmp_op(t_process *proc)
 
 void	ld_op(t_process *proc)
 {
+	if (proc->proc_id == 1 && proc->args_value[1] == 4)//TODO debug
+		proc->proc_id = 1;
     proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
     if (!proc->args_value[0])
 			proc->carry = 1;
