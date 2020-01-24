@@ -45,7 +45,7 @@ void			or_op(t_process *proc)
 		proc->carry = 1;
 	else
 		proc->carry = 0;
-	proc->regs[proc->args[2] - 1] = (int)res;
+	proc->regs[proc->args_value[2] - 1] = (int)res;
 }
 
 void			xor_op(t_process *proc)
