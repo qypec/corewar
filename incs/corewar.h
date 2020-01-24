@@ -8,6 +8,8 @@
 #include		"../libft/libft.h"
 
 # define DEBUG 1
+# define OPTIONS 128u
+# define AF 128u
 
 typedef struct			s_player
 {

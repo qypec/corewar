@@ -14,24 +14,17 @@
 
 void	ldi_op(t_process *proc)
 {
-
+    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + (int)(get_arg_op(proc,0) +
+            get_arg_op(proc,1)) % IDX_MOD);
 }
 
-void	sti_op(t_process *proc)
+void	sti_op(t_process *proc) //TODO Данная операция может записывать id в arena_id
 {
 	int addr;
 
-	addr = -1;
-	if (proc->args[1] == T_DIR && proc->args[2] == T_DIR)
-		addr = proc->pos + (proc->args_value[1] + proc->args_value[2]) % IDX_MOD;
-	else if (proc->args[1] == T_REG && proc->args[2] == T_REG)
-		addr = proc->pos + (proc->regs[proc->args_value[1] - 1]
-				+ proc->regs[proc->args_value[2] - 1]) % IDX_MOD;
-	else if (proc->args[0] == T_IND)
-		addr = get_int32_from_mem(proc->pos
-								  + (int) proc->args_value[2]) % IDX_MOD;
+	addr = proc->pos + (int)(get_arg_op(proc,0) + get_arg_op(proc,1)) % IDX_MOD;
 	vm.arena[addr] = proc->regs[proc->args_value[0] - 1];
-	vm.arena_id[addr] = proc->player_id;
+    vm.arena_id[addr] = proc->player_id;
 }
 
 void	fork_op(t_process *proc)
@@ -42,56 +35,37 @@ void	fork_op(t_process *proc)
 	addr = proc->args_value[0] % IDX_MOD;
 	if (!(new = create_process(proc->player_id, addr)))
 		return ;
+	ft_memcpy(new->regs, proc->regs, 16 * sizeof(int));
+	new->carry = proc->carry;
+
 }
 
 void	lld_op(t_process *proc)
 {
-	int res;
-
-	res = -1;
-	if (proc->args[0] == T_DIR)
-	{
-		res = proc->args_value[0];
-		proc->regs[proc->args_value[1] - 1] = res;
-		if (!proc->args_value[0])
-			proc->carry = 1;
-	}
-	else if (proc->args[0] == T_IND)
-	{
-		res = get_int32_from_mem(proc->pos
-								 + (int) proc->args_value[0]);
-		proc->regs[proc->args_value[1] - 1] = res;
-		if (!res)
-			proc->carry = 1;
-	}
+    if (proc->args[0] == T_DIR)
+        proc->regs[proc->args_value[1] - 1] = proc->args_value[0];
+    else
+        proc->regs[proc->args_value[1] - 1] = get_int32_from_mem(proc->pos + proc->args_value[0]);
+    if (!proc->args_value[0])
+        proc->carry = 1;
+    else
+        proc->carry = 0;
 	if (DEBUG)
-		ft_printf("proc id - %d: lld op: num - %d reg - %d\n", proc->proc_id, res, proc->args_value[1]);
+		ft_printf("proc id - %d: lld op: reg - %d\n", proc->proc_id, proc->args_value[1]);
 }
 
 void	lldi_op(t_process *proc)
 {
-	int res;
-
-	res = -1;
-	if (proc->args[0] == T_REG && proc->args[1] == T_REG)
-	{
-		res = proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1];
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
-	else if (proc->args[0] == T_DIR && proc->args[1] == T_DIR)
-	{
-		res = proc->args_value[0] + proc->args_value[1];
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
-	else if (proc->args[0] == T_IND)
-	{
-		res = get_int32_from_mem(proc->pos
-								 + (int) proc->args_value[0]) % IDX_MOD;
-		proc->regs[proc->args_value[2] - 1] = res;
-	}
+    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos +
+            (int)(get_arg_op(proc,0) + get_arg_op(proc,1)));
 	if (DEBUG)
-		ft_printf("proc id - %d: lldi op: num - %d reg - %d\n", proc->proc_id, res, proc->regs[proc->args_value[2] - 1]);
+		ft_printf("proc id - %d: lldi op: reg - %d\n", proc->proc_id, proc->regs[proc->args_value[2] - 1]);
 }
 
 void	lfork_op(t_process *proc);
-void	aff_op(t_process *proc);
+
+void	aff_op(t_process *proc)
+{
+    if (OPTIONS & AF)
+        ft_putchar((char)proc->regs[proc->args_value[0] - 1]);
+}

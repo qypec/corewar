@@ -52,6 +52,8 @@ void	ld_op(t_process *proc)
     proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
     if (!proc->args_value[0])
 			proc->carry = 1;
+    else
+        proc->carry = 0;
     if (DEBUG)
 		ft_printf("proc id - %d: ld op: num - %d reg - %d\n",
 				proc->proc_id, proc->args_value[0], proc->args_value[1]);
