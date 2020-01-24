@@ -80,7 +80,8 @@ int 					parse_args_values(t_process *proc)
 		size = calc_args_size(i, proc);
 		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR) ? get_int32_from_mem(proc->pos + offset) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 0) ? get_int32_from_mem(proc->pos + offset) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 1) ? get_int16_from_mem(proc->pos + offset) : proc->args_value[i];
 		offset += (int)size;
 	}
 	proc->pc += offset;
