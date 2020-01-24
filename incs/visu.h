@@ -17,20 +17,26 @@
 ** Color pairs
 */
 
-# define GRAY					9
-# define GREEN					10
-# define YELLOW					11
-# define RED					12
-# define CYAN					13
-# define GRAY_CURSOR			14
-# define GREEN_CURSOR			15
-# define YELLOW_CURSOR			16
-# define RED_CURSOR				17
-# define CYAN_CURSOR			18
-# define LIVE_GREEN				19
-# define LIVE_YELLOW			20
-# define LIVE_RED				21
-# define LIVE_CYAN				22
+# define GRAY					5
+# define GREEN					6
+# define YELLOW					7
+# define RED					8
+# define CYAN					9
+// # define GRAY_CURSOR			14
+// # define GREEN_CURSOR			15
+// # define YELLOW_CURSOR			16
+// # define RED_CURSOR				17
+// # define CYAN_CURSOR			18
+// # define LIVE_GREEN				19
+// # define LIVE_YELLOW			20
+// # define LIVE_RED				21
+// # define LIVE_CYAN				22
+
+/*
+** Buttons
+*/
+
+# define ESC_BUTTON				27
 
 
 # define MIN_COLS_TO_VISU 70

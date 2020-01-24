@@ -6,11 +6,22 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 13:04:02 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:12:33 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+
+static void			handle_buttons(void)
+{
+	char			key;
+	
+	if ((key = getch()) != ERR)
+	{
+		delete_visu(&(vm.visu));
+		exit(1);
+	}
+}
 
 static void         draw_arena(void)
 {
@@ -24,9 +35,9 @@ static void         draw_arena(void)
 		wmove(vm.visu->win_arena, i + 2, 5);
 		while (j < 64)
 		{
-            // wcolor_set(vm.visu->win_arena, vm.players[vm.arena_id[i * 64 + j]].color, NULL);
+            wcolor_set(vm.visu->win_arena, vm.arena_id[i * 64 + j] + 5, NULL);
 			wprintw(vm.visu->win_arena, "%.2x", vm.arena[i * 64 + j]);
-            // wcolor_set(vm.visu->win_info, 0, NULL);
+            wcolor_set(vm.visu->win_arena, 0, NULL);
 			waddch(vm.visu->win_arena, ' ');
 			j++;
 		}
@@ -40,5 +51,5 @@ static void         draw_arena(void)
 void                draw(void)
 {   
     draw_arena();
-    getch();
+	handle_buttons();
 }

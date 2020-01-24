@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 17:39:55 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/23 18:49:26 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 16:23:27 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int 	init_game(void)
 	int j;
 	int k;
 	int step;
+	int	g;
 
 	i = 0;
 	j = 0;
@@ -29,6 +30,9 @@ int 	init_game(void)
 		{
 			k = (j) ? 1 : 0;
 			ft_memcpy(vm.arena + (j * step - k), vm.players[i].code, vm.players[i].code_size);
+			g = -1;
+			while (++g <  vm.players[i].code_size)
+				vm.arena_id[j * step - k + g] = vm.players[i].id;
 			if (!create_process(i, j * step - k))
 				return (0);
 			++j;

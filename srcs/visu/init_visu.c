@@ -6,24 +6,11 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 13:06:08 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 17:08:44 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
-// void					assign_colors_to_players(void)
-// {
-// 	int					color_set[4] = {GREEN, YELLOW, RED, CYAN};
-// 	size_t				i;
-
-// 	i = 0;
-// 	while (i < vm.players_sum)
-// 	{
-// 		vm.players[i].color = color_set[i];
-// 		i++;
-// 	}
-// }
 
 void					init_win_arena(t_visu *visu)
 {
@@ -40,7 +27,6 @@ void					init_win_info(t_visu *visu)
 	mvwprintw(visu->win_info, 1, (WIN_INFO_COLS - ft_strlen(RUNNING_INFO)) / 2, RUNNING_INFO);
 	wcolor_set(visu->win_info, 0, NULL);
 	wrefresh(visu->win_info);
-	// assign_colors_to_players();
 }
 
 void					init_win_help(t_visu *visu)
@@ -68,6 +54,7 @@ t_visu					*init_visu(void)
 	keypad(stdscr, TRUE);
 	curs_set(0);
 	noecho();
+	nodelay(stdscr, TRUE);
 	init_colors();
 	refresh();
 	getmaxyx(stdscr, visu->tty_lines, visu->tty_cols);
@@ -79,7 +66,6 @@ t_visu					*init_visu(void)
 	init_win_arena(visu);
 	init_win_info(visu);
 	init_win_help(visu);
-	// refresh();
 	return (visu);
 }
 
