@@ -22,7 +22,7 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
 {
 	int addr;
 
-	addr = proc->pos + (int)(get_arg_op(proc,0) + get_arg_op(proc,1)) % IDX_MOD;
+	addr = proc->pos + (int)(get_arg_op(proc,1) + get_arg_op(proc,2)) % IDX_MOD;
 	vm.arena[addr] = proc->regs[proc->args_value[0] - 1];
     vm.arena_id[addr] = proc->player_id;
 }
