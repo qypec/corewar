@@ -16,12 +16,12 @@ void			sub_op(t_process *proc)
 {
 	int res;
 
-	res = proc->regs[proc->args[0] - 1] - proc->regs[proc->args[1] - 1];
+	res = proc->regs[proc->args_value[0] - 1] - proc->regs[proc->args_value[1] - 1];
 	if (res == 0)
 		proc->carry = 1;
 	else
 		proc->carry = 0;
-	proc->regs[proc->args[2] - 1] = res;
+	proc->regs[proc->args_value[2] - 1] = res;
 }
 
 void			and_op(t_process *proc)
