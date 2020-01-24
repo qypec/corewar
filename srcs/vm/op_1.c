@@ -62,12 +62,12 @@ void	ld_op(t_process *proc)
 void	st_op(t_process *proc)//TODO Данная операция может записывать id в arena_id
 {
 	if (proc->args[1] == T_REG)
-		proc->regs[proc->args[1] - 1] = proc->regs[proc->args[0] - 1];
+		proc->regs[proc->args_value[1] - 1] = proc->regs[proc->args_value[0] - 1];
 	else if (proc->args[1] == T_IND)
 	{
-		vm.arena[proc->pos + proc->args[1] % IDX_MOD] =
-				proc->regs[proc->args[0] - 1];
-		vm.arena_id[proc->pos + proc->args[1] % IDX_MOD] = proc->player_id;
+		vm.arena[proc->pos + proc->args_value[1] % IDX_MOD] =
+				proc->regs[proc->args_value[0] - 1];
+		vm.arena_id[proc->pos + proc->args_value[1] % IDX_MOD] = proc->player_id;
 	}
 }
 
