@@ -107,7 +107,7 @@ int						get_int16_from_mem(int position);
 
 typedef struct			s_game
 {
-	t_windows			*win;
+	t_visu				*visu;
 	int 				process_count;
 	t_process 			*processes;
 	t_player			*last_alive;

@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 19:27:22 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 07:04:34 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int 	init_corewar()
 	vm.checks = 0;
 	ft_bzero(vm.arena, MEM_SIZE);
 	init_players_struct(NULL);
-	vm.win = init_visu();
+	vm.visu = init_visu();
 	return (1);
 }
 
@@ -73,6 +73,6 @@ int 	main(int argc, char **argv)
 	if (DEBUG)
 		print_process();
 	battle();
-	delete_windows(&(vm.win));
+	delete_visu(&(vm.visu));
 	return (0);
 }

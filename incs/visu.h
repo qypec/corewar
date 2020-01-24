@@ -2,23 +2,28 @@
 # define VISU_H
 
 #include <ncurses.h>
-#include <sys/ioctl.h>
 
-# define MAINWIN_LINES 50
-# define MAINWIN_COLS 140
-# define RUNNING_INFO_WIN_LINES 50
-# define RUNNING_INFO_WIN_COLS 50
-# define INFO_WIN_LINES 10
-# define INFO_WIN_COLS 140
+# define RUNNING_INFO "Running info"
 
-typedef struct		s_windows
+# define BUTTON_EXIT "Exit - \'Esc\'"
+
+# define WIN_ARENA_LINES (visu->tty_lines * 0.75)
+# define WIN_ARENA_COLS (visu->tty_cols * 0.75)
+# define WIN_INFO_LINES (visu->tty_lines * 0.75)
+# define WIN_INFO_COLS (visu->tty_cols * 0.25)
+# define WIN_HELP_LINES (visu->tty_lines * 0.25)
+# define WIN_HELP_COLS (visu->tty_cols * 0.75)
+
+typedef struct		s_visu
 {
-	WINDOW			*arena;
-	WINDOW			*runing_info;
-	WINDOW			*user_info;
-}					t_windows;
+	WINDOW			*win_arena;
+	WINDOW			*win_info;
+	WINDOW			*win_help;
+	size_t			tty_lines;
+	size_t			tty_cols;
+}					t_visu;
 
-t_windows               *init_visu(void);
-void					delete_windows(t_windows **win);
+t_visu					*init_visu(void);
+void					delete_visu(t_visu **visu);
 
 #endif

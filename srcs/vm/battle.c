@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:50:11 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/23 20:04:50 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/24 09:50:55 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int 	battle(void)
 		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check(); // проверка хода игры
+		getch();
 	}
 	if (vm.last_alive)
 	{
