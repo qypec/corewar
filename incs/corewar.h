@@ -13,11 +13,12 @@
 typedef struct			s_player
 {
 	int					id;
-	char				name[PROG_NAME_LENGTH + 1]; //
-	char				comment[COMMENT_LENGTH + 1]; //
+	int					color;
+	char				name[PROG_NAME_LENGTH + 1];
+	char				comment[COMMENT_LENGTH + 1];
 	char				code[CHAMP_MAX_SIZE];
 	int 				code_size;
-	short				is_alive; //
+	short				is_alive;
 	ssize_t				lives_all;
 	ssize_t				lives_last;
 	ssize_t				lives_current;
@@ -108,18 +109,18 @@ int						get_int16_from_mem(int position);
 typedef struct			s_game
 {
 	t_visu				*visu;
-	int 				process_count; //
+	int 				process_count;
 	t_process 			*processes;
 	t_player			*last_alive; // win
 	t_player			players_temp[MAX_PLAYERS];
-	t_player			players[MAX_PLAYERS + 1]; //
+	t_player			players[MAX_PLAYERS + 1];
 	int 				players_sum;
 	unsigned char		arena[MEM_SIZE];
 	int					arena_id[MEM_SIZE];
-	size_t				cycles_all; //
-	ssize_t 			cycle_current; //
-	size_t				lives_in_round; //
-	int					cycles_to_die; //
+	size_t				cycles_all;
+	ssize_t 			cycle_current;
+	size_t				lives_in_round;
+	int					cycles_to_die;
 	int					cycles_to_die_last;
 	int					cycles_to_die_not_updated;
 	int 				checks;

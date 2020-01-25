@@ -58,6 +58,7 @@ t_visu					*init_visu(void);
 void					init_colors(void);
 void					delete_visu(t_visu **visu);
 
+void					assign_players_to_color(void);
 void                	draw(void);
 
 #endif

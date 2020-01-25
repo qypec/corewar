@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:38:26 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/24 16:04:38 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/25 21:26:09 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int init_players_struct(t_player *players)
 		vm.players_temp[i].name[PROG_NAME_LENGTH] = '\0';
 		vm.players_temp[i].comment[COMMENT_LENGTH] = '\0';
 		vm.players_temp[i].code_size = 0;
-		vm.players_temp[i].is_alive = 0;
+		vm.players_temp[i].is_alive = 1;
 		vm.players_temp[i].lives_all = 0;
 		vm.players_temp[i].lives_last = 0;
 		vm.players_temp[i].lives_current = 0;

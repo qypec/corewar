@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:20:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/25 16:59:21 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/25 21:20:01 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void                    init_pairs(void)
 	init_pair(YELLOW_CARRY, COLOR_BLACK, COLOR_YELLOW);
 	init_pair(RED_CARRY, COLOR_BLACK, COLOR_RED);
 	init_pair(CYAN_CARRY, COLOR_BLACK, COLOR_CYAN);
+}
+
+void					assign_players_to_color(void)
+{
+	vm.players[0].color = GRAY;
+	vm.players[1].color = GREEN;
+	vm.players[2].color = YELLOW;
+	vm.players[3].color = RED;
+	vm.players[4].color = CYAN;
 }
 
 void					init_colors(void)

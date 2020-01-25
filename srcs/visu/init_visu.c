@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 17:08:44 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/25 19:42:10 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void					init_win_info(t_visu *visu)
 	visu->win_info = newwin(WIN_INFO_LINES, WIN_INFO_COLS, 0, WIN_ARENA_COLS);
 	// box(visu->win_info, 0, 0);
 	wcolor_set(visu->win_info, GREEN, NULL);
-	mvwprintw(visu->win_info, 1, (WIN_INFO_COLS - ft_strlen(RUNNING_INFO)) / 2, RUNNING_INFO);
+	mvwprintw(visu->win_info, 1, 5, RUNNING_INFO);
 	wcolor_set(visu->win_info, 0, NULL);
 	wrefresh(visu->win_info);
 }
@@ -36,8 +36,6 @@ void					init_win_help(t_visu *visu)
 	mvwprintw(visu->win_help, WIN_HELP_LINES / 2, (WIN_HELP_COLS - ft_strlen(BUTTON_EXIT)) / 2, BUTTON_EXIT);
 	wrefresh(visu->win_help);
 }
-
-
 
 t_visu					*init_visu(void)
 {
@@ -66,6 +64,7 @@ t_visu					*init_visu(void)
 	init_win_arena(visu);
 	init_win_info(visu);
 	init_win_help(visu);
+	assign_players_to_color();
 	return (visu);
 }
 
