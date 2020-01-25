@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:20:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 17:01:42 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/25 16:59:21 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ void                    init_pairs(void)
 	init_pair(YELLOW, COLOR_YELLOW, 0);
 	init_pair(RED, COLOR_RED, 0);
 	init_pair(CYAN, COLOR_CYAN, 0);
-	// init_pair(GRAY_CURSOR, COLOR_BLACK, COLOR_GRAY);
-	// init_pair(GREEN_CURSOR, COLOR_BLACK, COLOR_GREEN);
-	// init_pair(YELLOW_CURSOR, COLOR_BLACK, COLOR_YELLOW);
-	// init_pair(RED_CURSOR, COLOR_BLACK, COLOR_RED);
-	// init_pair(CYAN_CURSOR, COLOR_BLACK, COLOR_CYAN);
-	// init_pair(LIVE_GREEN, COLOR_WHITE, COLOR_GREEN);
-	// init_pair(LIVE_YELLOW, COLOR_WHITE, COLOR_YELLOW);
-	// init_pair(LIVE_RED, COLOR_WHITE, COLOR_RED);
-	// init_pair(LIVE_CYAN, COLOR_WHITE, COLOR_CYAN);
+	init_pair(GRAY_CARRY, COLOR_BLACK, COLOR_GRAY);
+	init_pair(GREEN_CARRY, COLOR_BLACK, COLOR_GREEN);
+	init_pair(YELLOW_CARRY, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(RED_CARRY, COLOR_BLACK, COLOR_RED);
+	init_pair(CYAN_CARRY, COLOR_BLACK, COLOR_CYAN);
 }
 
 void					init_colors(void)

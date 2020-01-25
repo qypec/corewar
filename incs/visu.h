@@ -22,15 +22,11 @@
 # define YELLOW					7
 # define RED					8
 # define CYAN					9
-// # define GRAY_CURSOR			14
-// # define GREEN_CURSOR			15
-// # define YELLOW_CURSOR			16
-// # define RED_CURSOR				17
-// # define CYAN_CURSOR			18
-// # define LIVE_GREEN				19
-// # define LIVE_YELLOW			20
-// # define LIVE_RED				21
-// # define LIVE_CYAN				22
+# define GRAY_CARRY				10
+# define GREEN_CARRY			11
+# define YELLOW_CARRY			12
+# define RED_CARRY				13
+# define CYAN_CARRY				14
 
 /*
 ** Buttons

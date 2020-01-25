@@ -6,7 +6,7 @@
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 18:40:10 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/24 17:17:10 by yquaro           ###   ########.fr        #
+#    Updated: 2020/01/25 19:32:06 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,6 @@ clean:
 fclean: clean
 	@make -C libft/ fclean
 	@make -C .objs/ fclean
-	@rm -rf $EXECUTABLE
+	@rm -rf $(EXECUTABLE)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 17:12:33 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/25 19:30:25 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,24 @@ static void			handle_buttons(void)
 	}
 }
 
+static int			one_of_carriages_pos(t_process *carry, size_t pos)
+{
+	while (carry != NULL)
+	{
+		if (pos == carry->pos)
+			return (1);
+		carry = carry->next;
+	}
+	return (0);
+}
+
 static void         draw_arena(void)
 {
-	int				i;
-	int				j;
+	size_t			i;
+	size_t			j;
+	t_process		*carry;
 
+	carry = vm.processes;
 	i = 0;
 	while (i < 64)
 	{
@@ -35,7 +48,10 @@ static void         draw_arena(void)
 		wmove(vm.visu->win_arena, i + 2, 5);
 		while (j < 64)
 		{
-            wcolor_set(vm.visu->win_arena, vm.arena_id[i * 64 + j] + 5, NULL);
+			if (one_of_carriages_pos(carry, i * 64 + j))
+				wcolor_set(vm.visu->win_arena, vm.arena_id[i * 64 + j] + 10, NULL);
+           	else
+				wcolor_set(vm.visu->win_arena, vm.arena_id[i * 64 + j] + 5, NULL);
 			wprintw(vm.visu->win_arena, "%.2x", vm.arena[i * 64 + j]);
             wcolor_set(vm.visu->win_arena, 0, NULL);
 			waddch(vm.visu->win_arena, ' ');
