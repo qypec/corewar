@@ -113,6 +113,7 @@ void					lfork_op(t_process *proc);
 void					aff_op(t_process *proc);
 unsigned int			get_arg_op(t_process *proc, int i);
 int                     position_correction(int position);
+void                    st_log(t_process *proc);
 
 int get_int32_from_mem(int position);
 int16_t get_int16_from_mem(int position);
