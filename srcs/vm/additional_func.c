@@ -24,8 +24,7 @@ void    standart_usage(void)
     ft_putstr("                   2  : Show cycles\n");
     ft_putstr("                   4  : Show operations\n");
     ft_putstr("                   8  : Show deaths\n");
+    ft_putstr("                   16 : Show PC movements (Except for jumps)\n");
     ft_putstr("    -v          : Run visualizer\n");
     ft_putstr("    -n    <num> : Set <num> of the next player\n");
-
-
 }
