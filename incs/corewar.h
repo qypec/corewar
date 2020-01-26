@@ -7,7 +7,7 @@
 #include		"op.h"
 #include		"../libft/libft.h"
 
-# define DEBUG 1
+# define DEBUG 0
 # define LOG_ON 128u
 # define LIVE 1u
 # define CYCLE 2u
@@ -77,7 +77,7 @@ int						check_code(int fd, int player_k);
 
 int						init_game(void);
 void					print_process(void);
-void print_arena(int pos, int print_op, int op_pos, int size, int bit);
+void print_arena(int pos, int print_op, int op_pos, int size);
 t_process				*create_process(int n_player, int position);
 void					del_process(t_process *proc);
 

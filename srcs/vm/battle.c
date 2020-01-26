@@ -85,7 +85,7 @@ int 	battle(void)
 		++vm.cycle_current;
 		++vm.cycles_all;
 		if ((vm.dump_cycle && vm.cycles_all == vm.dump_cycle))
-            print_arena(0, 0, 0, 0, 0);
+			print_arena(0, 0, 0, 0);
 		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check(); // проверка хода игры
