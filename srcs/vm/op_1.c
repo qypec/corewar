@@ -44,13 +44,9 @@ void	zjmp_op(t_process *proc)
 		proc->pc = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
 		if (!proc->pc)
 		    proc->pos = 0;
-		if (DEBUG && proc->carry)
-			ft_printf("proc id - %d: pos = %d zjmp op - %d\n", proc->proc_id, proc->pos, proc->pc);
+		if (vm.log_level & OPERA)
+			ft_printf("P %d | zjmp %d OK\n", proc->proc_id, proc->pc);//TODO check why prints OK
 	}
-	else if (DEBUG && proc->carry)
-		ft_printf("proc id - %d: zjmp op carry - %d\n",
-				proc->proc_id, proc->carry);
-//    (DEBUG) ? print_arena(position_correction(proc->pos + proc->pc), 1, proc->pos, 1) : 0;
 }
 
 void	ld_op(t_process *proc)
