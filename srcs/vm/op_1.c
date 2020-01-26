@@ -79,9 +79,8 @@ void                st_op(t_process *proc)//TODO Данная операция �
             vm.arena_id[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = proc->player_id;
         }
 	}
-    if (DEBUG)
-        ft_printf("proc id - %d: proc->pos = %d : st op: arg1 - %X arg2 - %X res = %X addr - %d\n",
-                  proc->proc_id, proc->pos, get_arg_op(proc,1), get_arg_op(proc,2), proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[0] - 1]);
+    if (vm.log_level & OPERA)
+		st_log(proc);
 }
 
 void	add_op(t_process *proc)
