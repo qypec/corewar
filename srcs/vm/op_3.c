@@ -38,8 +38,8 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
         vm.arena_id[addr + i] = proc->player_id;
     }
 	if (vm.log_level & OPERA)
-		ft_printf("P%5d | sti r%d %d r%d\n       | ->load from %d + 5d = %d (with pc and mod %d)", proc->proc_id,
-				proc->args_value[0],
+		ft_printf("P%5d | sti r%d %d r%d\n", proc->proc_id,
+				proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
 
 void	fork_op(t_process *proc)
