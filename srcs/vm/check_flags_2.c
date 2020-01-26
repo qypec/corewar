@@ -1,0 +1,2 @@
+#include "../../incs/corewar.h"
+
