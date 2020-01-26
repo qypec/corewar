@@ -9,7 +9,7 @@
 
 # define DEBUG 1
 # define OPTIONS 128u
-# define AF 128u
+# define AF 0u
 
 typedef struct			s_player
 {
@@ -49,6 +49,12 @@ int						print_usage(int code, int usage);
 int						create_players(char **argv);
 int						is_set(int number, int max);
 void					set_id(int player_k);
+int check_n(int value);
+int check_d(char **av, int value, int i);
+int check_s(int ac, char **av, int value);
+int check_l(int ac, char **av, int value);
+int check_v(int ac, char **av);
+int check_a(int ac, char **av);
 
 /*
 ** -------------------------- Parse players -------------------------------
@@ -66,7 +72,7 @@ int						check_code(int fd, int player_k);
 
 int						init_game(void);
 void					print_process(void);
-void					print_arena(void);
+void print_arena(int pos, int print_op, int op_pos, int size);
 t_process				*create_process(int n_player, int position);
 void					del_process(t_process *proc);
 
@@ -103,9 +109,10 @@ void					lldi_op(t_process *proc);
 void					lfork_op(t_process *proc);
 void					aff_op(t_process *proc);
 unsigned int			get_arg_op(t_process *proc, int i);
+int                     position_correction(int position);
 
 int get_int32_from_mem(int position);
-int						get_int16_from_mem(int position);
+int16_t get_int16_from_mem(int position);
 
 typedef struct			s_game
 {
@@ -124,7 +131,13 @@ typedef struct			s_game
 	int					cycles_to_die_last;
 	int					cycles_to_die_not_updated;
 	int 				checks;
+    int                 dump_64;
 	int 				dump_cycle;
+	int                 log_level;
+	int                 print_aff;
+	int                 show_64;
+	int                 show_cycle;
+	int                 viz;
 }						t_game;
 
 t_game					vm;

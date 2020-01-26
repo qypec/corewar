@@ -29,7 +29,7 @@ typedef struct			s_op
 	int 				has_args_code;
 }						t_op;
 
-static t_op					op_tab[16] =
+static t_op					op_tab[17] =
 		{
 				{"live",
 						1,
@@ -205,7 +205,18 @@ static t_op					op_tab[16] =
 						1,
 						0,
 						aff_op,
-						1}
+						1},
+
+                {"null",
+                        0,
+                        {},
+                        17,
+                        0,
+                        "null",
+                        0,
+                        0,
+                        NULL,
+                        0}
 		};
 
 #endif

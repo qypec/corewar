@@ -23,7 +23,7 @@ int get_int32_from_mem(int position)
 	return (*((int*)buf));
 }
 
-int get_int16_from_mem(int position)
+int16_t get_int16_from_mem(int position)
 {
 	unsigned char buf[2];
 
@@ -42,4 +42,11 @@ unsigned int	get_arg_op(t_process *proc, int i)
 		return (get_int32_from_mem(proc->pos + proc->args_value[i] % IDX_MOD));
 	else
 		return (-1);
+}
+
+int             position_correction(int position)
+{
+    position %= MEM_SIZE;
+    position += (position < 0) ? MEM_SIZE : 0;
+    return (position);
 }

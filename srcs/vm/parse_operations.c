@@ -67,21 +67,24 @@ void 		process_args_code(t_process *proc)
 
 int 					parse_args_values(t_process *proc)
 {
-	int	i;
-	int offset;
-	unsigned int size;
+	int             i;
+	int             offset;
+	unsigned int    size;
+	unsigned int    index;
 
 	i = -1;
+	index = 0;
 	offset = (op_tab[proc->op - 1].has_args_code) ? 2 : 1; // смещение при наличии на 1 байт значения аргументов
 	if (proc->op == 1)
 		proc->op = 1;
 	while (++i < op_tab[proc->op - 1].argc)
 	{
 		size = calc_args_size(i, proc);
-		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[proc->pos + offset] : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem(proc->pos + offset) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 0) ? get_int32_from_mem(proc->pos + offset) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 1) ? get_int16_from_mem(proc->pos + offset) : proc->args_value[i];
+		index = position_correction(proc->pos + offset);
+		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[index] : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int)index) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 0) ? get_int32_from_mem((int)index) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 1) ? get_int16_from_mem((int)index) : proc->args_value[i];
 		offset += (int)size;
 	}
 	proc->pc += offset;

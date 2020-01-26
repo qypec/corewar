@@ -50,24 +50,11 @@ int		check_flags(int i, int ac, char **ag)
 		return (print_usage(-7, 1));
 	value = ft_atoi(ag[i + 1]);
 	if (ag[i][1] == 'n')
-	{
-		if (value > MAX_PLAYERS || value <= 0)
-			return (print_usage(-2, 1));
-		else
-		{
-			if (is_set(value, MAX_PLAYERS))
-				return (print_usage(-5, 1));
-			vm.players_temp[vm.players_sum].id =
-					(!is_set(value, MAX_PLAYERS)) ? value : 0;
-		}
-	}
+        if (!check_n(value))
+            return (0);
 	else if (ag[i][1] == 'd')
-	{
-		if (value > CYCLE_TO_DIE || ag[i + 1] <= 0)
-			return (print_usage(-3, 0));
-		else
-			vm.dump_cycle = value;
-	}
+	    if (!(check_d(ag, value, i)))
+            return (0);
 	return (1);
 }
 
