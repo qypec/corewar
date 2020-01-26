@@ -9,7 +9,6 @@
 
 # define DEBUG 1
 # define OPTIONS 128u
-# define AF 0u
 # define LOG 128u
 # define LIVE 1u
 # define CYCLE 2u
@@ -143,6 +142,7 @@ typedef struct			s_game
 	unsigned char       dump:2;
 	unsigned char       viz:1;
 	unsigned char       s:1;
+	unsigned char       af:1;
 }						t_game;
 
 t_game					vm;
