@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/27 00:14:07 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/27 01:13:35 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		print_usage(int code, int usage)
 	if (code == -5)
 		ft_printf("%s\n", ANSI_B_RED"Duplicates in flags"ANSI_RESET);
 	if (code == -6)
-		ft_printf("%s\n", ANSI_B_RED"You pass flag n as the last argument!"ANSI_RESET);
+		ft_printf("%s\n", ANSI_B_RED"You pass FLAG as the LAST argument!"ANSI_RESET);
 	if (code == -7)
 		ft_printf("%s\n", ANSI_B_RED"Flag value is not a number!"ANSI_RESET);
 	if (usage)
@@ -61,7 +61,7 @@ int		check_flags(int i, int ac, char **ag)
 	ok = 1;
 	if (i + 1 == ac)
 		return (print_usage(-6, 1));
-	if (!ft_isnum(ag[i + 1]))
+	if (!ft_isnum(ag[i + 1]) && ag[i][1] != 'a' && ag[i][1] != 'v')
 		return (print_usage(-7, 1));
 	value = ft_atoi(ag[i + 1]);
 	if (ag[i][1] == 'n')
@@ -107,10 +107,12 @@ int		check_args(int ac, char **ag)
 			if ((i + 1 < ac && ag[i + 1][0] == '-') ||
 			(i + 2 < ac && ag[i + 2][0] == '-'))
 				return (print_usage(-5, 1));
-			if (!check_flags(i, ac, ag))
+			else if (!check_flags(i, ac, ag))
 				return (0);
-			if ((i + 2) < ac)
+			else if ((i + 2) < ac && (ag[i][1] != 'a' && ag[i][1] != 'v'))
 				i += 2;
+			else if ((i + 1) < ac && (ag[i][1] == 'a' || ag[i][1] == 'v'))
+				i += 1;
 			else
 				return (print_usage(-2, 1));
 		}

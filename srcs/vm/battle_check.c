@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 21:24:09 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/23 18:48:55 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/27 01:13:35 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,4 @@ void    battle_check()
     update_cycle_to_die();
     check_procs();
 	vm.lives_in_round = 0;
-	if (vm.log_level & CYCLE && vm.cycles_to_die != vm.cycles_to_die_last)
-		ft_printf("Cycle to die is now %d\n", vm.cycles_to_die);
 }
