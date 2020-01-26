@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:50:11 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/24 18:14:59 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/27 01:18:02 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int 	battle(void)
 		++vm.cycle_current;
 		++vm.cycles_all;
 		if ((vm.dump_cycle && vm.cycles_all == vm.dump_cycle))
-			print_arena(0, 0, 0, 0);
+            print_arena(0, 0, 0, 0);
 		check_proc(); // проверка процессов, парсинг и исполнение
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);

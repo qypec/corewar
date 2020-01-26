@@ -29,6 +29,7 @@ int check_s(char **av, int value, int i)
 	vm.s |= (ft_strequ(av[i], "show")) ? 2u : 1u;
 	if(av[i + 1] <= 0)
 	{
+		ft_printf(ANSI_B_RED"Negative or zero flag -s value! See usage:\n"ANSI_RESET);
 		ft_putstr("    -show <num> : Run <num> cycles, dump memory (32 octets per line), pause and repeat\n");
 		ft_putstr("    -s    <num> : Run <num> cycles, dump memory (64 octets per line), pause and repeat\n");
 		return (0);
@@ -52,7 +53,7 @@ int check_l(int value)
 		vm.log_level |= PC;
 	else
 	{
-		ft_putstr("WRONG VALUE! See usage:\n");
+		ft_printf(ANSI_B_RED"Wrong flag -l value! See usage:\n"ANSI_RESET);
 		ft_putstr("    -l    <num> : Log levels\n");
 		ft_putstr("                   1  : Show lives\n");
 		ft_putstr("                   2  : Show cycles\n");
