@@ -14,8 +14,6 @@
 
 int		print_usage(int code, int usage)
 {
-	if (!code)
-		ft_printf("%s\n", ANSI_B_RED"You didn't pass the program arguments!"ANSI_RESET);
 	if (code == -1)
 		ft_printf("%s\n", ANSI_B_RED"Only files with the extension .cor are accepted!"ANSI_RESET);
 	if (code == -2)
@@ -33,10 +31,7 @@ int		print_usage(int code, int usage)
 	if (code == -7)
 		ft_printf("%s\n", ANSI_B_RED"Flag value is not a number!"ANSI_RESET);
 	if (usage)
-		ft_printf("%s %d\n", ANSI_B_GREEN"USAGE:\n"ANSI_RESET "The virtual machine ./corewar accepts player files as arguments\n"
-						 "in the form of \"some_player_name.cor\" separated by a space:\n"
-						 "./corewar player1.cor player2.cor player3.cor\n"
-						 ANSI_B_GREEN"Max number of players is:", MAX_PLAYERS, ANSI_RESET);
+		standart_usage();
 	return (0);
 }
 

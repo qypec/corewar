@@ -24,6 +24,6 @@ int check_d(char **av, int value, int i)
     return (1);
 }
 
-int check_s(int ac, char **av, int value);
-int check_v(int ac, char **av);
-int check_a(int ac, char **av);
+//int check_s(int ac, char **av, int value);
+//int check_v(int ac, char **av);
+//int check_a(int ac, char **av);
