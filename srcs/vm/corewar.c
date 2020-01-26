@@ -41,7 +41,12 @@ int		init_corewar(void)
 	vm.cycles_to_die = CYCLE_TO_DIE;
 	vm.cycles_to_die_last = CYCLE_TO_DIE;
 	vm.players_sum = 0;
-	vm.dump_cycle = 0;
+	vm.log_level = 0;
+	vm.print_aff = 0;
+	vm.dump = 0;
+	vm.viz = 0;
+	vm.s = 0;
+	vm.af = 0;
 	vm.checks = 0;
 	ft_bzero(vm.arena, MEM_SIZE);
 	ft_bzero(vm.arena_id, MEM_SIZE * sizeof(int));

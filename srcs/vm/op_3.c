@@ -108,6 +108,6 @@ void	lfork_op(t_process *proc)
 
 void	aff_op(t_process *proc)
 {
-    if (OPTIONS & AF)
+    if (vm.af)
         ft_putchar((char)proc->regs[proc->args_value[0] - 1]);
 }
