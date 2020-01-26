@@ -75,7 +75,7 @@ int						check_code(int fd, int player_k);
 
 int						init_game(void);
 void					print_process(void);
-void print_arena(int pos, int print_op, int op_pos, int size);
+void					print_arena(int pos, int print_op, int op_pos, int size);
 t_process				*create_process(int n_player, int position);
 void					del_process(t_process *proc);
 
@@ -84,7 +84,7 @@ void					del_process(t_process *proc);
 */
 
 int						battle(void);
-void battle_check(void);
+void					battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
 int 					parse_args_values(t_process *proc);

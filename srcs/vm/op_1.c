@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 19:09:16 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/22 18:07:26 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/27 01:13:35 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ void	live_op(t_process *proc)
 		++vm.players[player_index].lives_current;
 		vm.last_alive = &vm.players[player_index];
 	}
-	if (vm.log_level & OPERA)
-		ft_printf("P %d | live %d\n", proc->proc_id, number);
-	if (vm.log_level & LIVE)
-		ft_printf("Player %d (%s) is said to be alive\n",
-				  proc->player_id, vm.players[proc->player_id].name);
+	if (DEBUG)
+		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
 }
 
 void	zjmp_op(t_process *proc)
@@ -44,21 +41,29 @@ void	zjmp_op(t_process *proc)
 		proc->pc = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
 		if (!proc->pc)
 		    proc->pos = 0;
-		if (vm.log_level & OPERA)
-			ft_printf("P %d | zjmp %d OK\n", proc->proc_id, proc->pc);//TODO check why prints OK
+		if (DEBUG && proc->carry)
+			ft_printf("proc id - %d: pos = %d zjmp op - %d\n", proc->proc_id, proc->pos, proc->pc);
 	}
+	else if (DEBUG && proc->carry)
+		ft_printf("proc id - %d: zjmp op carry - %d\n",
+				proc->proc_id, proc->carry);
+//    (DEBUG) ? print_arena(position_correction(proc->pos + proc->pc), 1, proc->pos, 1) : 0;
 }
 
 void	ld_op(t_process *proc)
 {
+    if (vm.checks == 148) {
+        vm.checks = 148;
+        print_arena(proc->pos, 0, 0, 0);
+    }
     proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
     if (!proc->args_value[0])
 			proc->carry = 1;
     else
         proc->carry = 0;
-	if (vm.log_level & OPERA)
-		ft_printf("P %d | ld %d r%d\n", proc->proc_id,
-				proc->regs[proc->args_value[1] - 1], proc->args_value[1]);
+    if (DEBUG)
+		ft_printf("proc id - %d: ld op: num - %d reg - %d\n",
+				proc->proc_id, proc->args_value[0], proc->args_value[1]);
 }
 
 void                st_op(t_process *proc)//TODO Данная операция может записывать id в arena_id
@@ -79,8 +84,9 @@ void                st_op(t_process *proc)//TODO Данная операция �
             vm.arena_id[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = proc->player_id;
         }
 	}
-    if (vm.log_level & OPERA)
-		st_log(proc);
+    if (DEBUG)
+        ft_printf("proc id - %d: proc->pos = %d : st op: arg1 - %X arg2 - %X res = %X addr - %d\n",
+                  proc->proc_id, proc->pos, get_arg_op(proc,1), get_arg_op(proc,2), proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[0] - 1]);
 }
 
 void	add_op(t_process *proc)
@@ -93,7 +99,6 @@ void	add_op(t_process *proc)
 	else
 		proc->carry = 0;
 	proc->regs[proc->args_value[2] - 1] = res;
-	if (vm.log_level & OPERA)
-		ft_printf("P %d | add r%d r%d r%d\n", proc->proc_id,
-				proc->args_value[0], proc->args_value[1], proc->args_value[2]);
+    if (DEBUG)
+        ft_printf("proc id - %d: add op: arg1 = %d arg2 = %d res = %d\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
 }
