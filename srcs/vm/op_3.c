@@ -37,12 +37,9 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
         vm.arena[addr + i] = temp[3 - i];
         vm.arena_id[addr + i] = proc->player_id;
     }
-    if (DEBUG) {
-        ft_printf("proc id - %d: proc->pos = %d : sti op: arg2 - %d arg3 - %d res = %d addr - %d\n",
-                  proc->proc_id, proc->pos, get_arg_op(proc, 1), get_arg_op(proc, 2),
-                  proc->regs[proc->args_value[0] - 1], addr);
-//        print_arena(addr, 1, proc->pos, proc->pc);
-    }
+	if (vm.log_level & OPERA)
+		ft_printf("P%5d | sti r%d %d r%d\n       | ->load from %d + 5d = %d (with pc and mod %d)", proc->proc_id,
+				proc->args_value[0],
 }
 
 void	fork_op(t_process *proc)
