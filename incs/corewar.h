@@ -10,6 +10,12 @@
 # define DEBUG 1
 # define OPTIONS 128u
 # define AF 0u
+# define LOG 128u
+# define LIVE 1u
+# define CYCLE 2u
+# define OPERA 4u
+# define DEATH 8u
+# define PC 16u
 
 typedef struct			s_player
 {
@@ -132,13 +138,11 @@ typedef struct			s_game
 	int					cycles_to_die_last;
 	int					cycles_to_die_not_updated;
 	int 				checks;
-    int                 dump_64;
-	int 				dump_cycle;
-	int                 log_level;
-	int                 print_aff;
-	int                 show_64;
-	int                 show_cycle;
-	int                 viz;
+	unsigned char       log_level;
+	unsigned char       print_aff:1;
+	unsigned char       dump:2;
+	unsigned char       viz:1;
+	unsigned char       s:1;
 }						t_game;
 
 t_game					vm;
