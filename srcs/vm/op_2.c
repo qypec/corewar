@@ -31,8 +31,8 @@ void			and_op(t_process *proc)
 	res = get_arg_op(proc, 0) & get_arg_op(proc, 1);
     proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
-    if (DEBUG)
-        ft_printf("proc id - %d: and: arg1 = %d arg2 = %d res = %X\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
+	if (vm.log_level & OPERA)
+		and_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
 }
 
 void			or_op(t_process *proc)
