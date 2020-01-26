@@ -56,10 +56,8 @@ int						is_set(int number, int max);
 void					set_id(int player_k);
 int                     check_n(int value);
 int check_d(char **av, int value, int i);
-//int check_s(int ac, char **av, int value);
-//int check_l(int ac, char **av, int value);
-//int check_v(int ac, char **av);
-//int check_a(int ac, char **av);
+int check_s(char **av, int value, int i);
+int check_l(int value);
 
 /*
 ** -------------------------- Parse players -------------------------------
@@ -137,11 +135,12 @@ typedef struct			s_game
 	int					cycles_to_die_not_updated;
 	int                 dump_cycle;
 	int 				checks;
+	int 				dump_cycle;
 	unsigned char       log_level;
 	unsigned char       print_aff:1;
 	unsigned char       dump:2; // 1 bit - dump 2 - d
 	unsigned char       viz:1;
-	unsigned char       s:1;
+	unsigned char       s:2;
 	unsigned char       af:1;
 }						t_game;
 
