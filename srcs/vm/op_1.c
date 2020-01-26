@@ -54,7 +54,7 @@ void	ld_op(t_process *proc)
 {
     if (vm.checks == 148) {
         vm.checks = 148;
-        print_arena(proc->pos, 0, 0, 0, 0);
+		print_arena(proc->pos, 0, 0, 0);
     }
     proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
     if (!proc->args_value[0])

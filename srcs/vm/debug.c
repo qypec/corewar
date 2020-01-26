@@ -31,18 +31,18 @@ void	print_process(void)
 	}
 }
 
-void print_arena(int pos, int print_op, int op_pos, int size, int bit)
+void print_arena(int pos, int print_op, int op_pos, int size)
 {
 	int 	i;
 	int 	j;
 	int 	k;
 	int     row;
+	int 	bit;
 
 	i = 0;
 	row = 0;
 	k = -1;
-    if (vm.dump_cycle == vm.cycles_all && DEBUG)
-        ft_printf("vm.cycles_all = %d\n\n", vm.cycles_all);
+	bit = (vm.dump) ? vm.dump * 32 : 32;
 	ft_printf("0x");
 	while (i < MEM_SIZE)
 	{
