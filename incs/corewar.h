@@ -135,6 +135,7 @@ typedef struct			s_game
 	int					cycles_to_die;
 	int					cycles_to_die_last;
 	int					cycles_to_die_not_updated;
+	int                 dump_cycle;
 	int 				checks;
 	unsigned char       log_level;
 	unsigned char       print_aff:1;
