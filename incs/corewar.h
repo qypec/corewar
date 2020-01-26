@@ -54,7 +54,7 @@ void                    standart_usage(void);
 int						create_players(char **argv);
 int						is_set(int number, int max);
 void					set_id(int player_k);
-int check_n(int value);
+int                     check_n(int value);
 int check_d(char **av, int value, int i);
 //int check_s(int ac, char **av, int value);
 //int check_l(int ac, char **av, int value);

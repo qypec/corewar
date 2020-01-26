@@ -30,8 +30,8 @@ void	live_op(t_process *proc)
 		++vm.players[player_index].lives_current;
 		vm.last_alive = &vm.players[player_index];
 	}
-	if (DEBUG)
-		ft_printf("proc id - %d: live op - %d\n", proc->proc_id, number);
+	if (vm.log_level & OPERA)
+		ft_printf("P %d | live %d\n", proc->proc_id, number);
 	if (vm.log_level & LIVE)
 		ft_printf("Player %d (%s) is said to be alive\n",
 				  proc->player_id, vm.players[proc->player_id].name);
