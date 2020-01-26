@@ -31,7 +31,7 @@ void	print_process(void)
 	}
 }
 
-void print_arena(int pos, int print_op, int op_pos, int size)
+void print_arena(int pos, int print_op, int op_pos, int size, int bit)
 {
 	int 	i;
 	int 	j;
@@ -47,8 +47,8 @@ void print_arena(int pos, int print_op, int op_pos, int size)
 	while (i < MEM_SIZE)
 	{
 		j = -1;
-		ft_printf("%#.4x : ", row * 32);
-		while (++j < 32)
+		ft_printf("%#.4x : ", row * bit);
+		while (++j < bit)
 		{
 		    if (DEBUG)
             {
