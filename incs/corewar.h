@@ -8,8 +8,7 @@
 #include		"../libft/libft.h"
 
 # define DEBUG 1
-# define OPTIONS 128u
-# define LOG 128u
+# define LOG_ON 128u
 # define LIVE 1u
 # define CYCLE 2u
 # define OPERA 4u
@@ -139,7 +138,7 @@ typedef struct			s_game
 	int 				checks;
 	unsigned char       log_level;
 	unsigned char       print_aff:1;
-	unsigned char       dump:2;
+	unsigned char       dump:2; // 1 bit - dump 2 - d
 	unsigned char       viz:1;
 	unsigned char       s:1;
 	unsigned char       af:1;
