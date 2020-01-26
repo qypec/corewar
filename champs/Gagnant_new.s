@@ -4,7 +4,7 @@
 		ld   %0,r3		
 label:		zjmp %:avantdebut
 		zjmp %0				# pour eviter ecrasement
-						# de l'instruction suivante
+		aff r1				# de l'instruction suivante
 code:		live %-1			# 5
 		sti  r15,%0,r14			# 6
 		zjmp %-200			# 3

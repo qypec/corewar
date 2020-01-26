@@ -17,11 +17,10 @@ void			sub_op(t_process *proc)
 	int res;
 
 	res = proc->regs[proc->args_value[0] - 1] - proc->regs[proc->args_value[1] - 1];
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+    proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = res;
+    if (DEBUG)
+        ft_printf("proc id - %d: sub: arg1 = %d arg2 = %d res = %X\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
 }
 
 void			and_op(t_process *proc)
@@ -29,11 +28,10 @@ void			and_op(t_process *proc)
 	unsigned int res;
 
 	res = get_arg_op(proc, 0) & get_arg_op(proc, 1);
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+    proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
+    if (DEBUG)
+        ft_printf("proc id - %d: and: arg1 = %d arg2 = %d res = %X\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
 }
 
 void			or_op(t_process *proc)
@@ -41,11 +39,10 @@ void			or_op(t_process *proc)
 	unsigned int res;
 
 	res = get_arg_op(proc, 0) | get_arg_op(proc, 1);
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+    proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
+    if (DEBUG)
+        ft_printf("proc id - %d: or: arg1 = %d arg2 = %d res = %X\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
 }
 
 void			xor_op(t_process *proc)
@@ -53,9 +50,8 @@ void			xor_op(t_process *proc)
 	unsigned int res;
 
 	res = get_arg_op(proc, 0) ^ get_arg_op(proc, 1);
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+    proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
+    if (DEBUG)
+        ft_printf("proc id - %d: xor: arg1 = %d arg2 = %d res = %X\n", proc->proc_id, proc->regs[proc->args_value[0] - 1], proc->regs[proc->args_value[1] - 1], res);
 }

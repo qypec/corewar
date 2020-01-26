@@ -34,25 +34,7 @@ int 	init_game(void)
 			++j;
 		}
 	}
+	vm.last_alive = &vm.players[vm.processes->player_id];
 	return (1);
 }
 
-//void	init_op_selector(void)
-//{
-//	vm.ops[1] = live_op();
-//	vm.ops[2] = ld_op();
-//	vm.ops[3] = st_op();
-//	vm.ops[4] = add_op();
-//	vm.ops[5] = sub_op();
-//	vm.ops[6] = and_op();
-//	vm.ops[7] = or_op();
-//	vm.ops[8] = xor_op();
-//	vm.ops[9] = zjmp_op();
-//	vm.ops[10] = ldi_op();
-//	vm.ops[11] = sti_op();
-//	vm.ops[12] = fork_op();
-//	vm.ops[13] = lld_op();
-//	vm.ops[14] = lldi_op();
-//	vm.ops[15] = lfork_op();
-//	vm.ops[16] = aff_op();
-//}

@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void update_cycle_to_die(void)
+void    update_cycle_to_die(void)
 {
 	vm.cycle_current = 0;
 	++vm.cycles_to_die_not_updated;
@@ -38,7 +38,7 @@ void update_cycle_to_die(void)
 	}
 }
 
-int 	kill_all_procs(void)
+int     kill_all_procs(void)
 {
 	t_process *procs;
 	t_process *next;
@@ -53,7 +53,7 @@ int 	kill_all_procs(void)
 	return (1);
 }
 
-void check_procs(void)
+void    check_procs(void)
 {
 	t_process *temp;
 	t_process *next;
@@ -75,12 +75,12 @@ void check_procs(void)
 	}
 }
 
-void battle_check()
+void    battle_check()
 {
 	++vm.checks;
 	if (vm.cycles_to_die <= 0)
 		kill_all_procs();
-	update_cycle_to_die();
-	check_procs();
+    update_cycle_to_die();
+    check_procs();
 	vm.lives_in_round = 0;
 }
