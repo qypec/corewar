@@ -114,10 +114,10 @@ void					aff_op(t_process *proc);
 unsigned int			get_arg_op(t_process *proc, int i);
 int                     position_correction(int position);
 void                    st_log(t_process *proc);
-void bit_op_log(t_process *proc, unsigned int arg1, unsigned int arg2);
+void                    universal_op_log(t_process *proc, unsigned int arg1, unsigned int arg2);
 
-int get_int32_from_mem(int position);
-int16_t get_int16_from_mem(int position);
+int                     get_int32_from_mem(int position);
+int16_t                 get_int16_from_mem(int position);
 
 typedef struct			s_game
 {

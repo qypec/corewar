@@ -32,7 +32,7 @@ void			and_op(t_process *proc)
     proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
 	if (vm.log_level & OPERA)
-		bit_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
+		universal_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
 }
 
 void			or_op(t_process *proc)
@@ -43,7 +43,7 @@ void			or_op(t_process *proc)
     proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
 	if (vm.log_level & OPERA)
-		bit_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
+		universal_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
 }
 
 void			xor_op(t_process *proc)
@@ -54,5 +54,5 @@ void			xor_op(t_process *proc)
     proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = (int)res;
 	if (vm.log_level & OPERA)
-		bit_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
+		universal_op_log(proc, get_arg_op(proc, 0), get_arg_op(proc, 1));
 }
