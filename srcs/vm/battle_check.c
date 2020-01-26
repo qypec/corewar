@@ -83,10 +83,6 @@ void    battle_check()
     update_cycle_to_die();
     check_procs();
 	vm.lives_in_round = 0;
-	if (vm.log_level & CYCLE)
-	{
-		ft_printf("It is now cycle %d\n", vm.cycle_current);
-		if (vm.cycles_to_die != vm.cycles_to_die_last)
-			ft_printf("Cycle to die is now %d\n", vm.cycles_to_die);
-	}
+	if (vm.log_level & CYCLE && vm.cycles_to_die != vm.cycles_to_die_last)
+		ft_printf("Cycle to die is now %d\n", vm.cycles_to_die);
 }
