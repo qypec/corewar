@@ -17,10 +17,13 @@ void	ldi_op(t_process *proc)
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(position_correction(proc->pos + (int)(get_arg_op(proc,0) +
             get_arg_op(proc,1))) % IDX_MOD);
 	if (vm.log_level & OPERA)
-		ft_printf("P%5d | ldi %d %d r%d\n       | ->load from %d + 5d = %d (with pc and mod %d)", proc->proc_id,
-				  (int)(get_arg_op(proc,0), (int)get_arg_op(proc,1), proc->args_value[2], (int)(get_arg_op(proc,0),
-						  (int)get_arg_op(proc,1),(int)(get_arg_op(proc,0) + (int)get_arg_op(proc,1),
-						  		position_correction(proc->pos + (int)(get_arg_op(proc,0) +get_arg_op(proc,1)))))));
+	{
+		ft_printf("P%5d | ldi %d %d r%d\n",  proc->proc_id);
+		ft_printf("       | ->load from %d + 5d = %d (with pc and mod %d)\n",
+				  (get_arg_op(proc, 0), get_arg_op(proc, 1), proc->args_value[2], (get_arg_op(proc,0),
+				  		get_arg_op(proc, 1), ((get_arg_op(proc, 0) + get_arg_op(proc, 1)),
+						  position_correction(proc->pos + (int) (get_arg_op(proc, 0) + get_arg_op(proc, 1)))))));
+	}
 }
 
 void	sti_op(t_process *proc) //TODO Данная операция может записывать id в arena_id
