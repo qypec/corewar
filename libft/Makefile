@@ -6,7 +6,7 @@
 #    By: ergottli <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 15:50:14 by ergottli          #+#    #+#              #
-#    Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr        #
+#    Updated: 2020/01/27 05:28:03 by vgerold-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,14 +168,14 @@ HEADER = ./
 all: $(NAME)
 
 $(NAME): 
-	gcc -Wall -Wextra -Werror -c $(SRC) $(SRC_PRINTF) -I $(HEADER)
-	ar rc $(NAME) $(SRCO) $(SRCO_PRINTF)
-	ranlib $(NAME)
+	@gcc -Wall -Wextra -Werror -c $(SRC) $(SRC_PRINTF) -I $(HEADER)
+	@ar rc $(NAME) $(SRCO) $(SRCO_PRINTF)
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(SRCO) $(SRCO_PRINTF)
+	@rm -f $(SRCO) $(SRCO_PRINTF)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
