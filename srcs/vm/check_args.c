@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 17:21:07 by vgerold-          #+#    #+#             */
-/*   Updated: 2020/01/27 01:13:35 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/27 01:13:38 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,7 @@ int		check_args(int ac, char **ag)
 	{
 		if (ag[i][0] == '-')
 		{
-			if ((i + 1 < ac && ag[i + 1][0] == '-') ||
-			(i + 2 < ac && ag[i + 2][0] == '-'))
-				return (print_usage(-5, 1));
-			else if (!check_flags(i, ac, ag))
+			if (!check_flags(i, ac, ag))
 				return (0);
 			else if ((i + 2) < ac && (ag[i][1] != 'a' && ag[i][1] != 'v'))
 				i += 2;
