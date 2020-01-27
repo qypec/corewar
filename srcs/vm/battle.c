@@ -17,9 +17,9 @@ int		get_op_code(t_process *proc)
 	proc->op = (int)(vm.arena[proc->pos]);
 	if (proc->op < 1 || proc->op > 16)
 	{
-        proc->op = 17;
-        proc->pc = 1;
-    }
+		proc->op = 17;
+		proc->pc = 1;
+	}
 	else
 		proc->delay = op_tab[proc->op - 1].op_delay;
 	return (1);
@@ -40,27 +40,25 @@ void	intro(void)
 	}
 }
 
-void 	ft_exec_op(t_process *proc)
+void	ft_exec_op(t_process *proc)
 {
-    if (!op_tab[proc->op - 1].has_args_code)
-        proc->args[0] = op_tab[proc->op - 1].args_types[0];
-    else
-        process_args_code(proc);
-//    if (proc->pos >= 68)
-//        proc->op = proc->op;
-    if (proc->op > 0 && proc->op < 17
-        && parse_args_values(proc)
-        && check_regs(proc)) // парсинг значений аргументов и валидация регистров при их наличии
-    {
-        op_tab[proc->op - 1].operations(proc); // исполнение операции (из массива указателей на функции операций)
-        ft_bzero((void*)proc->args, sizeof(int) * 4);
-        ft_bzero((void*)proc->args_value, sizeof(int) * 3);
-    }
-    proc->pos = position_correction(proc->pos + proc->pc); // смещение позиции процесса в соотвествии со значением PC
-    proc->pc = 0;
+	if (!op_tab[proc->op - 1].has_args_code)
+		proc->args[0] = op_tab[proc->op - 1].args_types[0];
+	else
+		process_args_code(proc);
+	if (proc->op > 0 && proc->op < 17
+		&& parse_args_values(proc)
+		&& check_regs(proc))
+	{
+		op_tab[proc->op - 1].operations(proc);
+		ft_bzero((void*)proc->args, sizeof(int) * 4);
+		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
+	}
+	proc->pos = position_correction(proc->pos + proc->pc);
+	proc->pc = 0;
 }
 
-int 	check_proc(void)
+int		check_proc(void)
 {
 	t_process *iter;
 
@@ -68,16 +66,16 @@ int 	check_proc(void)
 	while (iter)
 	{
 		if (!iter->delay)
-			get_op_code(iter); // парсинг кода текущей операции
+			get_op_code(iter);
 		iter->delay -= (iter->delay > 0) ? 1 : 0;
 		if (!iter->delay)
-			ft_exec_op(iter); // парсинг и исполнение операции
+			ft_exec_op(iter);
 		iter = iter->next;
 	}
 	return (1);
 }
 
-int 	battle(void)
+int		battle(void)
 {
 	intro();
 	while (vm.processes)
@@ -85,15 +83,15 @@ int 	battle(void)
 		++vm.cycle_current;
 		++vm.cycles_all;
 		if (vm.cycles_all == vm.dump_cycle)
-            print_arena(0, 0, 0, 0);
-		check_proc(); // проверка процессов, парсинг и исполнение
+			print_arena(0, 0, 0, 0);
+		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check(); // проверка хода игры
 	}
-    ft_printf("* Player %s id:[%d] win! Congratulations!\n",
-              vm.last_alive->name, vm.last_alive->id);
+	ft_printf("* Player %s id:[%d] win! Congratulations!\n",
+	vm.last_alive->name, vm.last_alive->id);
     if (DEBUG)
     {
         ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = "
