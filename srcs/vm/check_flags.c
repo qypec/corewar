@@ -16,7 +16,7 @@ int check_n(int value)
 
 int check_d(char **av, int value, int i)
 {
-    vm.dump |= (ft_strequ(av[i], "dump")) ? 2u : 1u;
+    vm.dump |= (ft_strequ(av[i], "-dump")) ? 2u : 1u;
     if(av[i + 1] <= 0)
         return (print_usage(-3, 0));
     else
