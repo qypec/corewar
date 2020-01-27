@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/25 19:42:10 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/27 19:08:56 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void					init_win_help(t_visu *visu)
 {
 	visu->win_help = newwin(WIN_HELP_LINES, WIN_HELP_COLS, WIN_ARENA_LINES, 0);
 	// box(visu->win_help, 0, 0);
-	mvwprintw(visu->win_help, WIN_HELP_LINES / 2, (WIN_HELP_COLS - ft_strlen(BUTTON_EXIT)) / 2, BUTTON_EXIT);
+    draw_help(visu, BUTTON_EXIT, BUTTON_PAUSE, BUTTON_NEXT_CYCLE, \
+        BUTTON_DEFAULT_SPEED, TITLE_SPEED_UP, TITLE_SPEED_DOWN, "bla", "bla","bla","bla","bla", NULL);
+	// mvwprintw(visu->win_help, WIN_HELP_LINES / 2, (WIN_HELP_COLS - ft_strlen(BUTTON_EXIT)) / 2, BUTTON_EXIT);
 	wrefresh(visu->win_help);
 }
 

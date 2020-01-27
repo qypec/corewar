@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ergottli <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 15:50:14 by ergottli          #+#    #+#              #
-#    Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr        #
+#    Updated: 2020/01/27 18:10:56 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC = ./ft_isalpha.c \
     ./ft_lst_append.c \
     ./ft_lstiter.c \
     ./ft_lstmap.c \
+	./ft_lstsize.c \
     ./ft_swap.c \
     ./ft_binary_search.c \
     ./ft_bruteforce.c \

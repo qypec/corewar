@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:24 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/27 18:10:29 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void				ft_lst_print(t_list *lst, unsigned char type, char n_flag);
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 size_t				ft_lstcmp_cs(t_list *l, t_list *r, size_t end);
 int					ft_lst_node_cpy(t_list *lst);
+size_t				ft_lstsize(t_list *alst);
 
 /*
 ** -------------------------- Doubly-linked list functions -------------------

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   visu.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/27 16:00:43 by yquaro            #+#    #+#             */
+/*   Updated: 2020/01/27 18:11:52 by yquaro           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VISU_H
 # define VISU_H
 
@@ -6,6 +18,11 @@
 # define RUNNING_INFO "Running info"
 
 # define BUTTON_EXIT "Exit - \'Esc\'"
+# define BUTTON_PAUSE "Pause / Unpause - \'Space\'"
+# define BUTTON_NEXT_CYCLE "Next cycle - \'Right arrow\'"
+# define BUTTON_DEFAULT_SPEED "Default speed - \'Left arrow\'"
+# define TITLE_SPEED_UP "Speed UP"
+# define TITLE_SPEED_DOWN "Speed DOWN"
 
 /*
 ** Color
@@ -33,6 +50,7 @@
 */
 
 # define ESC_BUTTON				27
+# define SPACE_BUTTON			' '
 
 
 # define MIN_COLS_TO_VISU 70
@@ -60,5 +78,6 @@ void					delete_visu(t_visu **visu);
 
 void					assign_players_to_color(void);
 void                	draw(void);
+void					draw_help(t_visu *visu, ...);
 
 #endif

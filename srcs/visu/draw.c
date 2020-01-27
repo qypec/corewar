@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/27 15:47:52 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:53:15 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@ static void			handle_buttons(void)
 {
 	char			key;
 	
-	if ((key = getch()) != ERR)
+	if ((key = getch()) == ESC_BUTTON)
 	{
 		delete_visu(&(vm.visu));
 		exit(1);
+	}
+	else if (key == SPACE_BUTTON)
+	{
+		while (getch() != SPACE_BUTTON)
+			;
 	}
 }
 
