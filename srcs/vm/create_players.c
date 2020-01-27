@@ -12,9 +12,9 @@
 
 #include "corewar.h"
 
-void 		redistribution(void)
+void	redistribution(void)
 {
-	int 	i;
+	int	i;
 
 	i = -1;
 	while (++i < vm.players_sum)
@@ -53,11 +53,11 @@ int		load_player(char *player_filename, int player_k)
 		return (0);
 	if (!check_magic(fd, player_k))
 		return (0);
-	if (!check_name(fd, player_k)) //check NULL
+	if (!check_name(fd, player_k))
 		return (0);
 	if (!check_exec_size(fd, player_k))
 		return (0);
-	if (!check_comment(fd, player_k)) //check NULL
+	if (!check_comment(fd, player_k))
 		return (0);
 	if (!check_code(fd, player_k))
 		return (0);
@@ -65,7 +65,7 @@ int		load_player(char *player_filename, int player_k)
 	return (1);
 }
 
-int create_players(char **argv)
+int		create_players(char **argv)
 {
 	int i;
 	int k;
