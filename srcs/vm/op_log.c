@@ -8,7 +8,7 @@ void	st_log(t_process *proc)
 				  proc->regs[proc->args_value[1] - 1], proc->args_value[1]);
 	else
 		ft_printf("P %d | st %d %d\n", proc->proc_id,
-				  proc->regs[proc->args_value[1] - 1],
+				  proc->args_value[1] - 1,
 				  position_correction(proc->pos + proc->args_value[1] % IDX_MOD));
 }
 

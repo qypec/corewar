@@ -94,6 +94,7 @@ void	add_op(t_process *proc)
 		proc->carry = 0;
 	proc->regs[proc->args_value[2] - 1] = res;
 	if (vm.log_level & OPERA)
-		ft_printf("P %d | add r%d r%d r%d\n", proc->proc_id,
-				  proc->args_value[0], proc->args_value[1], proc->args_value[2]);
+		ft_printf("P %d | add r%d r%d r%d\n       | -> %d + %d = %d\n", proc->proc_id,
+				  proc->args_value[0], proc->args_value[1], proc->args_value[2], proc->regs[proc->args_value[0] - 1],
+				  proc->regs[proc->args_value[1] - 1], res);
 }
