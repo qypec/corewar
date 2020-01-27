@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 out=
+op=live
 
-
-for i in {1..3000}
+for i in {1..1000}
 do
-	out=$(diff ./00/ldi_$i.out ./01/ldi_$i.out)
+	out=$(diff ./00_/$i.out ./01_/$i.out)
 	if [ -n $out ]
 	then
 		out=
 	else
 		echo $i
-		diff ./00/ldi_$i.out ./01/ldi_$i.out
+		diff ./00_/$i.out ./01_/$i.out
 		exit
 	fi
 done
