@@ -39,7 +39,7 @@ unsigned int	get_arg_op(t_process *proc, int i)
 	else if (proc->args[i] == T_DIR)
 		return (proc->args_value[i]);
 	else if (proc->args[i] == T_IND)
-		return (get_int32_from_mem(proc->pos + proc->args_value[i] % IDX_MOD));
+		return (get_int32_from_mem(position_correction(proc->pos + proc->args_value[i] % IDX_MOD)));
 	else
 		return (-1);
 }

@@ -73,7 +73,7 @@ int		check_flags(int i, int ac, char **ag)
 	else if (ag[i][1] == 'l')
 		ok = (!(check_l(value))) ? 0 : ok;
 	else if (ag[i][1] == 'a')
-		vm.af |= 1u;
+		vm.af = 1u;
 	else if (ag[i][1] == 'v')
 		vm.viz |= 1u;
 	return (ok);
