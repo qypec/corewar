@@ -34,8 +34,10 @@ void					init_win_help(t_visu *visu)
 	visu->win_help = newwin(WIN_HELP_LINES, WIN_HELP_COLS, WIN_ARENA_LINES, 0);
 	// box(visu->win_help, 0, 0);
     draw_help(visu, BUTTON_EXIT, BUTTON_PAUSE, BUTTON_NEXT_CYCLE, \
-        BUTTON_DEFAULT_SPEED, TITLE_SPEED_UP, TITLE_SPEED_DOWN, "bla", "bla","bla","bla","bla", NULL);
-	// mvwprintw(visu->win_help, WIN_HELP_LINES / 2, (WIN_HELP_COLS - ft_strlen(BUTTON_EXIT)) / 2, BUTTON_EXIT);
+        BUTTON_DEFAULT_SPEED, TITLE_SPEED_UP, \
+		SPEED_UP_BY_1, SPEED_UP_BY_10, SPEED_UP_BY_100, \
+		TITLE_SPEED_DOWN, SPEED_DOWN_BY_1, SPEED_DOWN_BY_10, \
+		SPEED_DOWN_BY_100, NULL);
 	wrefresh(visu->win_help);
 }
 
@@ -58,11 +60,11 @@ t_visu					*init_visu(void)
 	init_colors();
 	refresh();
 	getmaxyx(stdscr, visu->tty_lines, visu->tty_cols);
-	if (visu->tty_lines < MIN_LINES_TO_VISU || visu->tty_cols < MIN_COLS_TO_VISU)
-	{
-		ft_putendl("Enlarge the terminal window, please");
-		exit(0);
-	}
+	// if (visu->tty_lines < MIN_LINES_TO_VISU || visu->tty_cols < MIN_COLS_TO_VISU)
+	// {
+	// 	ft_putendl("Enlarge the terminal window, please");
+	// 	exit(0);
+	// }
 	init_win_arena(visu);
 	init_win_info(visu);
 	init_win_help(visu);

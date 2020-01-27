@@ -22,7 +22,13 @@
 # define BUTTON_NEXT_CYCLE "Next cycle - \'Right arrow\'"
 # define BUTTON_DEFAULT_SPEED "Default speed - \'Left arrow\'"
 # define TITLE_SPEED_UP "Speed UP"
+# define SPEED_UP_BY_1 "By 1"
+# define SPEED_UP_BY_10 "By 10"
+# define SPEED_UP_BY_100 "By 100"
 # define TITLE_SPEED_DOWN "Speed DOWN"
+# define SPEED_DOWN_BY_1 "By 1"
+# define SPEED_DOWN_BY_10 "By 10"
+# define SPEED_DOWN_BY_100 "By 100"
 
 /*
 ** Color
