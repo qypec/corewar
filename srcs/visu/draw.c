@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/25 21:26:52 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/27 15:47:52 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static void			draw_info(void)
 		}
 		wcolor_set(vm.visu->win_info, 0, NULL);
 		mvwprintw(vm.visu->win_info, line++, 7, "slogan: %s ", vm.players[i].comment);
+		mvwprintw(vm.visu->win_info, line++, 7, "last live: %zu ", vm.players[i].lives_last);
+		mvwprintw(vm.visu->win_info, line++, 7, "current live: %zu ", vm.players[i].lives_current);
 		i++;
 	}
 	wrefresh(vm.visu->win_info);
