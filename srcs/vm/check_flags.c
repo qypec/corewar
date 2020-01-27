@@ -6,7 +6,7 @@
 /*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 05:51:26 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/27 05:51:29 by ergottli         ###   ########.fr       */
+/*   Updated: 2020/01/27 06:10:01 by vgerold-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_n(int value)
 
 int	check_d(char **av, int value, int i)
 {
-	vm.dump |= (ft_strequ(av[i], "-dump")) ? 2u : 1u;
+	vm.dump |= (ft_strequ(av[i], "-dump")) ? 1u : 2u;
 	if (av[i + 1] <= 0)
 		return (print_usage(-3, 0));
 	else
