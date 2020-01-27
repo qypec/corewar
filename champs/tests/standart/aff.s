@@ -2,10 +2,13 @@
 .comment "lol"
 
 before:
-before:
+ld %65, r3
+ld %68, r2
+ld %69, r7
+ld %70, r16
 
 middle:
-aff r1
+aff r3
 
 after:
 
