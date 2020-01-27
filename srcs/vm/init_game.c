@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int 	init_game(void)
+int		init_game(void)
 {
 	int i;
 	int j;
@@ -28,7 +28,8 @@ int 	init_game(void)
 		if (vm.players[i].id)
 		{
 			k = (j) ? 1 : 0;
-			ft_memcpy(vm.arena + (j * step - k), vm.players[i].code, vm.players[i].code_size);
+			ft_memcpy(vm.arena + (j * step - k),
+					vm.players[i].code, vm.players[i].code_size);
 			if (!create_process(i, j * step - k))
 				return (0);
 			++j;
@@ -37,4 +38,3 @@ int 	init_game(void)
 	vm.last_alive = &vm.players[vm.processes->player_id];
 	return (1);
 }
-

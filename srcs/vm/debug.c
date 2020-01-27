@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   debug.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/27 05:56:12 by ergottli          #+#    #+#             */
+/*   Updated: 2020/01/27 05:56:13 by ergottli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "corewar.h"
 
@@ -31,7 +42,7 @@ void	print_process(void)
 	}
 }
 
-void print_arena(int pos, int print_op, int op_pos, int size)
+void	print_arena(int pos, int print_op, int op_pos, int size)
 {
 	int 	i;
 	int 	j;
