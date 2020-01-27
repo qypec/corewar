@@ -12,12 +12,13 @@
 
 #include "corewar.h"
 
-void    update_cycle_to_die(void)
+void	update_cycle_to_die(void)
 {
 	vm.cycle_current = 0;
 	++vm.cycles_to_die_not_updated;
 	vm.cycles_to_die_last = vm.cycles_to_die;
-	if (vm.lives_in_round >= NBR_LIVE || vm.cycles_to_die_not_updated == MAX_CHECKS)
+	if (vm.lives_in_round >= NBR_LIVE ||
+	vm.cycles_to_die_not_updated == MAX_CHECKS)
 	{
 		vm.cycles_to_die -= CYCLE_DELTA;
 		vm.cycles_to_die_not_updated = 0;
@@ -38,7 +39,7 @@ void    update_cycle_to_die(void)
 	}
 }
 
-int     kill_all_procs(void)
+int		kill_all_procs(void)
 {
 	t_process *procs;
 	t_process *next;
@@ -53,7 +54,7 @@ int     kill_all_procs(void)
 	return (1);
 }
 
-void    check_procs(void)
+void	check_procs(void)
 {
 	t_process *temp;
 	t_process *next;
@@ -75,13 +76,13 @@ void    check_procs(void)
 	}
 }
 
-void    battle_check()
+void	battle_check()
 {
 	++vm.checks;
 	if (vm.cycles_to_die <= 0)
 		kill_all_procs();
-    update_cycle_to_die();
-    check_procs();
+	update_cycle_to_die();
+	check_procs();
 	vm.lives_in_round = 0;
 	if (vm.log_level & CYCLE && vm.cycles_to_die != vm.cycles_to_die_last)
 		ft_printf("Cycle to die is now %d\n", vm.cycles_to_die);
