@@ -39,13 +39,21 @@ void	live_op(t_process *proc)
 
 void	zjmp_op(t_process *proc)
 {
+	int	addr;
+
+	addr = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
 	if (proc->carry == 1)
 	{
-		proc->pc = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
+		proc->pc = addr;
 		if (!proc->pc)
 			proc->pos = 0;
-		if (vm.log_level & OPERA)
-			ft_printf("P %d | zjmp %d OK\n", proc->proc_id, proc->pc);//TODO check why prints OK
+	}
+	if (vm.log_level & OPERA)
+	{
+		ft_printf("P %4d | zjmp %d %s\n",
+				  proc->proc_id,
+				  addr,
+				  (proc->carry) ? "OK" : "FAILED");
 	}
 }
 
@@ -57,8 +65,7 @@ void	ld_op(t_process *proc)
 	else
 		proc->carry = 0;
 	if (vm.log_level & OPERA)
-		ft_printf("P %d | ld %d r%d\n", proc->proc_id,
-				  proc->regs[proc->args_value[1] - 1], proc->args_value[1]);
+		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
 
 void                st_op(t_process *proc)//TODO Данная операция может записывать id в arena_id
@@ -80,7 +87,7 @@ void                st_op(t_process *proc)//TODO Данная операция �
 		}
 	}
 	if (vm.log_level & OPERA)
-		st_log(proc);
+		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
 
 void	add_op(t_process *proc)
@@ -94,7 +101,5 @@ void	add_op(t_process *proc)
 		proc->carry = 0;
 	proc->regs[proc->args_value[2] - 1] = res;
 	if (vm.log_level & OPERA)
-		ft_printf("P %d | add r%d r%d r%d\n       | -> %d + %d = %d\n", proc->proc_id,
-				  proc->args_value[0], proc->args_value[1], proc->args_value[2], proc->regs[proc->args_value[0] - 1],
-				  proc->regs[proc->args_value[1] - 1], res);
+		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
