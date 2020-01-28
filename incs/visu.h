@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:00:43 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/27 18:11:52 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/28 13:30:48 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,11 @@
 
 #include <ncurses.h>
 
-# define RUNNING_INFO "Running info"
+# define RUNNING "RUNNING"
+# define STOPPED "STOPPED"
 
-# define BUTTON_EXIT "Exit - \'Esc\'"
-# define BUTTON_PAUSE "Pause / Unpause - \'Space\'"
-# define BUTTON_NEXT_CYCLE "Next cycle - \'Right arrow\'"
-# define BUTTON_DEFAULT_SPEED "Default speed - \'Left arrow\'"
-# define TITLE_SPEED_UP "Speed UP"
-# define SPEED_UP_BY_1 "By 1"
-# define SPEED_UP_BY_10 "By 10"
-# define SPEED_UP_BY_100 "By 100"
-# define TITLE_SPEED_DOWN "Speed DOWN"
-# define SPEED_DOWN_BY_1 "By 1"
-# define SPEED_DOWN_BY_10 "By 10"
-# define SPEED_DOWN_BY_100 "By 100"
+# define IS_PAUSED		1
+# define IS_RUNNING		-1
 
 /*
 ** Color
@@ -76,6 +67,7 @@ typedef struct		s_visu
 	WINDOW			*win_help;
 	size_t			tty_lines;
 	size_t			tty_cols;
+	int				is_stopped;
 }					t_visu;
 
 t_visu					*init_visu(void);
@@ -84,6 +76,10 @@ void					delete_visu(t_visu **visu);
 
 void					assign_players_to_color(void);
 void                	draw(void);
-void					draw_help(t_visu *visu, ...);
+void					draw_arena(void);
+void					draw_info(void);
+void					draw_game_status(int flag);
+void					handle_buttons(void);
+void					draw_help(t_visu *visu);
 
 #endif

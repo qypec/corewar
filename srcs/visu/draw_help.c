@@ -6,112 +6,80 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 15:55:13 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/27 19:08:33 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/28 11:01:47 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-#define NUM_OF_COLUMN (column)
+# define MARGIN_TOP		3
 
-# define MAXLEN_OF_BUTTON_NAME	30
-# define MARGIN_BETWEEN_LINES 	2
-# define MARGIN_BETWEEN_COLUMNS	(MAXLEN_OF_BUTTON_NAME + 5)
-# define MARGIN_TOP				3
-# define MARGIN_LEFT			5
+# define BUTTON_NAME_EXIT "Exit - "
+# define BUTTON_EXIT "\'Esc\'"
 
-# define _INIT_					0
-# define _GET_MARGIN_TOP_		1
-# define _GET_MARGIN_LEFT_		2
-# define _MOVE_TO_NEXT_LINE_	3
-# define _MOVE_TO_NEXT_COLUMN_	4
-# define _DELETE_				5
+# define BUTTON_NAME_PAUSE "Pause / Unpause - "
+# define BUTTON_PAUSE "\'Space\'"
 
-static int				ft_round_up(float num)
+# define BUTTON_NAME_NEXT_CYCLE "Next cycle - "
+# define BUTTON_NEXT_CYCLE "\'Right arrow\'"
+
+# define BUTTON_NAME_DEFAULT_SPEED "Default speed - "
+# define BUTTON_DEFAULT_SPEED "\'Left arrow\'"
+
+# define BUTTON_NAME_SPEED_UP "Speed UP - "
+# define BUTTON_SPEED_UP "\'Top arrow\'"
+
+# define BUTTON_NAME_SPEED_DOWN "Speed DOWN - "
+# define BUTTON_SPEED_DOWN "\'Down arrow\'"
+
+static void				draw_first_column(t_visu *visu, size_t *margin_left)
 {
-	float				res;
-
-	res = num - (int)num;
-	if (res == 0.0)
-		return ((int)num);
-	else
-		return ((int)(num + 1));
+	mvwprintw(visu->win_help, MARGIN_TOP, *margin_left, BUTTON_NAME_EXIT);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_NAME_PAUSE);
+	wcolor_set(visu->win_help, CYAN, NULL);
+	mvwprintw(visu->win_help, MARGIN_TOP, \
+				*margin_left + ft_strlen(BUTTON_NAME_EXIT), BUTTON_EXIT);
+	*margin_left += ft_strlen(BUTTON_NAME_PAUSE);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_PAUSE);
+	wcolor_set(visu->win_help, 0, NULL);
+	*margin_left += ft_strlen(BUTTON_PAUSE) + 3;
 }
 
-static void			del_lstcontent(void *content, size_t content_size)
+static void				draw_second_column(t_visu *visu, size_t *margin_left)
 {
-	content = NULL;
-	content_size = 0;
+	mvwprintw(visu->win_help, MARGIN_TOP, *margin_left, BUTTON_NAME_NEXT_CYCLE);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_NAME_DEFAULT_SPEED);
+	wcolor_set(visu->win_help, CYAN, NULL);
+	mvwprintw(visu->win_help, MARGIN_TOP, \
+				*margin_left + ft_strlen(BUTTON_NAME_NEXT_CYCLE), BUTTON_NEXT_CYCLE);
+	*margin_left += ft_strlen(BUTTON_NAME_DEFAULT_SPEED);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_DEFAULT_SPEED);
+	wcolor_set(visu->win_help, 0, NULL);
+	*margin_left += ft_strlen(BUTTON_DEFAULT_SPEED) + 3;
 }
 
-static size_t		layout(int query, size_t column)
+static void				draw_third_column(t_visu *visu, size_t *margin_left)
 {
-	static size_t	margin_left = MARGIN_LEFT;
-	static size_t	margin_top = MARGIN_TOP;
-	
-	if (query == _INIT_)
-		margin_left = (WIN_HELP_COLS - (NUM_OF_COLUMN * MARGIN_BETWEEN_COLUMNS)) / 2;
-	else if (query == _MOVE_TO_NEXT_LINE_)
-		margin_top += MARGIN_BETWEEN_LINES;
-	else if (query == _MOVE_TO_NEXT_COLUMN_)
-	{
-		margin_top = MARGIN_TOP;
-		margin_left += MARGIN_BETWEEN_COLUMNS;
-	}
-	else if (query == _GET_MARGIN_TOP_)
-		return (margin_top);
-	else if (query == _GET_MARGIN_LEFT_)
-		return (margin_left);
-	else if (query == _DELETE_)
-	{
-		margin_left = 0;
-		margin_top = 0;
-	}
-	return (0);
+	mvwprintw(visu->win_help, MARGIN_TOP, *margin_left, BUTTON_NAME_SPEED_UP);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_NAME_SPEED_DOWN);
+	wcolor_set(visu->win_help, CYAN, NULL);
+	mvwprintw(visu->win_help, MARGIN_TOP, \
+				*margin_left + ft_strlen(BUTTON_NAME_SPEED_UP), BUTTON_SPEED_UP);
+	*margin_left += ft_strlen(BUTTON_NAME_SPEED_DOWN);
+	mvwprintw(visu->win_help, MARGIN_TOP + 1, *margin_left, BUTTON_SPEED_DOWN);
+	wcolor_set(visu->win_help, 0, NULL);
 }
 
-void				draw_columns(t_visu *visu, t_list *buttons, size_t numof_cols)
+void					draw_help(t_visu *visu)
 {
-	size_t			cols_counter;
-	size_t			button_counter;
+	size_t				margin_left;
 
-	layout(_INIT_, numof_cols);
-	cols_counter = 0;
-	while (cols_counter < numof_cols)
-	{
-		button_counter = 0;
-		while (buttons->content != NULL && button_counter < 4)
-		{
-			mvwprintw(visu->win_help, layout(_GET_MARGIN_TOP_, 0), layout(_GET_MARGIN_LEFT_, 0), buttons->content);
-			wrefresh(visu->win_help);
-			buttons = buttons->next;
-			layout(_MOVE_TO_NEXT_LINE_, 0);
-			button_counter++;
-		}
-		layout(_MOVE_TO_NEXT_COLUMN_, 0);
-		cols_counter++;
-	}
-	layout(_DELETE_, 0);
-}
-
-void                draw_help(t_visu *visu, ...)
-{
-    va_list         factor;
-    t_list          *buttons;
-    const char		*element;
-	size_t			numof_cols;
-    
-    buttons = NULL;
-    va_start(factor, visu);
-	element = (const char *)factor;
-    while (element != NULL)
-    {
-		element = va_arg(factor, const char *);
-        ft_lst_append(&buttons, ft_lstnew(element, ft_strlen(element) * sizeof(const char *)));
-    }
-	if ((numof_cols = ft_round_up((float)ft_lstsize(buttons) / 4)) == 0)
-		return ;
-	draw_columns(visu, buttons, numof_cols);
-	ft_lstdel(&buttons, del_lstcontent);
-    va_end(factor);
+	margin_left = (WIN_HELP_COLS - \
+		((ft_strlen(BUTTON_NAME_PAUSE) + ft_strlen(BUTTON_PAUSE)) + \
+		(ft_strlen(BUTTON_NAME_DEFAULT_SPEED) + ft_strlen(BUTTON_DEFAULT_SPEED)) + \
+		(ft_strlen(BUTTON_NAME_SPEED_DOWN) + ft_strlen(BUTTON_SPEED_DOWN)) + \
+			(3 * 3))) / 2;
+	draw_first_column(visu, &margin_left);
+	draw_second_column(visu, &margin_left);
+	draw_third_column(visu, &margin_left);
 }
