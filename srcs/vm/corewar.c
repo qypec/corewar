@@ -44,6 +44,7 @@ int		init_corewar(void)
 	vm.log_level = 0;
 	vm.print_aff = 0;
 	vm.dump = 0;
+	vm.dump_cycle = -1;
 	vm.viz = 0;
 	vm.s = 0;
 	vm.af = 0;
