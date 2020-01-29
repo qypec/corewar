@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:00:43 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/28 13:30:48 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 12:05:34 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 # define IS_PAUSED		1
 # define IS_RUNNING		-1
+# define NODELAY_MACROS ((vm.visu->is_stopped == 1) ? TRUE : FALSE)
+# define MAX_SPEED_POINT 3
 
 /*
 ** Color
@@ -68,6 +70,7 @@ typedef struct		s_visu
 	size_t			tty_lines;
 	size_t			tty_cols;
 	int				is_stopped;
+	size_t			speed;
 }					t_visu;
 
 t_visu					*init_visu(void);

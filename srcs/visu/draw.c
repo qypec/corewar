@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/28 14:56:19 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 10:21:45 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void                draw(void)
 {   
     draw_arena();
 	draw_info();
-	// handle_buttons();
+	handle_buttons();
 }

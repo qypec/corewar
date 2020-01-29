@@ -6,12 +6,37 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 08:47:52 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/28 13:31:02 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 12:45:13 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
+#define SPEED "Speed : "
+#define SPEED_POINT_ACTIVE ('0' | A_BOLD)
+#define SPEED_POINT ('O')
+
+
+void				draw_speed(void)
+{
+	size_t			i;
+
+	mvwprintw(vm.visu->win_info, 2, 5, SPEED);
+	i = 0;
+	while (i < vm.visu->speed)
+	{
+		wmove(vm.visu->win_info, 2, 5 + ft_strlen(SPEED) + i);
+		waddch(vm.visu->win_info, SPEED_POINT_ACTIVE);
+		i++;
+	}
+	while (i < MAX_SPEED_POINT)
+	{
+		wmove(vm.visu->win_info, 2, 5 + ft_strlen(SPEED) + i);
+		waddch(vm.visu->win_info, SPEED_POINT);
+		i++;
+	}
+	wrefresh(vm.visu->win_info);
+}
 
 void				draw_game_status(int flag)
 {
@@ -61,6 +86,7 @@ void				draw_info(void)
 	size_t			line;
 
     draw_game_status(vm.visu->is_stopped);
+	draw_speed();
 	line = 3;
 	mvwprintw(vm.visu->win_info, line += 2, 5, "Cycles : %zu", vm.cycles_all);
 	mvwprintw(vm.visu->win_info, line += 2, 5, "Cycle to die : %zu", vm.cycles_to_die);
