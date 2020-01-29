@@ -6,32 +6,43 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 15:38:19 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 20:15:53 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void					init_win_arena(t_visu *visu)
+#define MIN_COLS_TO_VISU 70
+#define MIN_LINES_TO_VISU 70
+
+static void				check_size_of_terminal(void)
 {
-	visu->win_arena = newwin(WIN_ARENA_LINES, WIN_ARENA_COLS, 0, 0);
-	box(visu->win_arena, 0, 0);
-	wrefresh(visu->win_arena);
+	size_t				tty_lines;
+	size_t				tty_cols;
+
+	getmaxyx(stdscr, tty_lines, tty_cols);
+	if (tty_lines < MIN_LINES_TO_VISU || tty_cols < MIN_COLS_TO_VISU)
+	{
+		ft_putendl("Enlarge the terminal window, please");
+		exit(0);
+	}
 }
 
-void					init_win_info(t_visu *visu)
+static void				init_button_fields(t_visu *visu)
 {
-	visu->win_info = newwin(WIN_INFO_LINES, WIN_INFO_COLS, 0, WIN_ARENA_COLS);
-	// box(visu->win_info, 0, 0);
-	wrefresh(visu->win_info);
+	visu->is_stopped = 1;
+	visu->speed = MAX_SPEED_POINT;
+	visu->delay = 0.0;
+	visu->is_next_cycle = 0;
 }
 
-void					init_win_help(t_visu *visu)
+static void				configure(t_visu *visu)
 {
-	visu->win_help = newwin(WIN_HELP_LINES, WIN_HELP_COLS, WIN_ARENA_LINES, 0);
-	// box(visu->win_help, 0, 0);
-	draw_help(visu);
-	wrefresh(visu->win_help);
+	cbreak();
+	keypad(stdscr, TRUE);
+	curs_set(0);
+	noecho();
+	refresh();
 }
 
 t_visu					*init_visu(void)
@@ -41,30 +52,17 @@ t_visu					*init_visu(void)
 	if (!(visu = (t_visu *)malloc(sizeof(t_visu))))
 		exit(-1);
 	if (!initscr())
-    {
-        ft_putendl("Error initialising ncurses.");
-        exit(-1);
-    }
-	cbreak();
-	keypad(stdscr, TRUE);
-	curs_set(0);
-	noecho();
-	init_colors();
-	refresh();
-	getmaxyx(stdscr, visu->tty_lines, visu->tty_cols);
-	if (visu->tty_lines < MIN_LINES_TO_VISU || visu->tty_cols < MIN_COLS_TO_VISU)
 	{
-		ft_putendl("Enlarge the terminal window, please");
-		exit(0);
+		ft_putendl("Error initialising ncurses.");
+		exit(-1);
 	}
+	configure(visu);
+	check_size_of_terminal();
 	init_win_arena(visu);
 	init_win_info(visu);
 	init_win_help(visu);
-	visu->is_stopped = 1;
-	visu->speed = MAX_SPEED_POINT;
-	visu->delay = 0.0;
-	visu->is_next_cycle = 0;
-	assign_players_to_color();
+	init_colors();
+	init_button_fields(visu);
 	return (visu);
 }
 

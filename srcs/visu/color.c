@@ -6,15 +6,15 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 12:20:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/25 21:20:01 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 19:44:09 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void                    init_pairs(void)
+static void				init_pairs(void)
 {
-    init_color(COLOR_GRAY, 355, 355, 355);
+	init_color(COLOR_GRAY, 355, 355, 355);
 	init_pair(GRAY, COLOR_GRAY, 0);
 	init_pair(GREEN, COLOR_GREEN, 0);
 	init_pair(YELLOW, COLOR_YELLOW, 0);
@@ -27,7 +27,7 @@ void                    init_pairs(void)
 	init_pair(CYAN_CARRY, COLOR_BLACK, COLOR_CYAN);
 }
 
-void					assign_players_to_color(void)
+static void				assign_players_to_color(void)
 {
 	vm.players[0].color = GRAY;
 	vm.players[1].color = GREEN;
@@ -46,4 +46,5 @@ void					init_colors(void)
 	}
 	start_color();
 	init_pairs();
+	assign_players_to_color();
 }

@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:00:43 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 18:04:40 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 19:40:35 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@
 # define ESC_BUTTON				27
 # define SPACE_BUTTON			' '
 
-
-# define MIN_COLS_TO_VISU 70
-# define MIN_LINES_TO_VISU 70
-
 # define WIN_ARENA_LINES (64 + 4)
 # define WIN_ARENA_COLS (64 * 3 + 9)
 # define WIN_INFO_LINES (WIN_ARENA_LINES)
@@ -71,8 +67,6 @@ typedef struct		s_visu
 	WINDOW			*win_info;
 	WINDOW			*win_help;
 	WINDOW			*win_winner;
-	size_t			tty_lines;
-	size_t			tty_cols;
 	int				is_stopped;
 	size_t			speed;
 	float			delay;
@@ -80,10 +74,12 @@ typedef struct		s_visu
 }					t_visu;
 
 t_visu					*init_visu(void);
+void					init_win_help(t_visu *visu);
+void					init_win_info(t_visu *visu);
+void					init_win_arena(t_visu *visu);
 void					init_colors(void);
 void					delete_visu(t_visu **visu);
 
-void					assign_players_to_color(void);
 void                	draw(void);
 void					draw_player(WINDOW *win, size_t *line, size_t players_counter);
 void					draw_arena(void);

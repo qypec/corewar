@@ -6,7 +6,7 @@
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 19:01:16 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/28 10:28:57 by yquaro           ###   ########.fr        #
+#    Updated: 2020/01/29 19:34:03 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEADER_H = -I ../../incs/
 
 DIR_O = ../../.objs
 SOURCES = init_visu.c draw.c draw_arena.c color.c draw_info.c handle_buttons.c \
-			draw_help.c
+			draw_help.c init_wins.c
 
 OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 

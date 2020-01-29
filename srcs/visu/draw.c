@@ -6,14 +6,14 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 10:53:39 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 18:03:14 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 20:12:17 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-# define NUMOF_LINES_FOR_PLAYER 4
-# define WINNER "WINNER!"
+#define NUMOF_LINES_FOR_PLAYER 4
+#define WINNER "WINNER!"
 
 static void			pause_before_termination(void)
 {
@@ -36,7 +36,8 @@ void				draw_winner(int flag, size_t line)
 	draw_player(vm.visu->win_winner, &start_line, vm.last_alive->id);
 	wattron(vm.visu->win_winner, A_BLINK | A_BOLD);
 	wcolor_set(vm.visu->win_winner, CYAN, NULL);
-	mvwprintw(vm.visu->win_winner, 1, (WIN_INFO_COLS - ft_strlen(WINNER)) / 2, WINNER);
+	mvwprintw(vm.visu->win_winner, 1, \
+		(WIN_INFO_COLS - ft_strlen(WINNER)) / 2, WINNER);
 	box(vm.visu->win_winner, 0, 0);
 	wcolor_set(vm.visu->win_winner, 0, NULL);
 	wattroff(vm.visu->win_winner, A_BLINK | A_BOLD);
@@ -44,9 +45,9 @@ void				draw_winner(int flag, size_t line)
 	pause_before_termination();
 }
 
-void                draw(void)
-{   
-    draw_arena();
+void				draw(void)
+{
+	draw_arena();
 	draw_info();
 	handle_buttons();
 }
