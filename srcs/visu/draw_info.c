@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 08:47:52 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:12:19 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 16:57:04 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,29 @@ void				draw_game_status(int flag)
     wrefresh(vm.visu->win_info);
 }
 
-static void			draw_players(size_t line)
+void				draw_player(WINDOW *win, size_t *line, size_t players_counter)
 {
-	size_t			i;
-
-	i = 1;
-	while (i <= vm.players_sum)
+	mvwprintw(win, ++(*line), 5, "Player %d : ", players_counter);
+	if (vm.players[players_counter].is_alive)
 	{
-		mvwprintw(vm.visu->win_info, ++line, 5, "Player %d : ", i);
-		if (vm.players[i].is_alive)
-		{
-			wcolor_set(vm.visu->win_info, vm.players[i].color, NULL);
-			mvwprintw(vm.visu->win_info, line++, 5 + ft_strlen("Player %d : "), "%s        ", vm.players[i].name);
-		}
-		else
-		{
-			wcolor_set(vm.visu->win_info, GRAY, NULL);
-			mvwprintw(vm.visu->win_info, line++, 5 + ft_strlen("Player %d : "), "%s is DEAD", vm.players[i].name);
-		}
-		wcolor_set(vm.visu->win_info, 0, NULL);
-		mvwprintw(vm.visu->win_info, line++, 7, "slogan: %s ", vm.players[i].comment);
-		mvwprintw(vm.visu->win_info, line++, 7, "last live: %zu ", vm.players[i].lives_last);
-		mvwprintw(vm.visu->win_info, line++, 7, "current live: %zu ", vm.players[i].lives_current);
-		i++;
+		wcolor_set(win, vm.players[players_counter].color, NULL);
+		mvwprintw(win, (*line)++, 5 + ft_strlen("Player %d : "), "%s        ", vm.players[players_counter].name);
 	}
+	else
+	{
+		wcolor_set(win, GRAY, NULL);
+		mvwprintw(win, (*line)++, 5 + ft_strlen("Player %d : "), "%s is DEAD", vm.players[players_counter].name);
+	}
+	wcolor_set(win, 0, NULL);
+	mvwprintw(win, (*line)++, 7, "slogan: %s ", vm.players[players_counter].comment);
+	mvwprintw(win, (*line)++, 7, "last live: %zu ", vm.players[players_counter].lives_last);
+	mvwprintw(win, (*line)++, 7, "current live: %zu ", vm.players[players_counter].lives_current);
 }
 
 void				draw_info(void)
 {
 	size_t			line;
+	size_t			i;
 
     draw_game_status(vm.visu->is_stopped);
 	line = 3;
@@ -67,6 +61,12 @@ void				draw_info(void)
 	mvwprintw(vm.visu->win_info, line += 2, 5, "Lives in round : %zu", vm.lives_in_round);
 	mvwprintw(vm.visu->win_info, line += 2, 5, "Number of cariages : %zu", vm.process_count);
 	line += 3;
-	draw_players(line);
+	draw_winner(_GIVE_NUMOF_LIVE_, line);
+	i = 0;
+	while (++i <= vm.players_sum)
+	{
+		draw_player(vm.visu->win_info, &line, i);
+		line++;
+	}
 	wrefresh(vm.visu->win_info);
 }

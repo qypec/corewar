@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:45:38 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 15:38:19 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void					delete_visu(t_visu **visu)
 	delwin((*visu)->win_arena);
 	delwin((*visu)->win_info);
 	delwin((*visu)->win_help);
+	delwin((*visu)->win_winner);
 	free(*visu);
 	*visu = NULL;
 	endwin();

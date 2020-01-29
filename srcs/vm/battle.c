@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:50:11 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:48:03 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 18:01:23 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,6 @@ int 	battle(void)
 		draw();
 	}
 	if (vm.last_alive)
-	{
-		// ft_printf("* Player %s id:[%d] win! Congratulations!\n",
-				//   vm.last_alive->name, vm.last_alive->id);
-		if (DEBUG)
-		{
-			ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = %d\nproccesses_count = %d\ncycle_to_die = %d\n",
-					vm.checks, vm.cycles_all, vm.cycle_current, vm.process_count, vm.cycles_to_die);
-			int i = 0;
-			while (++i < vm.players_sum + 1)
-				ft_printf("vm.player[%d].lives_all = %d\n", i, vm.players[i].lives_all);
-		}
-	}
-	// else
-		// ft_printf("All players died! :(\n");
+		draw_winner(0, 0);
 	return (0);
 }

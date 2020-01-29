@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 16:00:43 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:45:26 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 18:04:40 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define VISU_H
 
 #include <ncurses.h>
+
+# define _GIVE_NUMOF_LIVE_ 1
 
 # define RUNNING "RUNNING"
 # define STOPPED "STOPPED"
@@ -68,6 +70,7 @@ typedef struct		s_visu
 	WINDOW			*win_arena;
 	WINDOW			*win_info;
 	WINDOW			*win_help;
+	WINDOW			*win_winner;
 	size_t			tty_lines;
 	size_t			tty_cols;
 	int				is_stopped;
@@ -82,10 +85,12 @@ void					delete_visu(t_visu **visu);
 
 void					assign_players_to_color(void);
 void                	draw(void);
+void					draw_player(WINDOW *win, size_t *line, size_t players_counter);
 void					draw_arena(void);
 void					draw_info(void);
 void					draw_game_status(int flag);
 void					handle_buttons(void);
 void					draw_help(t_visu *visu);
+void					draw_winner(int flag, size_t line);
 
 #endif
