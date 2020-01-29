@@ -19,7 +19,7 @@ void	print_args(t_process *proc, int *arg)
 	i = -1;
 	while (++i < op_tab[proc->op - 1].argc)
 	{
-		if (proc->args[i] == T_REG)
+		if (proc->args[i] == T_REG && !(proc->op == 11 && op_tab[proc->op - 1].argc - 1 == i))
 			ft_printf("r%d", arg[i]);
 		else
 			ft_printf("%d", arg[i]);
@@ -37,7 +37,7 @@ void	print_verbose(t_process *proc, int *args)
 				  args[0], args[1], args[0] + args[1], proc->pos + (args[0] + args[1]) % IDX_MOD);
 	if (proc->op == 11)
 		ft_printf("       | -> %s to %d + %d = %d (with pc and mod %d)\n", op_tab[proc->op - 1].op_name,
-			args[0], args[1], args[0] + args[1], proc->pos + (args[0] + args[1]) % IDX_MOD);
+			args[1], args[2], args[1] + args[2], proc->pos + (args[1] + args[2]) % IDX_MOD);
 	if (proc->op == 14)
 		ft_printf("       | -> %s from %d + %d = %d (with pc and mod %d)\n", op_tab[proc->op - 1].op_name,
 				  args[0], args[1], args[0] + args[1], proc->pos + (args[0] + args[1]));

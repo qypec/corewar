@@ -20,9 +20,7 @@ void			sub_op(t_process *proc)
     proc->carry = (res == 0) ? 1 : 0;
 	proc->regs[proc->args_value[2] - 1] = res;
 	if (vm.log_level & OPERA)
-		ft_printf("P %5d | sub r%d r%d r%d\n       | -> %d - %d = %d\n", proc->proc_id,
-				  proc->args_value[0], proc->args_value[1], proc->args_value[2], proc->regs[proc->args_value[0] - 1],
-				  proc->regs[proc->args_value[1] - 1], res);
+		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
 
 void			and_op(t_process *proc)

@@ -35,11 +35,7 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
         vm.arena_id[addr + i] = proc->player_id;
     }
 	if (vm.log_level & OPERA)
-	{
-//		t_printf("P%5d | sti r%d %d %d\n", proc->proc_id,
-//				 proc->args_value[0], (int) get_arg_op(proc, 1), (int) get_arg_op(proc, 2));
 		universal_op_log(proc, (int) proc->args_value[0], (int) get_arg_op(proc, 1), (int) get_arg_op(proc, 2));
-	}
 }
 
 void	fork_op(t_process *proc)
@@ -56,11 +52,8 @@ void	fork_op(t_process *proc)
 	    new->regs[i] = proc->regs[i];
 	new->carry = proc->carry;
 	new->live_incycle = proc->live_incycle;
-	if (DEBUG) {
-        ft_printf(ANSI_B_CYAN"proc id - %d: fork op: arg1 - %d addr - %d\n"ANSI_RESET, proc->proc_id,
-                  proc->args_value[0], addr);
-//        print_arena(addr);
-    }
+	if (vm.log_level & OPERA)
+		ft_printf("P%5d | fork %d (%d)\n", proc->proc_id,  proc->args_value[0], addr);
 //	print_process();
 }
 
