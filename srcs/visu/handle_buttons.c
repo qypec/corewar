@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:29:21 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 12:38:53 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 13:40:49 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 static void		speed_up(void)
 {
-	if (vm.visu->speed != 3)
+	if (vm.visu->delay != 0.0 && vm.visu->speed != MAX_SPEED_POINT)
+	{
 		vm.visu->speed++;
+		vm.visu->delay -= 0.1;
+	}
 }
 
 static void		speed_down(void)
 {
-	if (vm.visu->speed != 1)
+	if (vm.visu->delay != 1.0 && vm.visu->speed != 1)
+	{
 		vm.visu->speed--;
+		vm.visu->delay += 0.1;
+	}
 }
 
 void			handle_buttons(void)
@@ -43,4 +49,5 @@ void			handle_buttons(void)
 		speed_down();
 	else if (key == KEY_UP)
 		speed_up();
+	usleep(vm.visu->delay * MAX_DELAY);
 }

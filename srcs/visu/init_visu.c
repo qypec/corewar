@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 18:00:57 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 11:55:04 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 13:40:18 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ t_visu					*init_visu(void)
 	init_win_info(visu);
 	init_win_help(visu);
 	visu->is_stopped = 1;
-	visu->speed = 3;
+	visu->speed = MAX_SPEED_POINT;
+	visu->delay = 0.0;
 	assign_players_to_color();
 	return (visu);
 }
