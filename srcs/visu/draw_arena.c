@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:26:05 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:18:58 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:34:36 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void				draw_speed_bar(void)
 		waddch(vm.visu->win_arena, SPEED_POINT);
 		i += 2;
 	}
-	wrefresh(vm.visu->win_arena);
 }
 
 static int			one_of_carriages_pos(t_process *carry, size_t pos)
