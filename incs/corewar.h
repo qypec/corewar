@@ -35,6 +35,7 @@ typedef struct			s_process
 	int					pos;
     int					pc;
     int					op;
+
     int					args_value[3];
     unsigned int		args[4];
 	int					carry;
@@ -87,9 +88,17 @@ int						battle(void);
 void					battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
-int 					parse_args_values(t_process *proc);
-int 					check_regs(t_process *proc);
+int 					calc_args_size(int i, t_process *proc);
+int parse_args_values(t_process *proc, int op, int position, int flag);
+int check_regs(t_process *proc, int op);
 int 					move_process(t_process *proc);
+
+/*
+** -------------------------- Logs print -------------------------------
+*/
+
+void					print_proc_movement(int position, int offset);
+void					print_zjmp_movement(t_process *proc);
 
 /*
 ** -------------------------- Operations -------------------------------
@@ -114,7 +123,9 @@ void					aff_op(t_process *proc);
 unsigned int			get_arg_op(t_process *proc, int i);
 int                     position_correction(int position);
 void                    st_log(t_process *proc);
-void universal_op_log(t_process *proc, int arg0, int arg1, int arg2);
+void					universal_op_log(t_process *proc, int arg0, int arg1, int arg2);
+unsigned int			check_args_type(unsigned int arg_code,
+										const int *arg_types, t_process *proc, int j);
 
 int                     get_int32_from_mem(int position);
 int16_t                 get_int16_from_mem(int position);

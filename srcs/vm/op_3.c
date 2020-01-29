@@ -54,7 +54,6 @@ void	fork_op(t_process *proc)
 	new->live_incycle = proc->live_incycle;
 	if (vm.log_level & OPERA)
 		ft_printf("P%5d | fork %d (%d)\n", proc->proc_id,  proc->args_value[0], addr);
-//	print_process();
 }
 
 void	lld_op(t_process *proc)
@@ -67,8 +66,8 @@ void	lld_op(t_process *proc)
         proc->carry = 1;
     else
         proc->carry = 0;
-	if (DEBUG)
-		ft_printf("proc id - %d: lld op: reg - %d\n", proc->proc_id, proc->args_value[1]);
+	if (vm.log_level & OPERA)
+		universal_op_log(proc, (int)get_arg_op(proc, 0), proc->args_value[1], 0);
 }
 
 void	lldi_op(t_process *proc)//TODO надо чекнуть
@@ -76,8 +75,8 @@ void	lldi_op(t_process *proc)//TODO надо чекнуть
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos +
             (int)(get_arg_op(proc,0) + get_arg_op(proc,1)));
     proc->carry = (!proc->regs[proc->args_value[2] - 1]) ? 1 : 0;
-	if (DEBUG)
-		ft_printf("proc id - %d: lldi op: reg - %d\n", proc->proc_id, proc->regs[proc->args_value[2] - 1]);
+	if (vm.log_level & OPERA)
+		universal_op_log(proc, (int)get_arg_op(proc, 0), (int)get_arg_op(proc, 1), proc->args_value[2]);
 }
 
 void	lfork_op(t_process *proc)
@@ -94,8 +93,8 @@ void	lfork_op(t_process *proc)
         new->regs[i] = proc->regs[i];
 	new->carry = proc->carry;
 	new->live_incycle = proc->live_incycle;
-	if (DEBUG)
-		ft_printf(ANSI_B_CYAN"proc id - %d: lfork op: t_dir - %d\n"ANSI_RESET, proc->proc_id, proc->args_value[0]);
+	if (vm.log_level & OPERA)
+		ft_printf("P%5d | lfork %d (%d)\n", proc->proc_id,  proc->args_value[0], addr);
 }
 
 void	aff_op(t_process *proc)

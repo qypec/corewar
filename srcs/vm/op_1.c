@@ -82,7 +82,6 @@ void                st_op(t_process *proc)//TODO Данная операция �
 		while (++i < REG_SIZE)
 		{
 			vm.arena[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = temp[3 - i];
-
 			vm.arena_id[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = proc->player_id;
 		}
 	}
