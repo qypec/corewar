@@ -47,10 +47,14 @@ void	ft_exec_op(t_process *proc)
 	else
 		process_args_code(proc);
 	if (proc->op > 0 && proc->op < 17
-		&& parse_args_values(proc)
-		&& check_regs(proc))
+		&& parse_args_values(proc, proc->op, proc->pos, 1)
+		&& check_regs(proc, proc->op))
 	{
 		op_tab[proc->op - 1].operations(proc);
+		if (vm.log_level & PC && proc->op != 9)
+			print_proc_movement(proc->pos, proc->pc);
+		else if (vm.log_level & PC)
+			print_zjmp_movement(proc);
 		ft_bzero((void*)proc->args, sizeof(int) * 4);
 		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 	}
@@ -60,17 +64,17 @@ void	ft_exec_op(t_process *proc)
 
 int		check_proc(void)
 {
-	t_process *iter;
+	t_process *proc;
 
-	iter = vm.processes;
-	while (iter)
+	proc = vm.processes;
+	while (proc)
 	{
-		if (!iter->delay)
-			get_op_code(iter);
-		iter->delay -= (iter->delay > 0) ? 1 : 0;
-		if (!iter->delay)
-			ft_exec_op(iter);
-		iter = iter->next;
+		if (!proc->delay)
+			get_op_code(proc);
+		proc->delay -= (proc->delay > 0) ? 1 : 0;
+		if (!proc->delay)
+			ft_exec_op(proc);
+		proc = proc->next;
 	}
 	return (1);
 }
@@ -88,7 +92,7 @@ int		battle(void)
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
-			battle_check(); // проверка хода игры
+			battle_check();
 	}
 	ft_printf("* Player %s id:[%d] win! Congratulations!\n",
 	vm.last_alive->name, vm.last_alive->id);
