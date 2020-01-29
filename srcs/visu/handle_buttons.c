@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/28 09:29:21 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/29 14:32:54 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/01/29 14:52:42 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void			handle_buttons(void)
 {
 	int			key;
 
+	vm.visu->is_next_cycle = 0;
 	if ((key = getch()) == SPACE_BUTTON)
 	{
 		nodelay(stdscr, NODELAY_MACROS);
@@ -57,5 +58,7 @@ void			handle_buttons(void)
 		speed_up();
 	else if (key == KEY_LEFT)
 		default_speed();
+	else if (key == KEY_RIGHT && vm.visu->is_stopped != -1)
+		vm.visu->is_next_cycle = 1;
 	usleep(vm.visu->delay * MAX_DELAY);
 }
