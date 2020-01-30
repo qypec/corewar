@@ -19,7 +19,7 @@ void	live_op(t_process *proc)
 
 	++vm.lives_in_round;
 	++proc->live_incycle;
-	number = get_int32_from_mem(proc->pos + 1);
+	number = get_int32_from_mem(proc->pos + 1, 0);
 	player_index = number * -1;
 	if (player_index > 0 && player_index <= MAX_PLAYERS &&
 		vm.players[player_index].id)
@@ -41,7 +41,7 @@ void	zjmp_op(t_process *proc)
 {
 	int	addr;
 
-	addr = get_int16_from_mem(proc->pos + 1) % IDX_MOD;
+	addr = get_int16_from_mem(proc->pos + 1, 0) % IDX_MOD;
 	if (proc->carry == 1)
 	{
 		proc->pc = addr;

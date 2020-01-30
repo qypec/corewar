@@ -79,9 +79,11 @@ int parse_args_values(t_process *proc, int op, int position, int flag)
 		size = calc_args_size(i, proc);
 		index = position_correction(position + offset);
 		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[index] : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int)index) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 0) ? get_int32_from_mem((int)index) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 1) ? get_int16_from_mem((int)index) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int) index, 0) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 0)
+				? get_int32_from_mem((int) index,0) : proc->args_value[i];
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 1)
+				? get_int16_from_mem((int) index,0) : proc->args_value[i];
 		offset += (int)size;
 	}
 	if (flag)

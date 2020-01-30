@@ -127,8 +127,8 @@ void					universal_op_log(t_process *proc, int arg0, int arg1, int arg2);
 unsigned int			check_args_type(unsigned int arg_code,
 										const int *arg_types, t_process *proc, int j);
 
-int                     get_int32_from_mem(int position);
-int16_t                 get_int16_from_mem(int position);
+int get_int32_from_mem(int position, int correction);
+int16_t get_int16_from_mem(int position, int correction);
 
 typedef struct			s_game
 {
