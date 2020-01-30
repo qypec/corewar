@@ -27,14 +27,14 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	return (0);
 }
 
-int 					calc_args_size(int i, t_process *proc)
+int calc_args_size(int i, t_process *proc, int op_code)
 {
 	int	size;
 
 	size = 0;
 	size = (proc->args[i] == T_REG) ? 1 : size;
 	size = (proc->args[i] == T_IND) ? 2 : size;
-	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op - 1].dir_size + 1) : size;
+	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[op_code - 1].dir_size + 1) : size;
 	return (size);
 }
 
@@ -76,7 +76,7 @@ int parse_args_values(t_process *proc, int op, int position, int flag)
 	offset = (op_tab[op - 1].has_args_code) ? 2 : 1;
 	while (++i < op_tab[op - 1].argc)
 	{
-		size = calc_args_size(i, proc);
+		size = calc_args_size(i, proc, op);
 		index = position_correction(position + offset);
 		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[index] : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int) index, 0) : proc->args_value[i];

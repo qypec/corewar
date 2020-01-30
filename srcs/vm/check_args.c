@@ -123,8 +123,8 @@ int		check_args(int ac, char **ag)
 		}
 		if (!check_extension(i, ag))
 			return (0);
-		if (vm.players_sum > MAX_PLAYERS)
-			return (print_usage(-4, 1));
+//		if (vm.players_sum > MAX_PLAYERS)
+//			return (print_usage(-4, 1));
 	}
 	return (1);
 }

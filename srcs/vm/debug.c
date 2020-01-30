@@ -50,10 +50,14 @@ void	print_arena(int pos, int print_op, int op_pos, int size)
 	int     row;
 	int 	bit;
 
+
 	i = 0;
 	row = 0;
 	k = -1;
-	bit = (vm.dump) ? vm.dump * 32 : 32;
+	if (vm.dump)
+		bit = (vm.dump) ? vm.dump * 32 : 32;
+	if (vm.s)
+		bit = (vm.s) ? vm.s * 32 : 32;
 	ft_printf("0x");
 	while (i < MEM_SIZE)
 	{
@@ -77,6 +81,14 @@ void	print_arena(int pos, int print_op, int op_pos, int size)
 		ft_printf("\n");
 		++row;
 	}
-	if (vm.dump_cycle == vm.cycles_all)
+	if (vm.dump_cycle == vm.cycles_all && vm.dump)
 	    exit(0);
+	else if (vm.s)
+	{
+		while (1)
+			if (getchar() == '\n')
+				break;
+//		vm.dump_cycle += vm.dump_step;
+		vm.dump_cycle += 1;
+	}
 }

@@ -65,12 +65,16 @@ void	print_zjmp_movement(t_process *proc)
 
 	op_code = get_code_code(proc);
 	if (!op_tab[op_code - 1].has_args_code)
-		proc->args[0] = op_tab[op_code].args_types[0];
+		proc->args[0] = op_tab[op_code - 1].args_types[0];
 	else
 		op_code = process_args_code_zjmp(proc, op_code);
+	if (op_code == 1)
+		offset = 3;
 	offset = parse_args_values(proc, op_code, position_correction(proc->pos + proc->pc), 0);
 	if (op_code == 0) //TODO: we don't know exactly what must be here
 		offset = 1;
+	if (op_code == 1 && offset == 3)
+		offset = 3;
 	if (op_code > 0 && op_code < 17 && check_regs(proc, op_code))
 		print_proc_movement(position_correction(proc->pos + proc->pc), offset);
 }

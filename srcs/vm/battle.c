@@ -46,10 +46,14 @@ void	ft_exec_op(t_process *proc)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
 		process_args_code(proc);
+	if (vm.cycles_all == 148)
+		vm.cycles_all = 148;
 	if (proc->op > 0 && proc->op < 17
 		&& parse_args_values(proc, proc->op, proc->pos, 1)
 		&& check_regs(proc, proc->op))
 	{
+		if (position_correction((proc->pos + ((int) get_arg_op(proc, 1) + (int) get_arg_op(proc, 2)) % IDX_MOD)) == 73)
+			proc->pos = proc->pos;
 		op_tab[proc->op - 1].operations(proc);
 		if (vm.log_level & PC && proc->op == 9 && proc->carry == 1)
 			print_zjmp_movement(proc);
@@ -87,13 +91,13 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		if (vm.cycles_all == vm.dump_cycle)
-			print_arena(0, 0, 0, 0);
 		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check();
+		if (vm.cycles_all == vm.dump_cycle)
+			print_arena(0, 0, 0, 0);
 	}
 	ft_printf("* Player %s id:[%d] win! Congratulations!\n",
 	vm.last_alive->name, vm.last_alive->id);
