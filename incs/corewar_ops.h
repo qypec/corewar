@@ -143,7 +143,7 @@ static t_op					op_tab[17] =
 
 				{"sti",
 						3,
-						{T_REG, 0, 0, T_REG, T_DIR, T_IND,T_DIR, T_REG},
+						{T_REG, 0, 0, T_REG, T_DIR, T_IND,T_DIR, T_REG, 0},
 						11,
 						25,
 						"store",

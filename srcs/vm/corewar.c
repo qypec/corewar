@@ -36,7 +36,7 @@ int		init_corewar(void)
 	vm.process_count = 0;
 	vm.processes = NULL;
 	vm.last_alive = NULL;
-	vm.cycles_all = -1;
+	vm.cycles_all = 0;
 	vm.cycle_current = -1;
 	vm.cycles_to_die = CYCLE_TO_DIE;
 	vm.cycles_to_die_last = CYCLE_TO_DIE;
@@ -45,6 +45,7 @@ int		init_corewar(void)
 	vm.print_aff = 0;
 	vm.dump = 0;
 	vm.dump_cycle = -1;
+	vm.dump_step = -1;
 	vm.viz = 0;
 	vm.s = 0;
 	vm.af = 0;

@@ -88,7 +88,7 @@ int						battle(void);
 void					battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
-int 					calc_args_size(int i, t_process *proc);
+int calc_args_size(int i, t_process *proc, int op_code);
 int parse_args_values(t_process *proc, int op, int position, int flag);
 int check_regs(t_process *proc, int op);
 int 					move_process(t_process *proc);
@@ -147,6 +147,7 @@ typedef struct			s_game
 	int					cycles_to_die_last;
 	int					cycles_to_die_not_updated;
 	int                 dump_cycle;
+	int                 dump_step;
 	int 				checks;
 	unsigned char       log_level;
 	unsigned char       print_aff:1;

@@ -38,7 +38,7 @@ int	check_d(char **av, int value, int i)
 
 int	check_s(char **av, int value, int i)
 {
-	vm.s |= (ft_strequ(av[i], "show")) ? 2u : 1u;
+	vm.s |= (ft_strequ(av[i], "-show")) ? 1u : 2u;
 	if (av[i + 1] <= 0)
 	{
 		ft_printf(ANSI_B_RED"Negative or zero flag "
@@ -50,7 +50,10 @@ int	check_s(char **av, int value, int i)
 		return (0);
 	}
 	else
+	{
 		vm.dump_cycle = value;
+		vm.dump_step = vm.dump_cycle;
+	}
 	return (1);
 }
 

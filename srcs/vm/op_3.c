@@ -15,7 +15,7 @@
 void	ldi_op(t_process *proc)
 {
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(
-			position_correction(proc->pos + (int) (get_arg_op(proc, 0) +
+			position_correction(proc->pos + (int)(get_arg_op(proc, 0) +
 												   get_arg_op(proc, 1))) % IDX_MOD, 0);
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, (int)(get_arg_op(proc,0)), (int)(get_arg_op(proc,1)), proc->args_value[2]);
@@ -52,6 +52,7 @@ void	fork_op(t_process *proc)
 	while (++i < REG_NUMBER)
 	    new->regs[i] = proc->regs[i];
 	new->carry = proc->carry;
+
 	new->live_incycle = proc->live_incycle;
 	if (vm.log_level & OPERA)
 		ft_printf("P%5d | fork %d (%d)\n", proc->proc_id,  proc->args_value[0], addr);
@@ -62,7 +63,7 @@ void	lld_op(t_process *proc)
     if (proc->args[0] == T_DIR)
         proc->regs[proc->args_value[1] - 1] = proc->args_value[0];
     else
-        proc->regs[proc->args_value[1] - 1] = get_int32_from_mem(proc->pos + proc->args_value[0], 0);
+        proc->regs[proc->args_value[1] - 1] = get_int32_from_mem(proc->pos + proc->args_value[0], 1);
     if (!proc->regs[proc->args_value[1] - 1])
         proc->carry = 1;
     else
@@ -74,7 +75,7 @@ void	lld_op(t_process *proc)
 void	lldi_op(t_process *proc)//TODO надо чекнуть
 {
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos +
-															 (int) (get_arg_op(proc, 0) + get_arg_op(proc, 1)), 0);
+															 (int) (get_arg_op(proc, 0) + get_arg_op(proc, 1)), 1);
     proc->carry = (!proc->regs[proc->args_value[2] - 1]) ? 1 : 0;
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, (int)get_arg_op(proc, 0), (int)get_arg_op(proc, 1), proc->args_value[2]);
