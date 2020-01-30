@@ -51,10 +51,11 @@ void	ft_exec_op(t_process *proc)
 		&& check_regs(proc, proc->op))
 	{
 		op_tab[proc->op - 1].operations(proc);
-		if (vm.log_level & PC && proc->op != 9)
-			print_proc_movement(proc->pos, proc->pc);
-		else if (vm.log_level & PC)
+		if (vm.log_level & PC && proc->op == 9 && proc->carry == 1)
 			print_zjmp_movement(proc);
+		else if (vm.log_level & PC)
+			print_proc_movement(proc->pos, proc->pc);
+
 		ft_bzero((void*)proc->args, sizeof(int) * 4);
 		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 	}
