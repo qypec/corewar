@@ -36,8 +36,8 @@ int		init_corewar(void)
 	vm.process_count = 0;
 	vm.processes = NULL;
 	vm.last_alive = NULL;
-	vm.cycles_all = 1; //was 0
-	vm.cycle_current = 1; //was -1
+	vm.cycles_all = 0; //was 0
+	vm.cycle_current = 0; //was -1
 	vm.cycles_to_die = CYCLE_TO_DIE;
 	vm.cycles_to_die_last = CYCLE_TO_DIE;
 	vm.players_sum = 0;

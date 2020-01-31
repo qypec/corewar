@@ -91,9 +91,9 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
+		check_proc();
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check();
 		if (vm.cycles_all == vm.dump_cycle)
