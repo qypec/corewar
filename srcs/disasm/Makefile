@@ -5,25 +5,24 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/23 18:40:59 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/31 19:30:16 by yquaro           ###   ########.fr        #
+#    Created: 2020/01/31 15:30:59 by yquaro            #+#    #+#              #
+#    Updated: 2020/01/31 20:32:06 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include ../incs/corewar.mk
+include ../../incs/corewar.mk
 
-CFLAGS = -g -Wall -Wextra -Werror
-COMPILING = $(CC) $(CFLAGS) $(HEADER_H)
+HEADER_H = -I ../../incs/
 
-all:
-	@mv ../libft/$(LIBNAME) $(LIBNAME)
-	make -C disasm/ all
-	$(COMPILING) *.o $(LIBNAME) -o $(EXECUTABLE)
-	@mv $(EXECUTABLE) ../$(EXECUTABLE)
-	@echo \*\*\* COREWAR COMPILED!
+DIR_O = ../../.objs/disasm
+SOURCES = disassemble.c error.c init.c parse_bytecode.c
 
-clean:
-	@rm -f *.o
+OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 
-fclean: clean
-	@rm -f $(LIBNAME)
+all: print $(OBJECTS)
+
+print:
+	@echo \*\*\* Compiling disasm files
+
+$(DIR_O)/%.o: %.c
+	$(COMPILING) $< -o $@

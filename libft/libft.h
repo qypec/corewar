@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:24 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/18 18:05:31 by vgerold-         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:30:19 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void				ft_putsymb_n(char c, int len);
 /*
 ** -------------------------- String functions -----------------------------
 */
-
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
