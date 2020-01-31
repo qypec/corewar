@@ -89,7 +89,8 @@ int		battle(void)
 	intro();
 	while (vm.processes)
 	{
-
+		++vm.cycle_current;
+		++vm.cycles_all;
 		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
@@ -97,8 +98,6 @@ int		battle(void)
 			battle_check();
 		if (vm.cycles_all == vm.dump_cycle)
 			print_arena(0, 0, 0, 0);
-        ++vm.cycle_current;
-        ++vm.cycles_all;
 	}
 	ft_printf("Contestant %d, \"%s\", has won !\n", vm.last_alive->id, vm.last_alive->name);
     if (DEBUG)
