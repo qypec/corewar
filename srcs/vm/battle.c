@@ -46,8 +46,8 @@ void	ft_exec_op(t_process *proc)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
 		process_args_code(proc);
-	if (vm.cycles_all == 148)
-		vm.cycles_all = 148;
+	if (proc->op == 8)
+		proc->op = 8;
 	if (proc->op > 0 && proc->op < 17
 		&& parse_args_values(proc, proc->op, proc->pos, 1)
 		&& check_regs(proc, proc->op))
@@ -89,8 +89,7 @@ int		battle(void)
 	intro();
 	while (vm.processes)
 	{
-		++vm.cycle_current;
-		++vm.cycles_all;
+
 		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
@@ -98,9 +97,10 @@ int		battle(void)
 			battle_check();
 		if (vm.cycles_all == vm.dump_cycle)
 			print_arena(0, 0, 0, 0);
+        ++vm.cycle_current;
+        ++vm.cycles_all;
 	}
-	ft_printf("* Player %s id:[%d] win! Congratulations!\n",
-	vm.last_alive->name, vm.last_alive->id);
+	ft_printf("Contestant %d, \"%s\", has won !\n", vm.last_alive->id, vm.last_alive->name);
     if (DEBUG)
     {
         ft_printf("vm.checks = %d\nvm.cycles_all = %d\nvm.cycle_current = "
