@@ -116,9 +116,9 @@ int		check_args(int ac, char **ag)
 		{
 			if (!check_flags(i, ac, ag))
 				return (0);
-			else if ((i + 2) < ac && (ag[i][1] != 'a' && ag[i][1] != 'v'))
+			else if ((i + 2) <=ac && (ag[i][1] != 'a' && ag[i][1] != 'v'))
 				i += 1;
-			else
+			else if ((i + 2) > ac)
 				return (print_usage(-2, 1));
 		}
 		if (!check_extension(i, ag))

@@ -102,5 +102,5 @@ void	lfork_op(t_process *proc)
 void	aff_op(t_process *proc)
 {
     if (vm.af)
-        ft_putchar((char)proc->regs[proc->args_value[0] - 1]);
+    	ft_printf("Aff: %c\n", (char)proc->regs[proc->args_value[0] - 1]);
 }
