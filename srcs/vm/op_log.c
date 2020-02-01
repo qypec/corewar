@@ -106,7 +106,7 @@ void	print_verbose(t_process *proc, int *args)
 		ft_printf("       | -> %s to %d + %d = %d (with pc and mod %d)\n", op_tab[proc->op - 1].op_name,
 			args[1], args[2], args[1] + args[2], proc->pos + (args[1] + args[2]) % IDX_MOD);
 	if (proc->op == 14)
-		ft_printf("       | -> %s from %d + %d = %d (with pc and mod %d)\n", op_tab[proc->op - 1].op_name,
+		ft_printf("       | -> %s from %d + %d = %d (with pc %d)\n", op_tab[proc->op - 1].op_name,
 				  args[0], args[1], args[0] + args[1], proc->pos + (args[0] + args[1]));
 }
 
