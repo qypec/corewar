@@ -46,8 +46,8 @@ void	ft_exec_op(t_process *proc)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
 		process_args_code(proc);
-	if (proc->op == 8)
-		proc->op = 8;
+	if (proc->op == 12)
+		proc->op = 12;
 	if (proc->op > 0 && proc->op < 17
 		&& parse_args_values(proc, proc->op, proc->pos, 1)
 		&& check_regs(proc, proc->op))
@@ -59,7 +59,6 @@ void	ft_exec_op(t_process *proc)
 			print_zjmp_movement(proc);
 		else if (vm.log_level & PC)
 			print_proc_movement(proc->pos, proc->pc);
-
 		ft_bzero((void*)proc->args, sizeof(int) * 4);
 		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 	}
@@ -91,9 +90,9 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		check_proc();
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
+		check_proc();
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check();
 		if (vm.cycles_all == vm.dump_cycle)
