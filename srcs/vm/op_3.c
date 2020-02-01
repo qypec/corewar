@@ -33,17 +33,25 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
 	int addr;
 	int i;
 	unsigned char *temp;
+	int addr1;
+	int addr2;
 
 	i = -1;
+	addr1 = (int)get_arg_op(proc,1);
+	addr2 = (int)get_arg_op(proc,2);
 	temp = (unsigned char*)&proc->regs[proc->args_value[0] - 1];
-	addr = position_correction(proc->pos + ((int)get_arg_op(proc,1) + (int)get_arg_op(proc,2)) % IDX_MOD);
+	addr = position_correction(proc->pos + (addr1 + addr2) % IDX_MOD);
 	while (++i < REG_SIZE)
 	{
         vm.arena[addr + i] = temp[3 - i];
         vm.arena_id[addr + i] = proc->player_id;
     }
 	if (vm.log_level & OPERA)
-		universal_op_log(proc, (int) proc->args_value[0], (int) get_arg_op(proc, 1), (int) get_arg_op(proc, 2));
+	{
+		proc->args[1] = T_DIR;
+		proc->args[2] = T_DIR;
+		universal_op_log(proc, (int) proc->args_value[0], addr1, addr2);
+	}
 }
 
 void	fork_op(t_process *proc)
@@ -59,7 +67,6 @@ void	fork_op(t_process *proc)
 	while (++i < REG_NUMBER)
 	    new->regs[i] = proc->regs[i];
 	new->carry = proc->carry;
-
 	new->live_incycle = proc->live_incycle;
 	if (vm.log_level & OPERA)
 		ft_printf("P%5d | fork %d (%d)\n", proc->proc_id,  proc->args_value[0], addr);

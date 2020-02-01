@@ -46,8 +46,6 @@ void	ft_exec_op(t_process *proc)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
 		process_args_code(proc);
-	if (proc->op == 12)
-		proc->op = 12;
 	if (proc->op > 0 && proc->op < 17
 		&& parse_args_values(proc, proc->op, proc->pos, 1)
 		&& check_regs(proc, proc->op))
@@ -55,10 +53,9 @@ void	ft_exec_op(t_process *proc)
 		if (position_correction((proc->pos + ((int) get_arg_op(proc, 1) + (int) get_arg_op(proc, 2)) % IDX_MOD)) == 73)
 			proc->pos = proc->pos;
 		op_tab[proc->op - 1].operations(proc);
-		if (vm.log_level & PC && proc->op == 9 && proc->carry == 1)
-			print_zjmp_movement(proc);
-		else if (vm.log_level & PC)
-			print_proc_movement(proc->pos, proc->pc);
+		if (vm.log_level & PC )
+			if (proc->op != 9 || (proc->op == 9 && !proc->carry))
+				print_proc_movement(proc->pos, proc->pc);
 		ft_bzero((void*)proc->args, sizeof(int) * 4);
 		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 	}

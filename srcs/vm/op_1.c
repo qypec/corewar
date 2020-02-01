@@ -29,12 +29,12 @@ void	live_op(t_process *proc)
 		++vm.players[player_index].lives_last;
 		++vm.players[player_index].lives_current;
 		vm.last_alive = &vm.players[player_index];
+		if (vm.log_level & LIVE)
+			ft_printf("Player %d (%s) is said to be alive\n",
+					  proc->player_id, vm.players[proc->player_id].name);
 	}
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, number, 0, 0);
-	if (vm.log_level & LIVE)
-		ft_printf("Player %d (%s) is said to be alive\n",
-				  proc->player_id, vm.players[proc->player_id].name);
 }
 
 void	zjmp_op(t_process *proc)
