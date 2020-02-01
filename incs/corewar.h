@@ -8,6 +8,7 @@
 #include		"../libft/libft.h"
 
 # define DEBUG 0
+# define DEBUG_DEL_PROC 0
 # define LOG_ON 128u
 # define LIVE 1u
 # define CYCLE 2u
@@ -133,6 +134,7 @@ int16_t get_int16_from_mem(int position, int correction);
 typedef struct			s_game
 {
 	int 				process_count;
+	int 				proc_id_count;
 	t_process 			*processes;
 	t_player			*last_alive;
 	t_player			players_temp[MAX_PLAYERS];

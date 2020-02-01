@@ -37,7 +37,8 @@ t_process	*create_process(int n_player, int position)
 	}
 	else
 	{
-		new->proc_id = vm.processes->proc_id + 1;
+		new->proc_id = vm.proc_id_count + 1;
+//		new->proc_id = vm.processes->proc_id + 1;
 		new->next = vm.processes;
 		vm.processes = new;
 	}
@@ -46,6 +47,7 @@ t_process	*create_process(int n_player, int position)
 	init_var(&new);
 	new->regs[0] = vm.players[n_player].id * -1;
 	++vm.process_count;
+	++vm.proc_id_count;
 	return (new);
 }
 
@@ -57,8 +59,9 @@ void		del_process(t_process *proc)
 	next = NULL;
 	if (proc == vm.processes)
 	{
+		next = vm.processes->next;
 		ft_memdel((void *)&proc);
-		vm.processes = NULL;
+		vm.processes = next;
 		return ;
 	}
 	iter = vm.processes;

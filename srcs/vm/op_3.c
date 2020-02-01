@@ -62,6 +62,8 @@ void	fork_op(t_process *proc)
 
 	i = -1;
 	addr = position_correction(proc->pos + proc->args_value[0] % IDX_MOD);
+	if (proc->proc_id == 26 && addr == 24)
+		addr = addr;
 	if (!(new = create_process(proc->player_id, addr)))
 		return ;
 	while (++i < REG_NUMBER)
