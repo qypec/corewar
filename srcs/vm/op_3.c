@@ -58,13 +58,13 @@ void	fork_op(t_process *proc)
 {
 	t_process	*new;
 	int 		addr;
+	int 		addr_correction;
 	int         i;
 
 	i = -1;
-	addr = position_correction(proc->pos + proc->args_value[0] % IDX_MOD);
-	if (proc->proc_id == 26 && addr == 24)
-		addr = addr;
-	if (!(new = create_process(proc->player_id, addr)))
+	addr = proc->pos + proc->args_value[0] % IDX_MOD;
+	addr_correction = position_correction(addr);
+	if (!(new = create_process(proc->player_id, addr_correction)))
 		return ;
 	while (++i < REG_NUMBER)
 	    new->regs[i] = proc->regs[i];
