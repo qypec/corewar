@@ -99,7 +99,7 @@ int		check_extension(int i, char **file)
 	if (file[i][j] != '.')
 		return (print_usage(-1, 1));
 	if (file[i][j] == '.' && ft_strequ(file[i] + j, ".cor"))
-		++vm.players_sum;
+		++vm.players_sum; //TODO: correct with flags
 	else
 		return (print_usage(-1, 1));
 	return (1);

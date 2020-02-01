@@ -34,6 +34,7 @@ int		init_players_struct(t_player *players)
 int		init_corewar(void)
 {
 	vm.process_count = 0;
+	vm.proc_id_count = 0;
 	vm.processes = NULL;
 	vm.last_alive = NULL;
 	vm.cycles_all = 0; //was 0
