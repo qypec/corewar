@@ -14,11 +14,18 @@
 
 void	ldi_op(t_process *proc)
 {
-    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(
-			position_correction(proc->pos + (int)(get_arg_op(proc, 0) +
-												   get_arg_op(proc, 1))) % IDX_MOD, 0);
+	int addr1;
+	int addr2;
+
+	addr1 = (int)get_arg_op(proc, 0);
+	addr2 = (int)get_arg_op(proc, 1);
+    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + (addr1 + addr2) % IDX_MOD, 0);
 	if (vm.log_level & OPERA)
-		universal_op_log(proc, (int)(get_arg_op(proc,0)), (int)(get_arg_op(proc,1)), proc->args_value[2]);
+	{
+		proc->args[0] = T_DIR;
+		proc->args[1] = T_DIR;
+		universal_op_log(proc, addr1, addr2, proc->args_value[2]);
+	}
 }
 
 void	sti_op(t_process *proc) //TODO Данная операция может записывать id в arena_id
@@ -74,11 +81,19 @@ void	lld_op(t_process *proc)
 
 void	lldi_op(t_process *proc)//TODO надо чекнуть
 {
-    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos +
-															 (int) (get_arg_op(proc, 0) + get_arg_op(proc, 1)), 1);
+	int addr1;
+	int addr2;
+
+	addr1 = (int)get_arg_op(proc, 0);
+	addr2 = (int)get_arg_op(proc, 1);
+    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + addr1 + addr2, 1);
     proc->carry = (!proc->regs[proc->args_value[2] - 1]) ? 1 : 0;
 	if (vm.log_level & OPERA)
-		universal_op_log(proc, (int)get_arg_op(proc, 0), (int)get_arg_op(proc, 1), proc->args_value[2]);
+	{
+		proc->args[0] = T_DIR;
+		proc->args[1] = T_DIR;
+		universal_op_log(proc, addr1, addr2, proc->args_value[2]);
+	}
 }
 
 void	lfork_op(t_process *proc)
