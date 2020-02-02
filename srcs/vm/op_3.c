@@ -19,7 +19,7 @@ void	ldi_op(t_process *proc)
 
 	addr1 = (int)get_arg_op(proc, 0);
 	addr2 = (int)get_arg_op(proc, 1);
-    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + (addr1 + addr2) % IDX_MOD, 0);
+    proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + (addr1 + addr2) % IDX_MOD, 1);
 	if (vm.log_level & OPERA)
 	{
 		proc->args[0] = T_DIR;
