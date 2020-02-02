@@ -42,6 +42,8 @@ void	intro(void)
 
 void	ft_exec_op(t_process *proc)
 {
+	if (proc->op == 6)
+		proc->op = 6;
 	if (!op_tab[proc->op - 1].has_args_code)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
@@ -49,7 +51,10 @@ void	ft_exec_op(t_process *proc)
 	if (proc->op > 0 && proc->op < 17 && parse_args_values(proc, proc->op, proc->pos, 1))
 	{
 		if (check_regs(proc, proc->op))
+		{
 			op_tab[proc->op - 1].operations(proc);
+			++g_op_count;//TODO del before validate project
+		}
 		if (vm.log_level & PC )
 			if (proc->op != 9 || (proc->op == 9 && !proc->carry))
 				print_proc_movement(proc->pos, proc->pc);
@@ -58,6 +63,7 @@ void	ft_exec_op(t_process *proc)
 	}
 	proc->pos = position_correction(proc->pos + proc->pc);
 	proc->pc = 0;
+	proc->op_error = 0;
 }
 
 int		check_proc(void)

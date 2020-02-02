@@ -18,7 +18,7 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	int 	i;
 
 	i = -1;
-	if (proc->op == 2)
+	if (proc->op == 3)
 		proc->op = proc->op;
 	while (++i < 3)
 		if (j < op_tab[proc->op - 1].argc && arg_code == arg_types[i] && arg_code != 0)

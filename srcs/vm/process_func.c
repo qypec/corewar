@@ -41,6 +41,7 @@ t_process	*create_process(int n_player, int position)
 		new->next = vm.processes;
 		vm.processes = new;
 	}
+	new->op_error = 0;
 	new->player_id = vm.players[n_player].id;
 	new->pos = position;
 	init_var(&new);
