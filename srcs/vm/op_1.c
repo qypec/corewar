@@ -43,11 +43,7 @@ void	zjmp_op(t_process *proc)
 
 	addr = get_int16_from_mem(proc->pos + 1, 1) % IDX_MOD;
 	if (proc->carry == 1)
-	{
 		proc->pc = addr;
-		if (!proc->pc)
-			proc->pos = 0;
-	}
 	if (vm.log_level & OPERA)
 	{
 		ft_printf("P %4d | zjmp %d %s\n",
@@ -91,14 +87,8 @@ void                st_op(t_process *proc)//TODO Данная операция �
 
 void	add_op(t_process *proc)
 {
-	int res;
-
-	res = proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1];
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
-	proc->regs[proc->args_value[2] - 1] = res;
+	proc->regs[proc->args_value[2] - 1] = proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1];
+	proc->carry = proc->regs[proc->args_value[2] - 1] == 0 ? 1 : 0;
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
