@@ -38,7 +38,6 @@ t_process	*create_process(int n_player, int position)
 	else
 	{
 		new->proc_id = vm.proc_id_count + 1;
-//		new->proc_id = vm.processes->proc_id + 1;
 		new->next = vm.processes;
 		vm.processes = new;
 	}
