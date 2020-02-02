@@ -56,10 +56,7 @@ void	zjmp_op(t_process *proc)
 void	ld_op(t_process *proc)
 {
 	proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
-	if (!proc->regs[proc->args_value[1] - 1])
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+	proc->carry = proc->regs[proc->args_value[1] - 1] == 0 ? 1 : 0;
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, proc->regs[proc->args_value[1] - 1], proc->args_value[1], proc->args_value[2]);
 }
@@ -82,7 +79,10 @@ void                st_op(t_process *proc)//TODO Данная операция �
 		}
 	}
 	if (vm.log_level & OPERA)
+	{
+		proc->args[1] = T_DIR;
 		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
+	}
 }
 
 void	add_op(t_process *proc)
