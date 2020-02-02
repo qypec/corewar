@@ -16,6 +16,8 @@
 # define DEATH 8u
 # define PC 16u
 
+int g_op_count;//TODO del before validate project;
+
 typedef struct			s_player
 {
 	int					id;
@@ -36,7 +38,7 @@ typedef struct			s_process
 	int					pos;
     int					pc;
     int					op;
-
+	int 				op_error;
     int					args_value[3];
     unsigned int		args[4];
 	int					carry;

@@ -17,12 +17,11 @@ void	live_op(t_process *proc)
 	int				number;
 	int				player_index;
 
-	++vm.lives_in_round;
-	++proc->live_incycle;
 	number = get_int32_from_mem(proc->pos + 1, 1);
 	player_index = number * -1;
-	if (player_index > 0 && player_index <= MAX_PLAYERS &&
-		vm.players[player_index].id)
+	++vm.lives_in_round;
+	++proc->live_incycle;
+	if (number > 0 && number <= vm.players_sum)
 	{
 		++vm.players[player_index].is_alive;
 		++vm.players[player_index].lives_all;

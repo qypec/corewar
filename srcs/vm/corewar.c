@@ -59,6 +59,7 @@ int		init_corewar(void)
 
 int		main(int argc, char **argv)
 {
+	g_op_count = 0;
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	if (!init_corewar() || !check_args(argc, argv))
