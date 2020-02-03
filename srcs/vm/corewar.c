@@ -34,6 +34,7 @@ int		init_players_struct(t_player *players)
 int		init_corewar(void)
 {
 	vm.process_count = 0;
+	vm.proc_id_count = 0;
 	vm.processes = NULL;
 	vm.last_alive = NULL;
 	vm.cycles_all = 0; //was 0
@@ -58,6 +59,7 @@ int		init_corewar(void)
 
 int		main(int argc, char **argv)
 {
+	g_op_count = 0;
 	if (argc <= 1)
 		return (print_usage(0, 1));
 	if (!init_corewar() || !check_args(argc, argv))

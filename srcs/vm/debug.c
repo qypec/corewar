@@ -56,8 +56,10 @@ void	print_arena(int pos, int print_op, int op_pos, int size)
 	k = -1;
 	if (vm.dump)
 		bit = (vm.dump) ? vm.dump * 32 : 32;
-	if (vm.s)
+	else if (vm.s)
 		bit = (vm.s) ? vm.s * 32 : 32;
+	else
+		bit = 32;
 	ft_printf("0x");
 	while (i < MEM_SIZE)
 	{

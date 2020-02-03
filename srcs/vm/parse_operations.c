@@ -18,12 +18,16 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	int 	i;
 
 	i = -1;
+	if (proc->op == 3)
+		proc->op = proc->op;
 	while (++i < 3)
-		if (arg_code == arg_types[i])
+		if (j < op_tab[proc->op - 1].argc && arg_code == arg_types[i] && arg_code != 0)
 		{
 			proc->args[j] = arg_code;
 			return (1);
 		}
+		else if (arg_code == 0 && j >= op_tab[proc->op - 1].argc)
+			return (1);
 	return (0);
 }
 
@@ -55,15 +59,6 @@ void 		process_args_code(t_process *proc)
 		}
 	}
 }
-
-/*
- * 			{T_REG, T_REG, T_REG}
- */
-
-/*
- * 	live	|	T_REG 	|	T_DIR	|	|	|	T_IND	|	|
- * 			|	1b		|	4b		|	|	|	2b		|	|
- */
 
 int parse_args_values(t_process *proc, int op, int position, int flag)
 {

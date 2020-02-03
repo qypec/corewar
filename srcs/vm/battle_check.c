@@ -58,15 +58,33 @@ void	check_procs(void)
 {
 	t_process *temp;
 	t_process *next;
+	int odin;
+	int flag;
 
 	temp = vm.processes;
+	flag = 0;
+	odin = 0;
 	while (temp)
 	{
+		flag = 0;
 		if (!temp->live_incycle) // Если не было выполнено операций live за раунд - удалить процесс
 		{
+//				if (DEBUG_DEL_PROC)
+//				{
+//					ft_printf(ANSI_B_GREEN"ID_BEFORE_DEL = %d\n"ANSI_RESET, temp->proc_id);
+//					if (temp->next)
+//					{
+//						flag = 1;
+//						ft_printf(ANSI_B_CYAN"ID_BEFORE_DEL_NEXT = %d\n"ANSI_RESET, temp->next->proc_id);
+//						odin = temp->next->proc_id;
+//					}
+//				}
 				next = temp->next;
 				del_process(temp);
 				temp = next;
+//				ft_printf(ANSI_B_BLUE"ID_AFTER_DEL = %d\n"ANSI_RESET, temp->proc_id);
+//				if (DEBUG_DEL_PROC && flag == 1 && odin != temp->proc_id)
+//					ft_printf(ANSI_RED"ERROR\n");
 		}
 		else
 		{
