@@ -40,9 +40,9 @@ void	zjmp_op(t_process *proc)
 {
 	int	addr;
 
-	addr = get_int16_from_mem(proc->pos + 1, 1) % IDX_MOD;
+	addr = get_int16_from_mem(proc->pos + 1, 1);
 	if (proc->carry == 1)
-		proc->pc = addr;
+		proc->pc = addr % IDX_MOD;
 	if (vm.log_level & OPERA)
 	{
 		ft_printf("P %4d | zjmp %d %s\n",
