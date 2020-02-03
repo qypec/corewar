@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 16:11:37 by yquaro            #+#    #+#             */
-/*   Updated: 2020/01/31 20:31:20 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/03 18:37:22 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ static uint8_t			*parse_code(int fd, int32_t size)
 
 	if (!(buffer = (uint8_t *)ft_memalloc(size)))
 		error(ERR_ALLOCATE);
-	ret = read(fd, buffer, size);
-	if (ret == -1)
+	if ((ret = read(fd, buffer, size)) == -1)
 		error(ERR_READ_FILE);
 	if (ret < (int)size || read(fd, &last_byte, 1) != 0)
 		error(ERR_INVALID_FILE);
