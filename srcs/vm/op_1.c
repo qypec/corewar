@@ -17,24 +17,23 @@ void	live_op(t_process *proc)
 	int				number;
 	int				player_index;
 
-	++vm.lives_in_round;
-	++proc->live_incycle;
 	number = get_int32_from_mem(proc->pos + 1, 1);
 	player_index = number * -1;
-	if (player_index > 0 && player_index <= MAX_PLAYERS &&
-		vm.players[player_index].id)
+	++vm.lives_in_round;
+	++proc->live_incycle;
+	if (number > 0 && number <= vm.players_sum)
 	{
 		++vm.players[player_index].is_alive;
 		++vm.players[player_index].lives_all;
 		++vm.players[player_index].lives_last;
 		++vm.players[player_index].lives_current;
 		vm.last_alive = &vm.players[player_index];
+		if (vm.log_level & LIVE)
+			ft_printf("Player %d (%s) is said to be alive\n",
+					  proc->player_id, vm.players[proc->player_id].name);
 	}
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, number, 0, 0);
-	if (vm.log_level & LIVE)
-		ft_printf("Player %d (%s) is said to be alive\n",
-				  proc->player_id, vm.players[proc->player_id].name);
 }
 
 void	zjmp_op(t_process *proc)
@@ -43,11 +42,7 @@ void	zjmp_op(t_process *proc)
 
 	addr = get_int16_from_mem(proc->pos + 1, 1) % IDX_MOD;
 	if (proc->carry == 1)
-	{
 		proc->pc = addr;
-		if (!proc->pc)
-			proc->pos = 0;
-	}
 	if (vm.log_level & OPERA)
 	{
 		ft_printf("P %4d | zjmp %d %s\n",
@@ -60,10 +55,7 @@ void	zjmp_op(t_process *proc)
 void	ld_op(t_process *proc)
 {
 	proc->regs[proc->args_value[1] - 1] = (int)get_arg_op(proc, 0);
-	if (!proc->regs[proc->args_value[1] - 1])
-		proc->carry = 1;
-	else
-		proc->carry = 0;
+	proc->carry = proc->regs[proc->args_value[1] - 1] == 0 ? 1 : 0;
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, proc->regs[proc->args_value[1] - 1], proc->args_value[1], proc->args_value[2]);
 }
@@ -86,19 +78,16 @@ void                st_op(t_process *proc)//TODO Данная операция �
 		}
 	}
 	if (vm.log_level & OPERA)
+	{
+		proc->args[1] = T_DIR;
 		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
+	}
 }
 
 void	add_op(t_process *proc)
 {
-	int res;
-
-	res = proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1];
-	if (res == 0)
-		proc->carry = 1;
-	else
-		proc->carry = 0;
-	proc->regs[proc->args_value[2] - 1] = res;
+	proc->regs[proc->args_value[2] - 1] = proc->regs[proc->args_value[0] - 1] + proc->regs[proc->args_value[1] - 1];
+	proc->carry = proc->regs[proc->args_value[2] - 1] == 0 ? 1 : 0;
 	if (vm.log_level & OPERA)
 		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
 }
