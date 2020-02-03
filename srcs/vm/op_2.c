@@ -42,13 +42,20 @@ void			and_op(t_process *proc)
 
 void			or_op(t_process *proc)
 {
-	unsigned int res;
+	unsigned int val1;
+	unsigned int val2;
 
-	res = get_arg_op(proc, 0) | get_arg_op(proc, 1);
-    proc->carry = (res == 0) ? 1 : 0;
-	proc->regs[proc->args_value[2] - 1] = (int)res;
+	val1 = get_arg_op(proc, 0);
+	val2 = get_arg_op(proc, 1);
+	proc->regs[proc->args_value[2] - 1] = (int)(val1 | val2);
+    proc->carry = (proc->regs[proc->args_value[2] - 1] == 0) ? 1 : 0;
+	proc->regs[proc->args_value[2] - 1] = (int)proc->regs[proc->args_value[2] - 1];
 	if (vm.log_level & OPERA)
-		universal_op_log(proc, proc->args_value[0], proc->args_value[1], proc->args_value[2]);
+	{
+		proc->args[0] = T_DIR;
+		proc->args[1] = T_DIR;
+		universal_op_log(proc, (int)val1, (int)val2, proc->args_value[2]);
+	}
 }
 
 void			xor_op(t_process *proc)
