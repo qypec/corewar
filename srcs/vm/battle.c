@@ -29,9 +29,9 @@ void	intro(void)
 {
 	int		i;
 
-	i = -1;
+	i = 0;
 	ft_printf("%s\n", "Introducing contestants...");
-	while (++i < MAX_PLAYERS)
+	while (++i <= MAX_PLAYERS)
 	{
 		if (vm.players[i].id)
 			ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",

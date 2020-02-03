@@ -28,9 +28,9 @@ int		init_game(void)
 		if (vm.players[i].id)
 		{
 			k = (j) ? 1 : 0;
-			ft_memcpy(vm.arena + (j * step - k),
+			ft_memcpy(vm.arena + (j * step),
 					vm.players[i].code, vm.players[i].code_size);
-			if (!create_process(i, j * step - k))
+			if (!create_process(i, j * step))
 				return (0);
 			++j;
 		}
