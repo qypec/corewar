@@ -21,7 +21,7 @@ void	live_op(t_process *proc)
 	player_index = number * -1;
 	++vm.lives_in_round;
 	++proc->live_incycle;
-	if (number > 0 && number <= vm.players_sum)
+	if (player_index > 0 && player_index <= vm.players_sum)
 	{
 		++vm.players[player_index].is_alive;
 		++vm.players[player_index].lives_all;
