@@ -40,7 +40,7 @@ int		print_usage(int code, int usage)
 	return (0);
 }
 
-void	standart_usage(void)
+int standart_usage(void)
 {
 	ft_putstr("Usage: ./corewar [-a (-dump|-d) <num> (-shed|-s) "
 "<num> -l <num>] [-v] [-n <num>] <champion.cor> <...>\n");
@@ -58,35 +58,36 @@ void	standart_usage(void)
 	ft_putstr("                   2  : Show cycles\n");
 	ft_putstr("                   4  : Show operations\n");
 	ft_putstr("                   8  : Show deaths\n");
-	ft_putstr("                   16 : Show PC movements (Except for jumps)\n");
+	ft_putstr("                   16 : Show PC movements\n");
 	ft_putstr("    -v          : Run visualizer\n");
 	ft_putstr("    -n    <num> : Set <num> of the next player\n");
+	return (0);
 }
 
 int		check_flags(int i, int ac, char **ag)
 {
 	int value;
-	int ok;
+	int offset;
 
-	ok = 1;
+	offset = 0;
 	if (i + 1 == ac)
 		return (print_usage(-6, 1));
 	if (!ft_isnum(ag[i + 1]) && ag[i][1] != 'a' && ag[i][1] != 'v')
 		return (print_usage(-7, 1));
 	value = ft_atoi(ag[i + 1]);
 	if (ag[i][1] == 'n')
-		ok = (!check_n(value)) ? 0 : ok;
+		offset = (check_n(value)) ? 1 : offset;
 	else if (ag[i][1] == 'd')
-		ok = (!(check_d(ag, value, i))) ? 0 : ok;
+		offset = ((check_d(ag, value, i))) ? 1 : offset;
 	else if (ag[i][1] == 's')
-		ok = (!(check_s(ag, value, i))) ? 0 : ok;
+		offset = ((check_s(ag, value, i))) ? 1 : offset;
 	else if (ag[i][1] == 'l')
-		ok = (!(check_l(value))) ? 0 : ok;
+		offset = ((check_l(value))) ? 1 : offset;
 	else if (ag[i][1] == 'a')
 		vm.af = 1u;
 	else if (ag[i][1] == 'v')
 		vm.viz |= 1u;
-	return (ok);
+	return (offset);
 }
 
 int		check_extension(int i, char **file)
@@ -101,7 +102,7 @@ int		check_extension(int i, char **file)
 	if (file[i][j] == '.' && ft_strequ(file[i] + j, ".cor"))
 		++vm.players_sum; //TODO: correct with flags
 	else
-		return (print_usage(-1, 1));
+		return (standart_usage());
 	return (1);
 }
 
@@ -114,15 +115,14 @@ int		check_args(int ac, char **ag)
 	{
 		if (ag[i][0] == '-')
 		{
-			if (!check_flags(i, ac, ag))
+			if (!(i += check_flags(i, ac, ag)))
 				return (0);
-			else if ((i + 2) <=ac && (ag[i][1] != 'a' && ag[i][1] != 'v'))
-				i += 1;
-			else if ((i + 2) > ac)
+			else if (i > ac)
 				return (print_usage(-2, 1));
 		}
-		if (!check_extension(i, ag))
-			return (0);
+		else
+			if (!check_extension(i, ag))
+				return (0);
 //		if (vm.players_sum > MAX_PLAYERS)
 //			return (print_usage(-4, 1));
 	}
