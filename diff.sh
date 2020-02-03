@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 out=
+path="./champs/ops"
 op=fork
 
 # while true
@@ -14,17 +15,24 @@ op=fork
 # 	esac
 # done
 
-
-for i in {1..9219}
+for pl in $(find $(echo $path)/* -name '*.cor')
 do
-	out=$(diff ./00/$(echo $op)_$i.out ./01/$(echo $op)_$i.out)
-	echo $i
-	if [ -n $out ]
-	then
-		out=
-	else
-		echo $i
-		diff ./00/$(echo $op)_$i.out ./01/$(echo $op)_$i.out | head -n 20
-		exit
-	fi
+	pl_sum=$(./corewar_ -l 2 $pl | grep -v "ontestant" | grep -v "die" | tail -n 1 | cut -d ' ' -f 5)
+	op=$(echo $pl | cut -d / -f 4 | cut -d . -f 1)
+	echo "$pl_sum"
+	echo "player = $pl"
+	for ((i = 0; p <= pl_sum; ++i))
+	do
+		echo "$op - $i"
+		out=$(diff ./00/$op/$(echo $op)_$i.out ./01/$op/$(echo $op)_$i.out)
+		if [ -n "$out" ]
+			then
+				out=
+			else
+				echo $i
+				diff ./00/$op/$(echo $op)_$i.out ./01/$op/$(echo $op)_$i.out | head -n 20
+				exit
+		fi
+	done
 done
+

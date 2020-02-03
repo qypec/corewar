@@ -88,7 +88,7 @@ void	lld_op(t_process *proc)
 		universal_op_log(proc, (int)get_arg_op(proc, 0), proc->args_value[1], 0);
 }
 
-void	lldi_op(t_process *proc)//TODO надо чекнуть
+void	lldi_op(t_process *proc)
 {
 	int addr1;
 	int addr2;
@@ -96,7 +96,7 @@ void	lldi_op(t_process *proc)//TODO надо чекнуть
 	addr1 = (int)get_arg_op(proc, 0);
 	addr2 = (int)get_arg_op(proc, 1);
     proc->regs[proc->args_value[2] - 1] = get_int32_from_mem(proc->pos + addr1 + addr2, 1);
-    proc->carry = (!proc->regs[proc->args_value[2] - 1]) ? 1 : 0;
+//    proc->carry = (!proc->regs[proc->args_value[2] - 1]) ? 1 : 0;//TODO vbrazhnik obmanivaet
 	if (vm.log_level & OPERA)
 	{
 		proc->args[0] = T_DIR;

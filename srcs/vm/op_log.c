@@ -15,11 +15,9 @@ void print_proc_movement(int position, int offset)
 	while (++byte < offset)
 	{
 		ft_printf("%.2x", vm.arena[position_correction(position + byte)]);
-		if (byte == offset - 1)
-			ft_printf("\n");
-		else
-			ft_printf(" ");
+		ft_printf(" ");
 	}
+	ft_printf("\n");
 }
 
 void	print_args(t_process *proc, int *arg)
