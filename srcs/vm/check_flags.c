@@ -78,7 +78,7 @@ int	check_l(int value)
 		ft_putstr("                   4  : Show operations\n");
 		ft_putstr("                   8  : Show deaths\n");
 		ft_putstr("                   16 : "
-			"Show PC movements (Except for jumps)\n");
+			"Show PC movements\n");
 		return (0);
 	}
 	return (1);

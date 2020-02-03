@@ -54,7 +54,7 @@ typedef struct			s_process
 
 int						check_args(int ac, char **ag);
 int						print_usage(int code, int usage);
-void                    standart_usage(void);
+int standart_usage(void);
 int						create_players(char **argv);
 int						is_set(int number, int max);
 void					set_id(int player_k);
