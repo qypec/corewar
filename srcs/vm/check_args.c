@@ -93,8 +93,8 @@ int		check_extension(int i, char **file)
 {
 	int j;
 
-	j = 0;
-	while (file[i][++j] != '.')
+	j = (int)ft_strlen(file[i]) - 1;
+	while (file[i][--j] != '.')
 		;
 	if (file[i][j] != '.')
 		return (print_usage(-1, 1));
