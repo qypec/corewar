@@ -28,7 +28,7 @@ int	check_n(int value)
 
 int	check_d(char **av, int value, int i)
 {
-	vm.dump |= (ft_strequ(av[i], "-dump")) ? 1u : 2u;
+	vm.dump |= (ft_strequ(av[i], "-dump")) ? 2u : 1u;
 	if (av[i + 1] <= 0)
 		return (print_usage(-3, 0));
 	else
@@ -38,7 +38,7 @@ int	check_d(char **av, int value, int i)
 
 int	check_s(char **av, int value, int i)
 {
-	vm.s |= (ft_strequ(av[i], "-show")) ? 1u : 2u;
+	vm.s |= (ft_strequ(av[i], "-show")) ? 2u : 1u;
 	if (av[i + 1] <= 0)
 	{
 		ft_printf(ANSI_B_RED"Negative or zero flag "
