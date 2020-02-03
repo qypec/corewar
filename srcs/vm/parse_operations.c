@@ -18,16 +18,16 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	int 	i;
 
 	i = -1;
-	if (proc->op == 3)
-		proc->op = proc->op;
 	while (++i < 3)
-		if (j < op_tab[proc->op - 1].argc && arg_code == arg_types[i] && arg_code != 0)
-		{
-			proc->args[j] = arg_code;
-			return (1);
-		}
-		else if (arg_code == 0 && j >= op_tab[proc->op - 1].argc)
-			return (1);
+	{
+        if (j < op_tab[proc->op - 1].argc && (int)arg_code == arg_types[i] && arg_code != 0)
+        {
+            proc->args[j] = arg_code;
+            return (1);
+        }
+        else if (arg_code == 0 && j >= op_tab[proc->op - 1].argc)
+            return (1);
+    }
 	return (0);
 }
 
@@ -52,11 +52,7 @@ void 		process_args_code(t_process *proc)
 		if (!check_args_type((*(vm.arena + position_correction(proc->pos + 1u))
 		& (192u >> (unsigned) (i * 2))) >> (6u - (unsigned) (i * 2)),
 				op_tab[proc->op - 1].args_types + i * 3, proc, i))
-		{
-			proc->op = 0;
-			proc->pc = 1;
-			return ;
-		}
+			proc->op_error = 1;
 	}
 }
 

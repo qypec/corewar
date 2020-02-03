@@ -42,25 +42,29 @@ void	intro(void)
 
 void	ft_exec_op(t_process *proc)
 {
-	if (proc->op == 6)
-		proc->op = 6;
+	if (proc->op == 9)
+		proc->op = 9;
 	if (!op_tab[proc->op - 1].has_args_code)
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
 	else
 		process_args_code(proc);
-	if (proc->op > 0 && proc->op < 17 && parse_args_values(proc, proc->op, proc->pos, 1))
+	if (proc->op > 0 && proc->op < 17)
+	{
+		parse_args_values(proc, proc->op, proc->pos, 1);
+	}
+	if (proc->op > 0 && proc->op < 17 && !proc->op_error)
 	{
 		if (check_regs(proc, proc->op))
 		{
 			op_tab[proc->op - 1].operations(proc);
 			++g_op_count;//TODO del before validate project
 		}
-		if (vm.log_level & PC )
-			if (proc->op != 9 || (proc->op == 9 && !proc->carry))
-				print_proc_movement(proc->pos, proc->pc);
 		ft_bzero((void*)proc->args, sizeof(int) * 4);
 		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
 	}
+	if (vm.log_level & PC && proc->pc > 1)
+		if (proc->op != 9 || (proc->op == 9 && !proc->carry))
+			print_proc_movement(proc->pos, proc->pc);
 	proc->pos = position_correction(proc->pos + proc->pc);
 	proc->pc = 0;
 	proc->op_error = 0;
