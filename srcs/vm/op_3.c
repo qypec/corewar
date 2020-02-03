@@ -111,9 +111,9 @@ void	lfork_op(t_process *proc)
 	int 		addr;
 	int 		i;
 
-	addr = position_correction(proc->pos + proc->args_value[0]);
+	addr = proc->pos + proc->args_value[0];
 	i = -1;
-	if (!(new = create_process(proc->player_id, addr)))
+	if (!(new = create_process(proc->player_id, position_correction(addr))))
 		return ;
     while (++i < REG_NUMBER)
         new->regs[i] = proc->regs[i];
