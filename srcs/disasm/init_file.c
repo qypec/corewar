@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 17:58:34 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/03 18:32:28 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/04 21:33:02 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char				*get_new_filename(const char *filename)
 	if (len_without_extention == 0)
 		error(ERR_INVALID_FILE_NAME);
 	filename_without_extention = ft_strnew(len_without_extention);
-	ft_strncpy(filename_without_extention, filename);
+	ft_strncpy(filename_without_extention, filename, len_without_extention);
 	new_filename = ft_strjoin(filename_without_extention, FILE_EXTENSION);
 	ft_strdel(&filename_without_extention);
 	return (new_filename);

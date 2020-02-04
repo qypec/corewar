@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:34:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/03 18:31:35 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/04 21:34:15 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DIS_ASM_H
 
 # include <stdint.h>
+# include <stddef.h>
 
 # define ERR_READ_FILE "error: read file"
 # define ERR_INVALID_FILE "error: invalid file"
@@ -23,10 +24,11 @@
 # define ERR_ALLOCATE "error: allocate"
 # define ERR_INVALID_FILE_NAME "error: invalid file name"
 # define ERR_CREATE_FILE "error: create file"
+# define ERR_INVALID_CODE "error: invalid code"
 
 # define SIZE_OF_MAGIC 4
 
-# define FILE_EXTENSION ".asm"
+# define FILE_EXTENSION ".s"
 
 
 typedef struct			s_parser
@@ -38,6 +40,23 @@ typedef struct			s_parser
 	uint8_t				*code;
 }						t_parser;
 
+typedef struct			s_optab
+{
+	uint8_t				code;
+	char				*name;
+	size_t				numof_args;
+	size_t				dir_size;
+	int					args[3];
+	
+}						t_optab;
+
+typedef struct			s_argtab
+{
+	int					type;
+	char				ch;
+	int					code;
+}						t_argtab;
+
 void					error(const char *error_msg);
 
 t_parser                *init_parser(int fd);
@@ -45,6 +64,8 @@ void					delete_parser(t_parser **parser);
 
 void                    parse_bytecode(t_parser *parser);
 int						init_asm_file(const char *filename);
+void					convert_player_code(t_parser *parser, int fd);
+int						get_arg_type(uint8_t num, size_t position);
 
 
 #endif
