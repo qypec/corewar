@@ -42,6 +42,14 @@ void	set_id(int player_k)
 	vm.players_temp[player_k].id = i;
 }
 
+int		print_errors_players(char *str)
+{
+	ft_putstr_fd("ERROR: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("\n", 2);
+	return (0);
+}
+
 int		load_player(char *player_filename, int player_k)
 {
 	int fd;
@@ -50,17 +58,17 @@ int		load_player(char *player_filename, int player_k)
 	if (vm.players_temp[player_k].id == 0)
 		set_id(player_k);
 	if ((fd = open(player_filename, O_RDONLY)) < 1)
-		return (0);
+		return (print_errors_players("Invalid file with champion"));
 	if (!check_magic(fd, player_k))
-		return (0);
+		return (print_errors_players("Invalid file with champion"));
 	if (!check_name(fd, player_k))
-		return (0);
+		return (print_errors_players("Invalid file with champion"));
 	if (!check_exec_size(fd, player_k))
-		return (0);
+		return (print_errors_players("Invalid code size"));
 	if (!check_comment(fd, player_k))
-		return (0);
+		return (print_errors_players("Invalid file with champion"));
 	if (!check_code(fd, player_k))
-		return (0);
+		return (print_errors_players("Invalid code size"));
 	close(fd);
 	return (1);
 }

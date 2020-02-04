@@ -65,10 +65,7 @@ int		main(int argc, char **argv)
 	if (!init_corewar() || !check_args(argc, argv))
 		return (0);
 	if (!create_players(argv))
-	{
-		ft_printf("error with player's file");
 		return (0);
-	}
 	if (!init_game())
 		return (0);
 	if (DEBUG)
