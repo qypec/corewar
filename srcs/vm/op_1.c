@@ -73,8 +73,8 @@ void                st_op(t_process *proc)//TODO Данная операция �
 		temp = (unsigned char*)&proc->regs[proc->args_value[0] - 1];
 		while (++i < REG_SIZE)
 		{
-			vm.arena[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = temp[3 - i];
-			vm.arena_id[position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD)] = proc->player_id;
+			vm.arena[position_correction(position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD))] = temp[3 - i];
+			vm.arena_id[position_correction(position_correction(proc->pos + i + proc->args_value[1] % IDX_MOD))] = proc->player_id;
 		}
 	}
 	if (vm.log_level & OPERA)

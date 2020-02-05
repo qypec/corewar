@@ -6,13 +6,15 @@
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/23 18:40:10 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/26 03:31:58 by ergottli         ###   ########.fr        #
+#    Updated: 2020/02/05 19:02:01 by ergottli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include incs/corewar.mk
 
-all:
+all: corewar
+
+corewar:
 	@make -C libft/ all
 	@make -C srcs/vm/ all
 	@make -C .objs/ all
