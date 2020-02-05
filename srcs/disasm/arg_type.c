@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 20:53:26 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/04 21:39:46 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 16:44:57 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ int					get_arg_type(uint8_t num, size_t position)
 		return (T_DIR);
 	else if (is_tind(num, position + 1))
 		return (T_IND);
-	error(ERR_INVALID_CODE);
+	error_dis(ERR_INVALID_CODE);
 	return (0);
 }
