@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:34:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/04 21:34:15 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 14:34:22 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void                    parse_bytecode(t_parser *parser);
 int						init_asm_file(const char *filename);
 void					convert_player_code(t_parser *parser, int fd);
 int						get_arg_type(uint8_t num, size_t position);
+int						bytecode_to_int(t_parser *parser, size_t *pos, t_optab tab, int arg_type);
 
 
 #endif

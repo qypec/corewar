@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:33:04 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/04 21:35:24 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 12:49:38 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int						main(int argc, char **argv)
 	parser = init_parser(fd_cor);
 	parse_bytecode(parser);
 #ifdef IN_WIP
-	fd_asm = init_asm_file(argv[0]);
+	fd_asm = init_asm_file(argv[1]);
 #endif
 	fd_asm = 0; //delete
 	dprintf(fd_asm, "%s %s\n%s %s\n\n", NAME_CMD_STRING, parser->name, \

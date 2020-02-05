@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:34:54 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/04 21:56:12 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 15:07:30 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,6 @@ static char			get_arg_char(int arg_type)
 	return ('\0');
 }
 
-static void			move(size_t *pos, t_optab tab, int arg_type)
-{
-	if (arg_type == T_DIR)
-		(*pos) += tab.dir_size;
-	else
-		(*pos)++;
-	
-}
-
 static void			interpret_args(t_parser *parser, size_t *pos, t_optab tab, int fd)
 {
 	size_t			i;
@@ -99,8 +90,7 @@ static void			interpret_args(t_parser *parser, size_t *pos, t_optab tab, int fd)
 	{
 		// if (arg_type[i] != tab.args[i])
 			// error(ERR_INVALID_CODE);
-		dprintf(fd, "%c%d", get_arg_char(arg_type[i]), parser->code[*pos]);
-		move(pos, tab, arg_type[i]);
+		dprintf(fd, "%c%d", get_arg_char(arg_type[i]), bytecode_to_int(parser, pos, tab, arg_type[i]));
 		i++;
 		if (i != tab.numof_args)
 			dprintf(fd, "%c ", SEPARATOR_CHAR);
