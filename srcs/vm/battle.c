@@ -42,16 +42,19 @@ void	intro(void)
 
 void	ft_exec_op(t_process *proc)
 {
-	if (proc->op == 9)
-		proc->op = 9;
-	if (!op_tab[proc->op - 1].has_args_code)
-		proc->args[0] = op_tab[proc->op - 1].args_types[0];
-	else
-		process_args_code(proc);
+	if (proc->pos == 0xda && proc->op == 14 && proc->proc_id == 8)
+		proc->op = 14;
 	if (proc->op > 0 && proc->op < 17)
 	{
-		parse_args_values(proc, proc->op, proc->pos, 1);
+		if (!op_tab[proc->op - 1].has_args_code)
+		{
+			proc->args[0] = op_tab[proc->op - 1].args_types[0];
+			proc->pc += 1 + calc_args_size(0, proc, proc->op);
+		} else
+			process_args_code(proc);
 	}
+	if (proc->op > 0 && proc->op < 17)
+		parse_args_values(proc, proc->op, proc->pos, 1);
 	if (proc->op > 0 && proc->op < 17 && !proc->op_error)
 	{
 		if (check_regs(proc, proc->op))
@@ -96,6 +99,8 @@ int		battle(void)
 		++vm.cycles_all;
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
+		if (vm.cycles_all == 28975)
+			vm.cycles_all = vm.cycles_all;
 		check_proc();
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check();

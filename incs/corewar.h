@@ -41,6 +41,7 @@ typedef struct			s_process
 	int 				op_error;
     int					args_value[3];
     unsigned int		args[4];
+    int 				correct_args;
 	int					carry;
 	int					delay;
 	int					live_incycle;
