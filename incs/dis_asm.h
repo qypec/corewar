@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 15:34:53 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/05 14:34:22 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 16:44:57 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 
 typedef struct			s_parser
 {
-	int					fd;
+	int					fd_cor;
+	int					fd_asm;
 	char				*name;
 	char				*comment;
 	int32_t				code_size;
@@ -57,14 +58,16 @@ typedef struct			s_argtab
 	int					code;
 }						t_argtab;
 
-void					error(const char *error_msg);
+void					error_dis(const char *error_msg);
 
 t_parser                *init_parser(int fd);
 void					delete_parser(t_parser **parser);
 
 void                    parse_bytecode(t_parser *parser);
-int						init_asm_file(const char *filename);
-void					convert_player_code(t_parser *parser, int fd);
+int						create_asm_file(const char *filename);
+void					convert_player_code(t_parser *parser);
+void					interpret_args(t_parser *parser, size_t *pos, t_optab tab);
+char					get_arg_char(int arg_type);
 int						get_arg_type(uint8_t num, size_t position);
 int						bytecode_to_int(t_parser *parser, size_t *pos, t_optab tab, int arg_type);
 

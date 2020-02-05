@@ -6,7 +6,7 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 14:21:30 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/05 15:08:48 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/05 16:38:31 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,6 @@
 
 # define CHECK_BIT(var, position) ((var & (1 << position)) ? 1 : 0)
 # define SIGN_BIT_INT 15
-
-static void			print_bit(int num)
-{
-	int				i;
-
-	printf("\n");
-	i = 31;
-	while (i >= 0)
-	{
-		if (CHECK_BIT(num, i))
-			printf("1 ");
-		else
-			printf("0 ");
-		i--;
-	}
-	printf("\n");
-}
 
 static int			convert_with_negative_sign(int num)
 {
