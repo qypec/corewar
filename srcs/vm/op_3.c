@@ -43,8 +43,8 @@ void	sti_op(t_process *proc) //TODO Данная операция может з�
 	addr = position_correction(proc->pos + (addr1 + addr2) % IDX_MOD);
 	while (++i < REG_SIZE)
 	{
-        vm.arena[addr + i] = temp[3 - i];
-        vm.arena_id[addr + i] = proc->player_id;
+        vm.arena[position_correction(addr + i)] = temp[3 - i];
+        vm.arena_id[position_correction(addr + i)] = proc->player_id;
     }
 	if (vm.log_level & OPERA)
 	{

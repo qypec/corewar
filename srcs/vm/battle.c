@@ -42,35 +42,18 @@ void	intro(void)
 
 void	ft_exec_op(t_process *proc)
 {
-	if (proc->pos == 0xda && proc->op == 14 && proc->proc_id == 8)
-		proc->op = 14;
-	if (proc->op > 0 && proc->op < 17)
+
+	if (!op_tab[proc->op - 1].has_args_code)
 	{
-		if (!op_tab[proc->op - 1].has_args_code)
-		{
-			proc->args[0] = op_tab[proc->op - 1].args_types[0];
-			proc->pc += 1 + calc_args_size(0, proc, proc->op);
-		} else
-			process_args_code(proc);
+		proc->args[0] = op_tab[proc->op - 1].args_types[0];
+		proc->pc += 1 + calc_args_size(0, proc);
 	}
-	if (proc->op > 0 && proc->op < 17)
-		parse_args_values(proc, proc->op, proc->pos, 1);
-	if (proc->op > 0 && proc->op < 17 && !proc->op_error)
-	{
-		if (check_regs(proc, proc->op))
-		{
+	else
+		process_args_code(proc);
+	parse_args_values(proc);
+	if (!proc->op_error)
+		if (check_regs(proc))
 			op_tab[proc->op - 1].operations(proc);
-			++g_op_count;//TODO del before validate project
-		}
-		ft_bzero((void*)proc->args, sizeof(int) * 4);
-		ft_bzero((void*)proc->args_value, sizeof(int) * 3);
-	}
-	if (vm.log_level & PC && proc->pc > 1)
-		if (proc->op != 9 || (proc->op == 9 && !proc->carry))
-			print_proc_movement(proc->pos, proc->pc);
-	proc->pos = position_correction(proc->pos + proc->pc);
-	proc->pc = 0;
-	proc->op_error = 0;
 }
 
 int		check_proc(void)
@@ -84,7 +67,20 @@ int		check_proc(void)
 			get_op_code(proc);
 		proc->delay -= (proc->delay > 0) ? 1 : 0;
 		if (!proc->delay)
-			ft_exec_op(proc);
+		{
+			if (proc->proc_id == 1)
+				proc = proc;
+			if (proc->op > 0 && proc->op < 17)
+				ft_exec_op(proc);
+			if (vm.log_level & PC && proc->pc > 1)
+				if (proc->op != 9 || (proc->op == 9 && !proc->carry))
+					print_proc_movement(proc->pos, proc->pc);
+			proc->pos = position_correction(proc->pos + proc->pc);
+			proc->pc = 0;
+			proc->op_error = 0;
+			ft_bzero((void*)proc->args, sizeof(int) * 4);
+			ft_bzero((void*)proc->args_value, sizeof(int) * 3);
+		}
 		proc = proc->next;
 	}
 	return (1);
@@ -97,10 +93,10 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
+		if (vm.cycles_all == 3647)
+			vm.cycles_all = 3647;
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
-		if (vm.cycles_all == 28975)
-			vm.cycles_all = vm.cycles_all;
 		check_proc();
 		if (vm.cycle_current == vm.cycles_to_die || vm.cycles_to_die <= 0)
 			battle_check();

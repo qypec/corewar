@@ -58,15 +58,10 @@ void	check_procs(void)
 {
 	t_process *temp;
 	t_process *next;
-	int odin;
-	int flag;
 
 	temp = vm.processes;
-	flag = 0;
-	odin = 0;
 	while (temp)
 	{
-		flag = 0;
 		if (!temp->live_incycle) // Если не было выполнено операций live за раунд - удалить процесс
 		{
 //				if (DEBUG_DEL_PROC)

@@ -92,9 +92,9 @@ int						battle(void);
 void					battle_check(void);
 void					process_args_code(t_process *proc);
 int						check_op_args(t_process *proc);
-int calc_args_size(int i, t_process *proc, int op_code);
-int parse_args_values(t_process *proc, int op, int position, int flag);
-int check_regs(t_process *proc, int op);
+int calc_args_size(int i, t_process *proc);
+int parse_args_values(t_process *proc);
+int check_regs(t_process *proc);
 int 					move_process(t_process *proc);
 
 /*

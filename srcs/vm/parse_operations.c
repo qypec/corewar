@@ -31,14 +31,14 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	return (0);
 }
 
-int calc_args_size(int i, t_process *proc, int op_code)
+int calc_args_size(int i, t_process *proc)
 {
 	int	size;
 
 	size = 0;
 	size = (proc->args[i] == T_REG) ? 1 : size;
 	size = (proc->args[i] == T_IND) ? 2 : size;
-	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[op_code - 1].dir_size + 1) : size;
+	size = (proc->args[i] == T_DIR) ? 4 / (op_tab[proc->op - 1].dir_size + 1) : size;
 	return (size);
 }
 
@@ -55,12 +55,12 @@ void 		process_args_code(t_process *proc)
 				op_tab[proc->op - 1].args_types + i * 3, proc, i))
 			proc->op_error = 1;
 		if (i < op_tab[proc->op - 1].argc)
-			proc->pc += calc_args_size(i, proc, proc->op);
+			proc->pc += calc_args_size(i, proc);
 	}
 
 }
 
-int parse_args_values(t_process *proc, int op, int position, int flag)
+int parse_args_values(t_process *proc)
 {
 	int             i;
 	int             offset;
@@ -68,30 +68,30 @@ int parse_args_values(t_process *proc, int op, int position, int flag)
 	unsigned int    index;
 
 	i = -1;
-	offset = (op_tab[op - 1].has_args_code) ? 2 : 1;
+	offset = (op_tab[proc->op - 1].has_args_code) ? 2 : 1;
 	while (++i < op_tab[proc->op - 1].argc)
 	{
-		size = calc_args_size(i, proc, op);
-		index = position_correction(position + offset);
+		size = calc_args_size(i, proc);
+		index = position_correction(proc->pos + offset);
 		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[index] : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int) index, 0) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 0)
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 0)
 				? get_int32_from_mem((int) index,0) : proc->args_value[i];
-		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[op - 1].dir_size == 1)
+		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 1)
 				? get_int16_from_mem((int) index,0) : proc->args_value[i];
 		offset += (int)size;
 	}
 	return (offset);
 }
 
-int check_regs(t_process *proc, int op)
+int check_regs(t_process *proc)
 {
 	int i;
 	int ok;
 
 	i = -1;
 	ok = 1;
-	while (++i < op_tab[op - 1].argc)
+	while (++i < op_tab[proc->op - 1].argc)
 		if (proc->args[i] == T_REG)
 			if (proc->args_value[i] < 1 || proc->args_value[i] > 16)
 				ok = 0;
