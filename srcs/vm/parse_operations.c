@@ -18,11 +18,11 @@ unsigned int 		check_args_type(unsigned int arg_code, const int *arg_types, t_pr
 	int 	i;
 
 	i = -1;
+	proc->args[j] = arg_code;
 	while (++i < 3)
 	{
         if (j < op_tab[proc->op - 1].argc && (int)arg_code == arg_types[i] && arg_code != 0)
         {
-            proc->args[j] = arg_code;
             return (1);
         }
         else if (arg_code == 0 && j >= op_tab[proc->op - 1].argc)
@@ -47,13 +47,17 @@ void 		process_args_code(t_process *proc)
 	int 			i;
 
 	i = -1;
+	proc->pc += 2;
 	while (++i < 4)
 	{
-		if (!check_args_type((*(vm.arena + position_correction(proc->pos + 1u))
+		if (!check_args_type((*(vm.arena + position_correction((int)(proc->pos + 1u)))
 		& (192u >> (unsigned) (i * 2))) >> (6u - (unsigned) (i * 2)),
 				op_tab[proc->op - 1].args_types + i * 3, proc, i))
 			proc->op_error = 1;
+		if (i < op_tab[proc->op - 1].argc)
+			proc->pc += calc_args_size(i, proc, proc->op);
 	}
+
 }
 
 int parse_args_values(t_process *proc, int op, int position, int flag)
@@ -65,7 +69,7 @@ int parse_args_values(t_process *proc, int op, int position, int flag)
 
 	i = -1;
 	offset = (op_tab[op - 1].has_args_code) ? 2 : 1;
-	while (++i < op_tab[op - 1].argc)
+	while (++i < op_tab[proc->op - 1].argc)
 	{
 		size = calc_args_size(i, proc, op);
 		index = position_correction(position + offset);
@@ -77,8 +81,6 @@ int parse_args_values(t_process *proc, int op, int position, int flag)
 				? get_int16_from_mem((int) index,0) : proc->args_value[i];
 		offset += (int)size;
 	}
-	if (flag)
-		proc->pc += offset;
 	return (offset);
 }
 

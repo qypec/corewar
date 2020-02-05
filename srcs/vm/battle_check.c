@@ -18,7 +18,7 @@ void	update_cycle_to_die(void)
 	++vm.cycles_to_die_not_updated;
 	vm.cycles_to_die_last = vm.cycles_to_die;
 	if (vm.lives_in_round >= NBR_LIVE ||
-	vm.cycles_to_die_not_updated == MAX_CHECKS)
+	vm.cycles_to_die_not_updated == MAX_CHECKS || vm.cycles_to_die <= 0)
 	{
 		vm.cycles_to_die -= CYCLE_DELTA;
 		vm.cycles_to_die_not_updated = 0;
