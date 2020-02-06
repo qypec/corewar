@@ -93,8 +93,8 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		if (vm.cycles_all == 3647)
-			vm.cycles_all = 3647;
+		if (vm.cycles_all == 25902)
+			vm.cycles_all = 25902;
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
 		check_proc();
