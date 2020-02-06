@@ -21,6 +21,8 @@ void	live_op(t_process *proc)
 	player_index = number * -1;
 	++vm.lives_in_round;
 	++proc->live_incycle;
+	if (vm.log_level & OPERA)
+		universal_op_log(proc, number, 0, 0);
 	if (player_index > 0 && player_index <= vm.players_sum)
 	{
 		++vm.players[player_index].is_alive;
@@ -30,10 +32,8 @@ void	live_op(t_process *proc)
 		vm.last_alive = &vm.players[player_index];
 		if (vm.log_level & LIVE)
 			ft_printf("Player %d (%s) is said to be alive\n",
-					  proc->player_id, vm.players[proc->player_id].name);
+					  ABS_NUM(number), vm.players[proc->player_id].name);
 	}
-	if (vm.log_level & OPERA)
-		universal_op_log(proc, number, 0, 0);
 }
 
 void	zjmp_op(t_process *proc)

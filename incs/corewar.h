@@ -15,6 +15,7 @@
 # define OPERA 4u
 # define DEATH 8u
 # define PC 16u
+# define ABS_NUM(n) ((n < 0) ? n * -1 : n)
 
 int g_op_count;//TODO del before validate project;
 

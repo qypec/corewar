@@ -76,9 +76,9 @@ int parse_args_values(t_process *proc)
 		proc->args_value[i] = (proc->args[i] == T_REG) ? (int)vm.arena[index] : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_IND) ? get_int16_from_mem((int) index, 0) : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 0)
-				? get_int32_from_mem((int) index,0) : proc->args_value[i];
+				? get_int32_from_mem((int) index,1) : proc->args_value[i];
 		proc->args_value[i] = (proc->args[i] == T_DIR && op_tab[proc->op - 1].dir_size == 1)
-				? get_int16_from_mem((int) index,0) : proc->args_value[i];
+				? get_int16_from_mem((int) index,1) : proc->args_value[i];
 		offset += (int)size;
 	}
 	return (offset);
