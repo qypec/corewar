@@ -42,7 +42,8 @@ void	intro(void)
 
 void	ft_exec_op(t_process *proc)
 {
-
+	if (vm.cycles_all == 18320)
+		vm = vm;
 	if (!op_tab[proc->op - 1].has_args_code)
 	{
 		proc->args[0] = op_tab[proc->op - 1].args_types[0];
@@ -93,8 +94,6 @@ int		battle(void)
 	{
 		++vm.cycle_current;
 		++vm.cycles_all;
-		if (vm.cycles_all == 25902)
-			vm.cycles_all = 25902;
 		if (vm.log_level & CYCLE)
 			ft_printf("It is now cycle %d\n", vm.cycles_all);
 		check_proc();
