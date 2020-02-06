@@ -67,8 +67,6 @@ int check_name(int fd, int player_k)
 	if ((ret = read(fd, &(vm.players_temp[player_k].name), PROG_NAME_LENGTH)) < PROG_NAME_LENGTH)
 		return (0);
 	vm.players_temp[player_k].name[ret] = '\0';
-	if (ft_strlen(vm.players_temp[player_k].name) < 1)
-		return (0);
 	if (read(fd, &buf, 4) < 4)
 		return (0);
 	if (buf != 0)
