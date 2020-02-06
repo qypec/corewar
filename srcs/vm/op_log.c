@@ -4,14 +4,12 @@
 void print_proc_movement(int position, int offset)
 {
 	int byte;
+	int dest;
 
 	byte = -1;
+	dest = position + offset;
 	ft_printf("ADV %d (", offset);
-	if (!position)
-		ft_printf("0x");
-	ft_printf("%#.4x -> %#.4x) ",
-			  position,
-			  position_correction(position + offset));
+	ft_printf("0x%.4x -> 0x%.4x) ", position, dest);
 	while (++byte < offset)
 	{
 		ft_printf("%.2x", vm.arena[position_correction(position + byte)]);

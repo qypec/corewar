@@ -18,7 +18,7 @@ void	update_cycle_to_die(void)
 	++vm.cycles_to_die_not_updated;
 	vm.cycles_to_die_last = vm.cycles_to_die;
 	if (vm.lives_in_round >= NBR_LIVE ||
-	vm.cycles_to_die_not_updated == MAX_CHECKS || vm.cycles_to_die <= 0)
+	vm.cycles_to_die_not_updated == MAX_CHECKS)
 	{
 		vm.cycles_to_die -= CYCLE_DELTA;
 		vm.cycles_to_die_not_updated = 0;
@@ -64,22 +64,9 @@ void	check_procs(void)
 	{
 		if (!temp->live_incycle) // Если не было выполнено операций live за раунд - удалить процесс
 		{
-//				if (DEBUG_DEL_PROC)
-//				{
-//					ft_printf(ANSI_B_GREEN"ID_BEFORE_DEL = %d\n"ANSI_RESET, temp->proc_id);
-//					if (temp->next)
-//					{
-//						flag = 1;
-//						ft_printf(ANSI_B_CYAN"ID_BEFORE_DEL_NEXT = %d\n"ANSI_RESET, temp->next->proc_id);
-//						odin = temp->next->proc_id;
-//					}
-//				}
 				next = temp->next;
 				del_process(temp);
 				temp = next;
-//				ft_printf(ANSI_B_BLUE"ID_AFTER_DEL = %d\n"ANSI_RESET, temp->proc_id);
-//				if (DEBUG_DEL_PROC && flag == 1 && odin != temp->proc_id)
-//					ft_printf(ANSI_RED"ERROR\n");
 		}
 		else
 		{

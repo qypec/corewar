@@ -57,6 +57,7 @@ void		del_process(t_process *proc)
 	t_process	*next;
 
 	next = NULL;
+	--vm.process_count;
 	if (proc == vm.processes)
 	{
 		next = vm.processes->next;
@@ -74,5 +75,4 @@ void		del_process(t_process *proc)
 	}
 	if (iter)
 		iter->next = next;
-	--vm.process_count;
 }
