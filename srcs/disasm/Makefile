@@ -5,29 +5,25 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/23 18:40:10 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/26 03:31:58 by ergottli         ###   ########.fr        #
+#    Created: 2020/01/31 15:30:59 by yquaro            #+#    #+#              #
+#    Updated: 2020/02/05 16:43:26 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include incs/corewar.mk
+include ../../incs/corewar.mk
 
-all:
-	@make -C libft/ all
-	@make -C srcs/disasm/ all
-	@make -C srcs/vm/ all
-	@make -C .objs/ all
+HEADER_H = -I ../../incs/
 
-clean:
-	@make -C libft/ clean
-	@make -C .objs/ clean
+DIR_O = ../../.objs/disasm
+SOURCES = disassemble.c init.c parse_bytecode.c create_asm_file.c \
+			convert_player_code.c arg_type.c bytecode_to_int.c interpret_args.c
 
-fclean: clean
-	@make -C libft/ fclean
-	@make -C .objs/ fclean
-	rm -rvf .objs/*.o
-	rm -rvf srcs/vm/*.o
-	rm -rvf corewar
-	rm -rf dis_asm
+OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 
-re: fclean all
+all: print $(OBJECTS)
+
+print:
+	@echo \*\*\* Compiling disasm files
+
+$(DIR_O)/%.o: %.c
+	$(COMPILING) $< -o $@
