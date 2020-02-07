@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 
-mkdir -p 00 01
-path="./champs/champs_op"
+# mkdir -p 00 01
+path="champs/ops"
 #rm -rf 00/* 01/*
-op=live
-
-#cd standart_operations; for i in $(ls); do ../../../bin/asm $i; done
-#cd ..;
 
 for pl in $(find $(echo $path)/* -name '*.cor')
 do
-  pl_sum=$(../corewar_ -l 2 $pl | grep -v "ontestant" | grep -v "die" | tail -n 1 | cut -d ' ' -f 5)
+  pl_sum=$(./corewar_ -l 2 $pl | grep -v "ontestant" | grep -v "die" | tail -n 1 | cut -d ' ' -f 5)
+  op=$(echo $pl | cut -d / -f 3 | cut -d . -f 1)
+  mkdir -p 00/$op 01/$op
   echo "player = $pl"
-  echo "pl_sum = $pl_sum"
+  echo "op = $op"
   for ((p = 0; p <= pl_sum; ++p))
   do
-#    echo "p = $p"
-    ./corewar -dump $p $pl > 00/$(echo $pl | cut -d / -f 3 | cut -d . -f 1)_$p.out
-    ./corewar_ -dump $p $pl > 01/$(echo $pl | cut -d / -f 3 | cut -d . -f 1)_$p.out
+  	echo "$op - $p"
+  	echo "player = $pl"
+	./corewar -dump $p $(echo $pl) > 00/$(echo $op)/$(echo $op)_$p.out
+	./corewar_ -dump $p $(echo $pl) > 01/$(echo $op)/$(echo $op)_$p.out
   done
 done

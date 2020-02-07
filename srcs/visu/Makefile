@@ -5,33 +5,25 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/23 18:40:59 by yquaro            #+#    #+#              #
-#    Updated: 2020/01/31 19:30:16 by yquaro           ###   ########.fr        #
+#    Created: 2020/01/23 19:01:16 by yquaro            #+#    #+#              #
+#    Updated: 2020/01/29 19:34:03 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-include ../incs/corewar.mk
+include ../../incs/corewar.mk
 
-CFLAGS = -g -Wall -Wextra -Werror
-COMPILING = $(CC) $(CFLAGS) $(HEADER_H)
+HEADER_H = -I ../../incs/
 
-all: prep corewar disasm
+DIR_O = ../../.objs
+SOURCES = init_visu.c draw.c draw_arena.c color.c draw_info.c handle_buttons.c \
+			draw_help.c init_wins.c
 
-prep:
-	@cp ../libft/$(LIBNAME) ./$(LIBNAME)
+OBJECTS = $(addprefix $(DIR_O)/,$(patsubst %.c,%.o,$(SOURCES)))
 
-corewar: prep
-	$(COMPILING) ./vm/*.o $(LIBNAME) -o $(COREWAR)
-	@mv $(COREWAR) ../$(COREWAR)
-	@echo \*\*\* COREWAR COMPILED!
+all: print $(OBJECTS)
 
-disasm: prep
-	$(COMPILING) ./disasm/*.o $(LIBNAME) -o $(DISASSEMBLER)
-	@mv $(DISASSEMBLER) ../$(DISASSEMBLER)
-	@echo \*\*\* DISASSEMBLER COMPILED!
+print:
+	@echo \*\*\* Compiling visu files
 
-clean:
-	rm -rvf *.o
-
-fclean: clean
-	@rm -rvf $(LIBNAME) $(COREWAR) $(DISASSEMBLER)
+$(DIR_O)/%.o: %.c
+	$(COMPILING) $< -o $@

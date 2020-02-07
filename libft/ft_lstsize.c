@@ -1,14 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   options_func.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ergottli <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 23:30:47 by ergottli          #+#    #+#             */
-/*   Updated: 2020/01/26 23:30:49 by ergottli         ###   ########.fr       */
+/*   Created: 2020/01/27 18:05:15 by yquaro            #+#    #+#             */
+/*   Updated: 2020/01/27 18:05:35 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../incs/corewar.h"
+#include "libft.h"
 
+/*
+** Returns number of items in list
+**
+** @param 		alst
+** @return		len
+*/
+
+size_t				ft_lstsize(t_list *alst)
+{
+	size_t			len;
+
+	len = 0;
+	while (alst != NULL)
+	{
+		len++;
+		alst = alst->next;
+	}
+	return (len);
+}
