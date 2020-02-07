@@ -6,15 +6,15 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 14:21:30 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/05 16:38:31 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/07 18:09:29 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dis_asm.h"
 #include "corewar.h"
 
-# define CHECK_BIT(var, position) ((var & (1 << position)) ? 1 : 0)
-# define SIGN_BIT_INT 15
+#define CHECK_BIT(var, position) ((var & (1 << position)) ? 1 : 0)
+#define SIGN_BIT_INT 15
 
 static int			convert_with_negative_sign(int num)
 {
@@ -25,10 +25,11 @@ static int			convert_with_negative_sign(int num)
 	return (num);
 }
 
-static int			num_compose(t_parser *parser, size_t *pos, size_t numof_byte)
+static int			num_compose(t_parser *parser, size_t *pos, \
+						size_t numof_byte)
 {
 	int				num;
-	
+
 	if (numof_byte == 1)
 		return (parser->code[(*pos)++]);
 	num = 0x0;
@@ -40,11 +41,12 @@ static int			num_compose(t_parser *parser, size_t *pos, size_t numof_byte)
 	return (num);
 }
 
-int					bytecode_to_int(t_parser *parser, size_t *pos, t_optab tab, int arg_type)
+int					bytecode_to_int(t_parser *parser, size_t *pos, \
+						t_optab tab, int arg_type)
 {
 	size_t			numof_byte;
 	int				num;
-	
+
 	numof_byte = 1;
 	if (arg_type == T_DIR)
 		numof_byte = tab.dir_size;

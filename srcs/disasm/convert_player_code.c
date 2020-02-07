@@ -6,15 +6,15 @@
 /*   By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:34:54 by yquaro            #+#    #+#             */
-/*   Updated: 2020/02/05 16:44:57 by yquaro           ###   ########.fr       */
+/*   Updated: 2020/02/07 18:02:53 by yquaro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "dis_asm.h"
 #include "corewar.h"
 
-# define SIZE_OF_ARGTAB 4
-# define OP_TAB_SIZE 17
+#define SIZE_OF_ARGTAB 4
+#define OP_TAB_SIZE 17
 
 t_argtab			g_arg[SIZE_OF_ARGTAB] =
 {
@@ -66,7 +66,6 @@ char				get_arg_char(int arg_type)
 	i = 0;
 	while (i < SIZE_OF_ARGTAB)
 	{
-		
 		if (g_arg[i].type == arg_type)
 			return (g_arg[i].ch);
 		i++;
