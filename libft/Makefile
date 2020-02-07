@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ergottli <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: yquaro <yquaro@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/22 15:50:14 by ergottli          #+#    #+#              #
-#    Updated: 2020/01/27 05:28:03 by vgerold-         ###   ########.fr        #
+#    Updated: 2020/01/31 20:30:23 by yquaro           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,7 +121,7 @@ SRC = ./ft_isalpha.c \
 	./ft_lst_node_cpy.c \
 	./ft_lst_print.c \
 	./free_char_ptr.c \
-	./count_chars.c
+	./count_chars.c \
 
 SRC_PRINTF = ./ft_printf/srcs/ft_printf.c \
 	./ft_printf/srcs/ft_del_2.c \
