@@ -59,5 +59,11 @@ Usage: ./asm <sourcefile.s>
 ./dis_asm 'filename.cor'
 ```
 
-## Visualisation
+### Visualisation
 ![corewar example](https://media.giphy.com/media/LMhlsb2m8WKA5u3JrO/giphy.gif)
+
+### Contributors
+   * [vgerold](https://github.com/vgerold)
+   * [ergottli](https://github.com/ergottli)
+   * [jcartwri](https://github.com/jcartwri)
+   * [qypec](https://github.com/qypec)
